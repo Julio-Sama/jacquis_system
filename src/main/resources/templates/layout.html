@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="https://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+</head>
+
+<body>
+    <div th:fragment="contenido">
+
+        <div class="container-fluid"> <!-- AQUI VA EL CONTENIDO DE LA PAGINA  -->
+            <div class="row"> <!-- zona de texto o botones  -->
+                <div class="col-md-12">
+                    <div class="overview-wrap">
+                        <h2 class="title-1">Inicio</h2>
+                        <button class="au-btn au-btn-icon au-btn--blue">
+                            <i class="zmdi zmdi-plus">&nbsp;</i> Agregar productos</button>
+                    </div>
+                </div>
+            </div> <!-- fin de la zona de texto o botones  -->
+            <div class="row m-t-25">
+                <div class="col-sm-6 col-lg-3">
+                    <div class="overview-item overview-item--c1">
+                        <div class="overview__inner">
+                            <div class="overview-box clearfix">
+                                <div class="icon">
+                                    <i class="zmdi zmdi-account-o"></i>
+                                </div>
+                                <div class="text">
+                                    <h2>2</h2>
+                                    <span>T. Empleados</span>
+                                </div>
+                            </div>
+                            <!-- <div class="overview-chart">
+                            <canvas id="widgetChart1"></canvas>
+                        </div> -->
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-lg-3">
+                    <div class="overview-item overview-item--c2">
+                        <div class="overview__inner">
+                            <div class="overview-box clearfix">
+                                <div class="icon">
+                                    <i class="zmdi zmdi-shopping-cart"></i>
+                                </div>
+                                <div class="text">
+                                    <h2>68</h2>
+                                    <span>Ventas por mes</span>
+                                </div>
+                            </div>
+                            <!-- <div class="overview-chart">
+                            <canvas id="widgetChart2"></canvas>
+                        </div> -->
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-lg-3">
+                    <div class="overview-item overview-item--c3">
+                        <div class="overview__inner">
+                            <div class="overview-box clearfix">
+                                <div class="icon">
+                                    <i class="zmdi zmdi-calendar-note"></i>
+                                </div>
+                                <div class="text">
+                                    <h2>20</h2>
+                                    <span>Esta semana</span>
+                                </div>
+                            </div>
+                            <!-- <div class="overview-chart">
+                            <canvas id="widgetChart3"></canvas>
+                        </div> -->
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-lg-3">
+                    <div class="overview-item overview-item--c4">
+                        <div class="overview__inner">
+                            <div class="overview-box clearfix">
+                                <div class="icon">
+                                    <i class="zmdi zmdi-money"></i>
+                                </div>
+                                <div class="text">
+                                    <h2>$567</h2>
+                                    <span>Ganancias totales</span>
+                                </div>
+                            </div>
+                            <!-- <div class="overview-chart">
+                            <canvas id="widgetChart4"></canvas>
+                        </div> -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="row">
+            <div class="col-lg-6">
+                <h5 class="title-1 m-b-25">Últimos productos agregados</h5>
+                <div class="table-responsive table--no-card m-b-20">
+                    <table class="table table-borderless table-striped table-earning">
+                        <thead>
+                            <tr>
+                                <th>No.</th>
+                                <th>Foto</th>
+                                <th>Descripción</th>
+                                <th>Stock</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr> <!-- th : each: ventas : $ { venta  -->
+                                <td> 1 </td> <!-- th: text = "${venta.id}" -->
+                                <td> img </td> <!-- th: text = "${venta.foto}" -->
+                                <td>Vestido azul talla S</td> <!-- th: text = "${venta.descripcion}" -->
+                                <td> 5 </td> <!-- th: text = "${venta.stock}" -->
+
+                            </tr>
+                            <tr>
+                                <td>1</td>
+                                <td>img</td>
+                                <td>Pantalon Kalua talla M</td>
+                                <td> 3 </td>
+
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- SEGUNDA TABLA -->
+            <div class="col-lg-6">
+                <h5 class="title-1 m-b-25">Últimas ventas realizadas</h5>
+                <div class="table-responsive table--no-card m-b-20">
+                    <table class="table table-borderless table-striped table-earning">
+                        <thead>
+                            <tr>
+                                <th>No. Registro</th>
+                                <th>Empleado</th>
+                                <th>Fecha</th>
+                                <th>Total de venta</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr> <!-- th : each: ventas : $ { venta  -->
+                                <td>00001</td> <!-- th: text = "${venta.id}" -->
+                                <td>Juan Perez</td> <!-- th: text = "${venta.foto}" -->
+                                <td>17/08/2023</td> <!-- th: text = "${venta.descripcion}" -->
+                                <td>$48.80</td> <!-- th: text = "${venta.stock}" -->
+
+                            </tr>
+                            <tr>
+                                <td>00002</td>
+                                <td>Carmen Diaz</td>
+                                <td>18/08/2023</td>
+                                <td>$37.60</td>
+
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>

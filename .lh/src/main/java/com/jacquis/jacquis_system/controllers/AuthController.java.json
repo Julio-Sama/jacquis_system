@@ -1,0 +1,122 @@
+{
+    "sourceFile": "src/main/java/com/jacquis/jacquis_system/controllers/AuthController.java",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 26,
+            "patches": [
+                {
+                    "date": 1696040987276,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1696041530325,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,11 +1,13 @@\n package com.jacquis.jacquis_system.controllers;\r\n \r\n import org.springframework.stereotype.Controller;\r\n import org.springframework.web.bind.annotation.GetMapping;\r\n+import org.springframework.web.bind.annotation.RequestMapping;\r\n \r\n \r\n @Controller\r\n+@RequestMapping(value=\"/index\")\r\n public class AuthController {\r\n \r\n     @GetMapping(value=\"/index\")\r\n     public String pageInicioString() {\r\n"
+                },
+                {
+                    "date": 1696042900073,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,13 +1,11 @@\n package com.jacquis.jacquis_system.controllers;\r\n \r\n import org.springframework.stereotype.Controller;\r\n import org.springframework.web.bind.annotation.GetMapping;\r\n-import org.springframework.web.bind.annotation.RequestMapping;\r\n \r\n \r\n @Controller\r\n-@RequestMapping(value=\"/index\")\r\n public class AuthController {\r\n \r\n     @GetMapping(value=\"/index\")\r\n     public String pageInicioString() {\r\n"
+                },
+                {
+                    "date": 1696047142004,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,15 +1,17 @@\n package com.jacquis.jacquis_system.controllers;\r\n \r\n import org.springframework.stereotype.Controller;\r\n+import org.springframework.ui.Model;\r\n import org.springframework.web.bind.annotation.GetMapping;\r\n \r\n \r\n @Controller\r\n public class AuthController {\r\n \r\n-    @GetMapping(value=\"/index\")\r\n-    public String pageInicioString() {\r\n+    @GetMapping(\"/index\")\r\n+    public String dashboard(Model model) {\r\n+        model.addAttribute(\"contenido\", \"layout\");\r\n         return \"index\";\r\n     }\r\n     \r\n     // @GetMapping(value=\"/empleados\")\r\n"
+                },
+                {
+                    "date": 1696047227503,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -12,8 +12,14 @@\n     public String dashboard(Model model) {\r\n         model.addAttribute(\"contenido\", \"layout\");\r\n         return \"index\";\r\n     }\r\n+\r\n+    @GetMapping(\"/empleados\")\r\n+    public String empleados(Model model) {\r\n+        model.addAttribute(\"contenido\", \"empleados\");\r\n+        return \"index\";\r\n+    }\r\n     \r\n     // @GetMapping(value=\"/empleados\")\r\n     // public String pageEmpleadoString() {\r\n     //     return \"empleados\";\r\n"
+                },
+                {
+                    "date": 1696048326588,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -13,13 +13,13 @@\n         model.addAttribute(\"contenido\", \"layout\");\r\n         return \"index\";\r\n     }\r\n \r\n-    @GetMapping(\"/empleados\")\r\n-    public String empleados(Model model) {\r\n-        model.addAttribute(\"contenido\", \"empleados\");\r\n-        return \"index\";\r\n-    }\r\n+    // @GetMapping(\"/empleados\")\r\n+    // public String empleados(Model model) {\r\n+    //     model.addAttribute(\"contenido\", \"empleados\");\r\n+    //     return \"index\";\r\n+    // }\r\n     \r\n     // @GetMapping(value=\"/empleados\")\r\n     // public String pageEmpleadoString() {\r\n     //     return \"empleados\";\r\n"
+                },
+                {
+                    "date": 1696048810384,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,24 +2,26 @@\n \r\n import org.springframework.stereotype.Controller;\r\n import org.springframework.ui.Model;\r\n import org.springframework.web.bind.annotation.GetMapping;\r\n+import org.springframework.web.bind.annotation.RequestMapping;\r\n \r\n \r\n @Controller\r\n+@RequestMapping(\"index\")\r\n public class AuthController {\r\n \r\n     @GetMapping(\"/index\")\r\n     public String dashboard(Model model) {\r\n         model.addAttribute(\"contenido\", \"layout\");\r\n         return \"index\";\r\n     }\r\n \r\n-    // @GetMapping(\"/empleados\")\r\n-    // public String empleados(Model model) {\r\n-    //     model.addAttribute(\"contenido\", \"empleados\");\r\n-    //     return \"index\";\r\n-    // }\r\n+    @GetMapping(\"/empleados\")\r\n+    public String empleados(Model model) {\r\n+        model.addAttribute(\"contenido\", \"empleados\");\r\n+        return \"index\";\r\n+    }\r\n     \r\n     // @GetMapping(value=\"/empleados\")\r\n     // public String pageEmpleadoString() {\r\n     //     return \"empleados\";\r\n"
+                },
+                {
+                    "date": 1696049015603,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,9 +6,9 @@\n import org.springframework.web.bind.annotation.RequestMapping;\r\n \r\n \r\n @Controller\r\n-@RequestMapping(\"index\")\r\n+@RequestMapping(\"dashboard\")\r\n public class AuthController {\r\n \r\n     @GetMapping(\"/index\")\r\n     public String dashboard(Model model) {\r\n"
+                },
+                {
+                    "date": 1696049071040,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,13 +2,11 @@\n \r\n import org.springframework.stereotype.Controller;\r\n import org.springframework.ui.Model;\r\n import org.springframework.web.bind.annotation.GetMapping;\r\n-import org.springframework.web.bind.annotation.RequestMapping;\r\n \r\n \r\n @Controller\r\n-@RequestMapping(\"dashboard\")\r\n public class AuthController {\r\n \r\n     @GetMapping(\"/index\")\r\n     public String dashboard(Model model) {\r\n"
+                },
+                {
+                    "date": 1696049199066,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -7,19 +7,19 @@\n \r\n @Controller\r\n public class AuthController {\r\n \r\n-    @GetMapping(\"/index\")\r\n+    @GetMapping(\"/dashboard\")\r\n     public String dashboard(Model model) {\r\n         model.addAttribute(\"contenido\", \"layout\");\r\n         return \"index\";\r\n     }\r\n \r\n-    @GetMapping(\"/empleados\")\r\n-    public String empleados(Model model) {\r\n-        model.addAttribute(\"contenido\", \"empleados\");\r\n-        return \"index\";\r\n-    }\r\n+    // @GetMapping(\"/empleados\")\r\n+    // public String empleados(Model model) {\r\n+    //     model.addAttribute(\"contenido\", \"empleados\");\r\n+    //     return \"index\";\r\n+    // }\r\n     \r\n     // @GetMapping(value=\"/empleados\")\r\n     // public String pageEmpleadoString() {\r\n     //     return \"empleados\";\r\n"
+                },
+                {
+                    "date": 1696049309889,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -7,9 +7,9 @@\n \r\n @Controller\r\n public class AuthController {\r\n \r\n-    @GetMapping(\"/dashboard\")\r\n+    @GetMapping(\"/index\")\r\n     public String dashboard(Model model) {\r\n         model.addAttribute(\"contenido\", \"layout\");\r\n         return \"index\";\r\n     }\r\n"
+                },
+                {
+                    "date": 1696049374599,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -13,13 +13,13 @@\n         model.addAttribute(\"contenido\", \"layout\");\r\n         return \"index\";\r\n     }\r\n \r\n-    // @GetMapping(\"/empleados\")\r\n-    // public String empleados(Model model) {\r\n-    //     model.addAttribute(\"contenido\", \"empleados\");\r\n-    //     return \"index\";\r\n-    // }\r\n+    @GetMapping(\"/empleados\")\r\n+    public String empleados(Model model) {\r\n+        model.addAttribute(\"contenido\", \"empleados\");\r\n+        return \"index\";\r\n+    }\r\n     \r\n     // @GetMapping(value=\"/empleados\")\r\n     // public String pageEmpleadoString() {\r\n     //     return \"empleados\";\r\n"
+                },
+                {
+                    "date": 1696049660926,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -7,9 +7,9 @@\n \r\n @Controller\r\n public class AuthController {\r\n \r\n-    @GetMapping(\"/index\")\r\n+    @GetMapping(\"/\")\r\n     public String dashboard(Model model) {\r\n         model.addAttribute(\"contenido\", \"layout\");\r\n         return \"index\";\r\n     }\r\n"
+                },
+                {
+                    "date": 1696049733563,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -7,9 +7,9 @@\n \r\n @Controller\r\n public class AuthController {\r\n \r\n-    @GetMapping(\"/\")\r\n+    @GetMapping({\"/\", \"/inicio\", \"/dashboard\"})\r\n     public String dashboard(Model model) {\r\n         model.addAttribute(\"contenido\", \"layout\");\r\n         return \"index\";\r\n     }\r\n"
+                },
+                {
+                    "date": 1696049853172,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -7,9 +7,9 @@\n \r\n @Controller\r\n public class AuthController {\r\n \r\n-    @GetMapping({\"/\", \"/inicio\", \"/dashboard\"})\r\n+    @GetMapping({\"/\", \"/dashboard\"})\r\n     public String dashboard(Model model) {\r\n         model.addAttribute(\"contenido\", \"layout\");\r\n         return \"index\";\r\n     }\r\n"
+                },
+                {
+                    "date": 1696049965886,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -7,9 +7,9 @@\n \r\n @Controller\r\n public class AuthController {\r\n \r\n-    @GetMapping({\"/\", \"/dashboard\"})\r\n+    @GetMapping(\"/\")\r\n     public String dashboard(Model model) {\r\n         model.addAttribute(\"contenido\", \"layout\");\r\n         return \"index\";\r\n     }\r\n"
+                },
+                {
+                    "date": 1696050114273,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,14 +2,16 @@\n \r\n import org.springframework.stereotype.Controller;\r\n import org.springframework.ui.Model;\r\n import org.springframework.web.bind.annotation.GetMapping;\r\n+import org.springframework.web.bind.annotation.RequestMapping;\r\n \r\n \r\n @Controller\r\n+@RequestMapping(\"/\")\r\n public class AuthController {\r\n \r\n-    @GetMapping(\"/\")\r\n+    @GetMapping(\"/index\")\r\n     public String dashboard(Model model) {\r\n         model.addAttribute(\"contenido\", \"layout\");\r\n         return \"index\";\r\n     }\r\n"
+                },
+                {
+                    "date": 1696052944629,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,13 +2,12 @@\n \r\n import org.springframework.stereotype.Controller;\r\n import org.springframework.ui.Model;\r\n import org.springframework.web.bind.annotation.GetMapping;\r\n-import org.springframework.web.bind.annotation.RequestMapping;\r\n \r\n \r\n @Controller\r\n-@RequestMapping(\"/\")\r\n+// @RequestMapping(\"/\")\r\n public class AuthController {\r\n \r\n     @GetMapping(\"/index\")\r\n     public String dashboard(Model model) {\r\n"
+                },
+                {
+                    "date": 1696053085778,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -8,9 +8,9 @@\n @Controller\r\n // @RequestMapping(\"/\")\r\n public class AuthController {\r\n \r\n-    @GetMapping(\"/index\")\r\n+    @GetMapping({\"/index\", \"/\"})\r\n     public String dashboard(Model model) {\r\n         model.addAttribute(\"contenido\", \"layout\");\r\n         return \"index\";\r\n     }\r\n"
+                },
+                {
+                    "date": 1696054320210,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -14,13 +14,13 @@\n         model.addAttribute(\"contenido\", \"layout\");\r\n         return \"index\";\r\n     }\r\n \r\n-    @GetMapping(\"/empleados\")\r\n-    public String empleados(Model model) {\r\n-        model.addAttribute(\"contenido\", \"empleados\");\r\n-        return \"index\";\r\n-    }\r\n+    // @GetMapping(\"/empleados\")\r\n+    // public String empleados(Model model) {\r\n+    //     model.addAttribute(\"contenido\", \"empleados\");\r\n+    //     return \"index\";\r\n+    // }\r\n     \r\n     // @GetMapping(value=\"/empleados\")\r\n     // public String pageEmpleadoString() {\r\n     //     return \"empleados\";\r\n"
+                },
+                {
+                    "date": 1696055211436,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -15,12 +15,12 @@\n         return \"index\";\r\n     }\r\n \r\n     // @GetMapping(\"/empleados\")\r\n-    // public String empleados(Model model) {\r\n-    //     model.addAttribute(\"contenido\", \"empleados\");\r\n-    //     return \"index\";\r\n-    // }\r\n+    public String empleados(Model model) {\r\n+        model.addAttribute(\"contenido\", \"empleados\");\r\n+        return \"index\";\r\n+    }\r\n     \r\n     // @GetMapping(value=\"/empleados\")\r\n     // public String pageEmpleadoString() {\r\n     //     return \"empleados\";\r\n"
+                },
+                {
+                    "date": 1696055236228,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -14,9 +14,9 @@\n         model.addAttribute(\"contenido\", \"layout\");\r\n         return \"index\";\r\n     }\r\n \r\n-    // @GetMapping(\"/empleados\")\r\n+    @GetMapping(\"/empleados\")\r\n     public String empleados(Model model) {\r\n         model.addAttribute(\"contenido\", \"empleados\");\r\n         return \"index\";\r\n     }\r\n"
+                },
+                {
+                    "date": 1696055339829,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -16,9 +16,9 @@\n     }\r\n \r\n     @GetMapping(\"/empleados\")\r\n     public String empleados(Model model) {\r\n-        model.addAttribute(\"contenido\", \"empleados\");\r\n+        model.addAttribute(\"contenido\", \"empleado\");\r\n         return \"index\";\r\n     }\r\n     \r\n     // @GetMapping(value=\"/empleados\")\r\n"
+                },
+                {
+                    "date": 1696221158114,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -16,9 +16,9 @@\n     }\r\n \r\n     @GetMapping(\"/empleados\")\r\n     public String empleados(Model model) {\r\n-        model.addAttribute(\"contenido\", \"empleado\");\r\n+        model.addAttribute(\"contenido\", \"empleados\");\r\n         return \"index\";\r\n     }\r\n     \r\n     // @GetMapping(value=\"/empleados\")\r\n"
+                },
+                {
+                    "date": 1696221460554,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -14,13 +14,13 @@\n         model.addAttribute(\"contenido\", \"layout\");\r\n         return \"index\";\r\n     }\r\n \r\n-    @GetMapping(\"/empleados\")\r\n-    public String empleados(Model model) {\r\n-        model.addAttribute(\"contenido\", \"empleados\");\r\n-        return \"index\";\r\n-    }\r\n+    // @GetMapping(\"/empleados\")\r\n+    // public String empleados(Model model) {\r\n+    //     model.addAttribute(\"contenido\", \"empleados\");\r\n+    //     return \"index\";\r\n+    // }\r\n     \r\n     // @GetMapping(value=\"/empleados\")\r\n     // public String pageEmpleadoString() {\r\n     //     return \"empleados\";\r\n"
+                },
+                {
+                    "date": 1696222166947,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -14,13 +14,13 @@\n         model.addAttribute(\"contenido\", \"layout\");\r\n         return \"index\";\r\n     }\r\n \r\n-    // @GetMapping(\"/empleados\")\r\n-    // public String empleados(Model model) {\r\n-    //     model.addAttribute(\"contenido\", \"empleados\");\r\n-    //     return \"index\";\r\n-    // }\r\n+    @GetMapping(\"/empleados\")\r\n+    public String empleados(Model model) {\r\n+        model.addAttribute(\"contenido\", \"empleados\");\r\n+        return \"index\";\r\n+    }\r\n     \r\n     // @GetMapping(value=\"/empleados\")\r\n     // public String pageEmpleadoString() {\r\n     //     return \"empleados\";\r\n"
+                },
+                {
+                    "date": 1696222451722,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -14,16 +14,12 @@\n         model.addAttribute(\"contenido\", \"layout\");\r\n         return \"index\";\r\n     }\r\n \r\n-    @GetMapping(\"/empleados\")\r\n-    public String empleados(Model model) {\r\n-        model.addAttribute(\"contenido\", \"empleados\");\r\n-        return \"index\";\r\n-    }\r\n-    \r\n-    // @GetMapping(value=\"/empleados\")\r\n-    // public String pageEmpleadoString() {\r\n-    //     return \"empleados\";\r\n+    // @GetMapping(\"/empleados\")\r\n+    // public String empleados(Model model) {\r\n+    //     model.addAttribute(\"contenido\", \"empleados\");\r\n+    //     return \"index\";\r\n     // }\r\n     \r\n+    \r\n }\r\n"
+                }
+            ],
+            "date": 1696040987276,
+            "name": "Commit-0",
+            "content": "package com.jacquis.jacquis_system.controllers;\r\n\r\nimport org.springframework.stereotype.Controller;\r\nimport org.springframework.web.bind.annotation.GetMapping;\r\n\r\n\r\n@Controller\r\npublic class AuthController {\r\n\r\n    @GetMapping(value=\"/index\")\r\n    public String pageInicioString() {\r\n        return \"index\";\r\n    }\r\n    \r\n    // @GetMapping(value=\"/empleados\")\r\n    // public String pageEmpleadoString() {\r\n    //     return \"empleados\";\r\n    // }\r\n    \r\n}\r\n"
+        }
+    ]
+}

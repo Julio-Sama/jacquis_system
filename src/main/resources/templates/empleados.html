@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="https://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+</head>
+
+<body>
+    <div th:fragment="contenido" class="container-fluid">
+        <!-- AQUI VA LA TABLA -->
+        <div class="row">
+            <div class="col-md-12">
+                <!-- DATA TABLE -->
+                <!-- Pongo el breadcrumbs? -->
+                <h3 class="title-5 m-b-25">Empleados</h3>
+                <div class="table-data__tool">
+                    <div class="table-data__tool-left">
+                        <!-- BUSCADOR DE EMPLEADO -->
+                        <!-- NAYELLY AGREGARA BUSCADOR -->
+                        <div class="rs-select2--light rs-select2--md"></div>
+                    </div>
+                    <div class="table-data__tool-right">
+                        <a th:href="@{/empleados/nuevo}" class="au-btn au-btn-icon au-btn--green au-btn--small">
+                            <i class="zmdi zmdi-plus"></i> NUEVO EMPLEADO
+                            <button type="button" style="display: none;"></button>
+                        </a>                        
+                        <div class="rs-select2--dark rs-select2--sm rs-select2--dark2">
+                            <select class="js-select2" name="type">
+                                <option selected="selected">Exportar</option>
+                                <option value="">EXCEL</option>
+                                <option value="">PDF</option>
+                            </select>
+                            <div class="dropDownSelect2"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="table-responsive table-responsive-data2">
+                    <table class="table table-data2">
+                        <thead>
+                            <tr>
+
+                                <th>Nombres</th>
+                                <th>Apellidos</th>
+                                <th>Dirección</th>
+                                <th>Correo</th>
+                                <th>Estado</th>
+                                <th>ROL</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr th:each="empleado: ${empleadoList}" class="tr-shadow">
+                                <td th:text="${empleado.nombre}"></td>
+                                <td th:text="${empleado.apellido}"></td>
+                                <td th:text="${empleado.direccion}" class="desc"></td>
+                                <td>
+                                    <span th:text="${empleado.correo_empleado}" class="block-email"></span>
+                                </td>
+                                <td>
+                                    <!-- <span th:text="${empleado.estado_empleado}" class="status--process"></span> -->
+                                    <span th:text="${empleado.estado_empleado}"
+                                        th:classappend="${empleado.estado_empleado == 'ACTIVO'} ? 'status--process' : 'status--denied'"></span>
+                                </td>
+                                <td th:text="${empleado.empleado_fk}"></td>
+                                <td>
+                                    <div class="table-data-feature">
+                                        <button class="item" data-toggle="tooltip" data-placement="top" title="Editar"
+                                            th:href="@{/edit_empleados}">
+                                            <i class="zmdi zmdi-edit"></i>
+                                        </button>
+                                        <button class="item" data-toggle="tooltip" data-placement="top"
+                                            title="Dar de baja">
+                                            <i class="zmdi zmdi-long-arrow-down"></i>
+                                        </button>
+                                        <button class="item" data-toggle="tooltip" data-placement="top" title="More">
+                                            <i class="zmdi zmdi-more"></i>
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr class="spacer"></tr>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

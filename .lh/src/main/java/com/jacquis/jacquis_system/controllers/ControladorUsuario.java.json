@@ -1,0 +1,22 @@
+{
+    "sourceFile": "src/main/java/com/jacquis/jacquis_system/controllers/ControladorUsuario.java",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 1,
+            "patches": [
+                {
+                    "date": 1695591652801,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1695591757727,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,14 +6,14 @@\n \r\n @Controller\r\n public class ControladorUsuario {\r\n \r\n-    @GetMapping(value=\"index\")\r\n+    @GetMapping(value=\"/index\")\r\n     public String pageInicioString() {\r\n         return \"index\";\r\n     }\r\n     \r\n-    @GetMapping(value=\"empleados\")\r\n+    @GetMapping(value=\"/empleados\")\r\n     public String pageEmpleadoString() {\r\n         return \"empleados\";\r\n     }\r\n     \r\n"
+                }
+            ],
+            "date": 1695591652801,
+            "name": "Commit-0",
+            "content": "package com.jacquis.jacquis_system.controllers;\r\n\r\nimport org.springframework.stereotype.Controller;\r\nimport org.springframework.web.bind.annotation.GetMapping;\r\n\r\n\r\n@Controller\r\npublic class ControladorUsuario {\r\n\r\n    @GetMapping(value=\"index\")\r\n    public String pageInicioString() {\r\n        return \"index\";\r\n    }\r\n    \r\n    @GetMapping(value=\"empleados\")\r\n    public String pageEmpleadoString() {\r\n        return \"empleados\";\r\n    }\r\n    \r\n}\r\n"
+        }
+    ]
+}

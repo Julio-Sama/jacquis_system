@@ -1,0 +1,42 @@
+{
+    "sourceFile": "src/main/java/com/jacquis/jacquis_system/model/TelefonoEmpleado.java",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 6,
+            "patches": [
+                {
+                    "date": 1695789819916,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1695790128882,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,7 @@\n package com.jacquis.jacquis_system.model;\r\n \r\n+import jakarta.persistence.EmbeddedId;\r\n import jakarta.persistence.Entity;\r\n import jakarta.persistence.JoinColumn;\r\n import jakarta.persistence.ManyToOne;\r\n import jakarta.persistence.Table;\r\n@@ -8,8 +9,9 @@\n @Entity\r\n @Table(name = \"tel_empleado\")\r\n public class TelefonoEmpleado {\r\n     \r\n+    @EmbeddedId\r\n     @ManyToOne\r\n     @JoinColumn(name = \"id_empleado\")\r\n     private Empleado empleado;\r\n \r\n"
+                },
+                {
+                    "date": 1695790621599,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,17 +1,22 @@\n package com.jacquis.jacquis_system.model;\r\n \r\n-import jakarta.persistence.EmbeddedId;\r\n import jakarta.persistence.Entity;\r\n+import jakarta.persistence.GeneratedValue;\r\n+import jakarta.persistence.GenerationType;\r\n+import jakarta.persistence.Id;\r\n import jakarta.persistence.JoinColumn;\r\n import jakarta.persistence.ManyToOne;\r\n import jakarta.persistence.Table;\r\n \r\n @Entity\r\n @Table(name = \"tel_empleado\")\r\n public class TelefonoEmpleado {\r\n     \r\n-    @EmbeddedId\r\n+    @Id\r\n+    @GeneratedValue(strategy = GenerationType.IDENTITY)\r\n+    private Long id;\r\n+    \r\n     @ManyToOne\r\n     @JoinColumn(name = \"id_empleado\")\r\n     private Empleado empleado;\r\n \r\n"
+                },
+                {
+                    "date": 1695793842262,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -16,9 +16,9 @@\n     @GeneratedValue(strategy = GenerationType.IDENTITY)\r\n     private Long id;\r\n     \r\n     @ManyToOne\r\n-    @JoinColumn(name = \"id_empleado\")\r\n+    @JoinColumn(name = \"dui_empleado\")\r\n     private Empleado empleado;\r\n \r\n     private String telefono;\r\n \r\n"
+                },
+                {
+                    "date": 1695794786500,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -13,9 +13,9 @@\n public class TelefonoEmpleado {\r\n     \r\n     @Id\r\n     @GeneratedValue(strategy = GenerationType.IDENTITY)\r\n-    private Long id;\r\n+    private Long id_telefono;\r\n     \r\n     @ManyToOne\r\n     @JoinColumn(name = \"dui_empleado\")\r\n     private Empleado empleado;\r\n"
+                },
+                {
+                    "date": 1695799098999,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,10 +3,8 @@\n import jakarta.persistence.Entity;\r\n import jakarta.persistence.GeneratedValue;\r\n import jakarta.persistence.GenerationType;\r\n import jakarta.persistence.Id;\r\n-import jakarta.persistence.JoinColumn;\r\n-import jakarta.persistence.ManyToOne;\r\n import jakarta.persistence.Table;\r\n \r\n @Entity\r\n @Table(name = \"tel_empleado\")\r\n@@ -15,10 +13,10 @@\n     @Id\r\n     @GeneratedValue(strategy = GenerationType.IDENTITY)\r\n     private Long id_telefono;\r\n     \r\n-    @ManyToOne\r\n-    @JoinColumn(name = \"dui_empleado\")\r\n+    // @ManyToOne\r\n+    // @JoinColumn(name = \"dui_empleado\")\r\n     private Empleado empleado;\r\n \r\n     private String telefono;\r\n \r\n"
+                },
+                {
+                    "date": 1695801314329,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,10 +1,13 @@\n package com.jacquis.jacquis_system.model;\r\n \r\n+import jakarta.persistence.Column;\r\n import jakarta.persistence.Entity;\r\n import jakarta.persistence.GeneratedValue;\r\n import jakarta.persistence.GenerationType;\r\n import jakarta.persistence.Id;\r\n+import jakarta.persistence.JoinColumn;\r\n+import jakarta.persistence.ManyToOne;\r\n import jakarta.persistence.Table;\r\n \r\n @Entity\r\n @Table(name = \"tel_empleado\")\r\n@@ -13,12 +16,13 @@\n     @Id\r\n     @GeneratedValue(strategy = GenerationType.IDENTITY)\r\n     private Long id_telefono;\r\n     \r\n-    // @ManyToOne\r\n-    // @JoinColumn(name = \"dui_empleado\")\r\n+    @ManyToOne\r\n+    @JoinColumn(name = \"dui_empleado\")\r\n     private Empleado empleado;\r\n \r\n+    @Column(name = \"telefono\")\r\n     private String telefono;\r\n \r\n     public TelefonoEmpleado() {\r\n     }\r\n"
+                }
+            ],
+            "date": 1695789819916,
+            "name": "Commit-0",
+            "content": "package com.jacquis.jacquis_system.model;\r\n\r\nimport jakarta.persistence.Entity;\r\nimport jakarta.persistence.JoinColumn;\r\nimport jakarta.persistence.ManyToOne;\r\nimport jakarta.persistence.Table;\r\n\r\n@Entity\r\n@Table(name = \"tel_empleado\")\r\npublic class TelefonoEmpleado {\r\n    \r\n    @ManyToOne\r\n    @JoinColumn(name = \"id_empleado\")\r\n    private Empleado empleado;\r\n\r\n    private String telefono;\r\n\r\n    public TelefonoEmpleado() {\r\n    }\r\n\r\n    public TelefonoEmpleado(Empleado empleado, String telefono) {\r\n        this.empleado = empleado;\r\n        this.telefono = telefono;\r\n    }\r\n\r\n    public Empleado getEmpleado() {\r\n        return empleado;\r\n    }\r\n\r\n    public void setEmpleado(Empleado empleado) {\r\n        this.empleado = empleado;\r\n    }\r\n\r\n    public String getTelefono() {\r\n        return telefono;\r\n    }\r\n\r\n    public void setTelefono(String telefono) {\r\n        this.telefono = telefono;\r\n    }\r\n\r\n}\r\n"
+        }
+    ]
+}

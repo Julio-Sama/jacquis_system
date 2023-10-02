@@ -1,0 +1,42 @@
+{
+    "sourceFile": "src/main/java/com/jacquis/jacquis_system/services/empleadoServiceImpl.java",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 6,
+            "patches": [
+                {
+                    "date": 1695698525324,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1695699044153,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -19,9 +19,9 @@\n \r\n     @Override\r\n     @Transactional(readOnly = true)\r\n     public List<Empleado> findAll() {\r\n-        return empleadoRepository.findAll();\r\n+        return (List<Empleado>) empleadoRepository.findAll();\r\n     }\r\n \r\n     @Override\r\n     public Page<Empleado> findAll(Pageable pageable) {\r\n"
+                },
+                {
+                    "date": 1695699163894,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -23,17 +23,16 @@\n         return (List<Empleado>) empleadoRepository.findAll();\r\n     }\r\n \r\n     @Override\r\n+    @Transactional\r\n     public Page<Empleado> findAll(Pageable pageable) {\r\n-        // TODO Auto-generated method stub\r\n-        throw new UnsupportedOperationException(\"Unimplemented method 'findAll'\");\r\n+        \r\n     }\r\n \r\n     @Override\r\n     public void save(Empleado empleado) {\r\n-        // TODO Auto-generated method stub\r\n-        throw new UnsupportedOperationException(\"Unimplemented method 'save'\");\r\n+        empleadoRepository.save(empleado);\r\n     }\r\n \r\n     @Override\r\n     public Empleado findOne(Long id) {\r\n"
+                },
+                {
+                    "date": 1695701183928,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -23,27 +23,28 @@\n         return (List<Empleado>) empleadoRepository.findAll();\r\n     }\r\n \r\n     @Override\r\n-    @Transactional\r\n+    @Transactional(readOnly = true)\r\n     public Page<Empleado> findAll(Pageable pageable) {\r\n-        \r\n+        return empleadoRepository.findAll(pageable);\r\n     }\r\n \r\n     @Override\r\n+    @Transactional\r\n     public void save(Empleado empleado) {\r\n         empleadoRepository.save(empleado);\r\n     }\r\n \r\n     @Override\r\n+    @Transactional(readOnly = true)\r\n     public Empleado findOne(Long id) {\r\n-        // TODO Auto-generated method stub\r\n-        throw new UnsupportedOperationException(\"Unimplemented method 'findOne'\");\r\n+        return empleadoRepository.findById(id).orElse(null);\r\n     }\r\n \r\n     @Override\r\n+    @Transactional\r\n     public void delete(Long id) {\r\n-        // TODO Auto-generated method stub\r\n-        throw new UnsupportedOperationException(\"Unimplemented method 'delete'\");\r\n+        empleadoRepository.deleteById(id);\r\n     }\r\n-\r\n+    \r\n }\r\n"
+                },
+                {
+                    "date": 1695701263540,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -13,10 +13,9 @@\n \r\n @Service\r\n public class EmpleadoServiceImpl implements EmpleadoService {\r\n \r\n-    @Autowired\r\n-    private EmpleadoRepository empleadoRepository;\r\n+    \r\n \r\n     @Override\r\n     @Transactional(readOnly = true)\r\n     public List<Empleado> findAll() {\r\n"
+                },
+                {
+                    "date": 1695701270190,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -13,9 +13,9 @@\n \r\n @Service\r\n public class EmpleadoServiceImpl implements EmpleadoService {\r\n \r\n-    @Autow\r\n+    @Autowre\r\n \r\n     @Override\r\n     @Transactional(readOnly = true)\r\n     public List<Empleado> findAll() {\r\n"
+                },
+                {
+                    "date": 1695701278909,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -14,9 +14,9 @@\n @Service\r\n public class EmpleadoServiceImpl implements EmpleadoService {\r\n \r\n     @Autowired\r\n-    \r\n+    private Emple\r\n \r\n     @Override\r\n     @Transactional(readOnly = true)\r\n     public List<Empleado> findAll() {\r\n"
+                }
+            ],
+            "date": 1695698525324,
+            "name": "Commit-0",
+            "content": "package com.jacquis.jacquis_system.services;\r\n\r\nimport java.util.List;\r\n\r\nimport org.springframework.beans.factory.annotation.Autowired;\r\nimport org.springframework.data.domain.Page;\r\nimport org.springframework.data.domain.Pageable;\r\nimport org.springframework.stereotype.Service;\r\nimport org.springframework.transaction.annotation.Transactional;\r\n\r\nimport com.jacquis.jacquis_system.entitys.Empleado;\r\nimport com.jacquis.jacquis_system.repository.EmpleadoRepository;\r\n\r\n@Service\r\npublic class EmpleadoServiceImpl implements EmpleadoService {\r\n\r\n    @Autowired\r\n    private EmpleadoRepository empleadoRepository;\r\n\r\n    @Override\r\n    @Transactional(readOnly = true)\r\n    public List<Empleado> findAll() {\r\n        return empleadoRepository.findAll();\r\n    }\r\n\r\n    @Override\r\n    public Page<Empleado> findAll(Pageable pageable) {\r\n        // TODO Auto-generated method stub\r\n        throw new UnsupportedOperationException(\"Unimplemented method 'findAll'\");\r\n    }\r\n\r\n    @Override\r\n    public void save(Empleado empleado) {\r\n        // TODO Auto-generated method stub\r\n        throw new UnsupportedOperationException(\"Unimplemented method 'save'\");\r\n    }\r\n\r\n    @Override\r\n    public Empleado findOne(Long id) {\r\n        // TODO Auto-generated method stub\r\n        throw new UnsupportedOperationException(\"Unimplemented method 'findOne'\");\r\n    }\r\n\r\n    @Override\r\n    public void delete(Long id) {\r\n        // TODO Auto-generated method stub\r\n        throw new UnsupportedOperationException(\"Unimplemented method 'delete'\");\r\n    }\r\n\r\n}\r\n"
+        }
+    ]
+}

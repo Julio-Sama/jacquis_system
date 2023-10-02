@@ -1,0 +1,30 @@
+{
+    "sourceFile": "src/main/java/com/jacquis/jacquis_system/services/EmpleadoService.java",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 3,
+            "patches": [
+                {
+                    "date": 1695698240642,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1695698507253,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,9 +6,9 @@\n import org.springframework.data.domain.Pageable;\r\n \r\n import com.jacquis.jacquis_system.entitys.Empleado;\r\n \r\n-public interface empleadoService {\r\n+public interface EmpleadoService {\r\n \r\n     public List<Empleado> findAll();\r\n \r\n     public Page<Empleado> findAll(Pageable pageable);\r\n"
+                },
+                {
+                    "date": 1695782573545,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,21 +1,32 @@\n package com.jacquis.jacquis_system.services;\r\n \r\n import java.util.List;\r\n \r\n-import org.springframework.data.domain.Page;\r\n-import org.springframework.data.domain.Pageable;\r\n+import org.springframework.beans.factory.annotation.Autowired;\r\n+import org.springframework.stereotype.Service;\r\n \r\n-import com.jacquis.jacquis_system.entitys.Empleado;\r\n+import com.jacquis.jacquis_system.model.Empleado;\r\n+import com.jacquis.jacquis_system.repository.EmpleadoRepository;\r\n \r\n-public interface EmpleadoService {\r\n+@Service\r\n+public class EmpleadoService {\r\n+    \r\n+    @Autowired\r\n+    EmpleadoRepository empleadoRepository;\r\n \r\n-    public List<Empleado> findAll();\r\n+    public List<Empleado> getEmpleados() {\r\n+        return empleadoRepository.findAll();\r\n+    }\r\n \r\n-    public Page<Empleado> findAll(Pageable pageable);\r\n+    public Empleado getEmpleadoById(Long id) {\r\n+        return empleadoRepository.findById(id).orElse(null);\r\n+    }\r\n \r\n-    public void save(Empleado empleado);\r\n+    public void saveOrUpdate(Empleado empleado) {\r\n+        empleadoRepository.save(empleado);\r\n+    }\r\n \r\n-    public Empleado findOne(Long id);\r\n-\r\n-    public void delete(Long id);\r\n+    public void delete(Long id) {\r\n+        empleadoRepository.deleteById(id);\r\n+    }\r\n }\r\n"
+                },
+                {
+                    "date": 1695782706228,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -11,9 +11,9 @@\n @Service\r\n public class EmpleadoService {\r\n     \r\n     @Autowired\r\n-    EmpleadoRepository empleadoRepository;\r\n+    private EmpleadoRepository empleadoRepository;\r\n \r\n     public List<Empleado> getEmpleados() {\r\n         return empleadoRepository.findAll();\r\n     }\r\n"
+                }
+            ],
+            "date": 1695698240642,
+            "name": "Commit-0",
+            "content": "package com.jacquis.jacquis_system.services;\r\n\r\nimport java.util.List;\r\n\r\nimport org.springframework.data.domain.Page;\r\nimport org.springframework.data.domain.Pageable;\r\n\r\nimport com.jacquis.jacquis_system.entitys.Empleado;\r\n\r\npublic interface empleadoService {\r\n\r\n    public List<Empleado> findAll();\r\n\r\n    public Page<Empleado> findAll(Pageable pageable);\r\n\r\n    public void save(Empleado empleado);\r\n\r\n    public Empleado findOne(Long id);\r\n\r\n    public void delete(Long id);\r\n}\r\n"
+        }
+    ]
+}

@@ -1,0 +1,22 @@
+{
+    "sourceFile": "src/main/resources/application.properties",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 1,
+            "patches": [
+                {
+                    "date": 1695019355909,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1695802715652,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,23 @@\n+# Configuracion de la base de datos\n+spring.datasource.url=jdbc:mariadb://localhost:3306/bd_jacquis\n+spring.datasource.username=root\n+# spring.datasource.password=\"\"\n+spring.datasource.driver-class-name=org.mariadb.jdbc.Driver\n+\n+# Configuracion de Hibernate\n+spring.jpa.database-platform=org.hibernate.dialect.MariaDBDialect\n+\n+# Hibernate ddl auto (create, create-drop, validate, update)\n+spring.jpa.hibernate.ddl-auto = update\n+\n+# spring.jpa.open-in-view = false\n+\n+# mostrar sql\n+spring.jpa.show-sql = true\n+spring.jpa.properties.hibernate.format_sql=true\n+\n+logging.level.org.hibernate.SQL=DEBUG\n+logging.level.org.hibernate.type=TRACE\n+\n+\n+server.port=80\n\\ No newline at end of file\n"
+                }
+            ],
+            "date": 1695019355909,
+            "name": "Commit-0",
+            "content": "# Thymeleaf properties\nspring.thymeleaf.cache=true\nspring.thymeleaf.encoding=UTF-8\nspring.thymeleaf.excluded-view-names= # Comma-separated list of view names that should be excluded from resolution.\nspring.thymeleaf.mode=HTML5\nspring.thymeleaf.prefix=classpath:/templates/\nspring.thymeleaf.render-hidden-markers-before-checkboxes=false\nspring.thymeleaf.servlet.content-type=text/html\nspring.thymeleaf.servlet.produce-partial-output-while-processing=true\nspring.thymeleaf.suffix=.html\n\n# Configuracion de la base de datos\nspring.datasource.url=jdbc:mariadb://localhost:3306/bd_jacquis\nspring.datasource.username=root\n# spring.datasource.password=\"\"\nspring.datasource.driver-class-name=org.mariadb.jdbc.Driver\n\n# Configuracion de Hibernate\nspring.jpa.database-platform=org.hibernate.dialect.MariaDBDialect\n\n# Hibernate ddl auto (create, create-drop, validate, update)\nspring.jpa.hibernate.ddl-auto = update\n\n# spring.jpa.open-in-view = false\n\n# mostrar sql\nspring.jpa.show-sql = true\nspring.jpa.properties.hibernate.format_sql=true\n\nlogging.level.org.hibernate.SQL=DEBUG\nlogging.level.org.hibernate.type=TRACE\n\n\nserver.port=80"
+        }
+    ]
+}

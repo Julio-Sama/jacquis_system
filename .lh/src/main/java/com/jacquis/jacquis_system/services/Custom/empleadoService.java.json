@@ -1,0 +1,22 @@
+{
+    "sourceFile": "src/main/java/com/jacquis/jacquis_system/services/Custom/empleadoService.java",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 1,
+            "patches": [
+                {
+                    "date": 1695697499731,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1695697580488,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -7,11 +7,15 @@\n \r\n import com.jacquis.jacquis_system.entitys.Empleado;\r\n \r\n public interface empleadoService {\r\n-    \r\n+\r\n     public List<Empleado> findAll();\r\n \r\n     public Page<Empleado> findAll(Pageable pageable);\r\n \r\n     public void save(Empleado empleado);\r\n+\r\n+    public Empleado findOne(Long id);\r\n+\r\n+    public void delete(Long id);\r\n }\r\n"
+                }
+            ],
+            "date": 1695697499731,
+            "name": "Commit-0",
+            "content": "package com.jacquis.jacquis_system.services.Custom;\r\n\r\nimport java.util.List;\r\n\r\nimport org.springframework.data.domain.Page;\r\nimport org.springframework.data.domain.Pageable;\r\n\r\nimport com.jacquis.jacquis_system.entitys.Empleado;\r\n\r\npublic interface empleadoService {\r\n    \r\n    public List<Empleado> findAll();\r\n\r\n    public Page<Empleado> findAll(Pageable pageable);\r\n\r\n    public void save(Empleado empleado);\r\n}\r\n"
+        }
+    ]
+}

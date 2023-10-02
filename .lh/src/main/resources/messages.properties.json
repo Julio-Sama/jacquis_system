@@ -1,0 +1,22 @@
+{
+    "sourceFile": "src/main/resources/messages.properties",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 1,
+            "patches": [
+                {
+                    "date": 1695696386124,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1695696818385,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,4 +1,8 @@\n+# Propiedades de los mensajes de error\r\n+# Propiedades de los mensajes de error para el formulario de empleado\r\n NotEmpty.empleado.nombre=Debe ingresar el nombre del empleado.\r\n NotEmpty.empleado.apellido=Debe ingresar el apellido del empleado.\r\n\\ No newline at end of file\n NotEmpty.empleado.direccion=Debe ingresar la dirección del empleado.\r\n-Email.empleado.email=Debe ingresar un email válido.\n+Email.empleado.email=Debe ingresar un email válido.\r\n+# NotNull.empleado.fecha=Debe ingresar la fecha\r\n+# typeMisMatch.empleado.fecha=Debe ingresar una fecha válida.\n\\ No newline at end of file\n"
+                }
+            ],
+            "date": 1695696386124,
+            "name": "Commit-0",
+            "content": "NotEmpty.empleado.nombre=Debe ingresar el nombre del empleado.\r\nNotEmpty.empleado.apellido=Debe ingresar el apellido del empleado.\r\nNotEmpty.empleado.direccion=Debe ingresar la dirección del empleado.\r\nEmail.empleado.email=Debe ingresar un email válido."
+        }
+    ]
+}

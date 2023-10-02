@@ -1,0 +1,38 @@
+{
+    "sourceFile": "src/main/java/com/jacquis/jacquis_system/entitys/Empleado.java",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 5,
+            "patches": [
+                {
+                    "date": 1695695257258,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1695695731920,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,8 +4,11 @@\n import jakarta.persistence.GeneratedValue;\r\n import jakarta.persistence.GenerationType;\r\n import jakarta.persistence.Id;\r\n import jakarta.persistence.Table;\r\n+import jakarta.validation.constraints.Email;\r\n+import jakarta.validation.constraints.NotEmpty;\r\n+import jakarta.validation.constraints.NotNull;\r\n \r\n @Entity\r\n @Table(name = \"empleado\")\r\n public class Empleado {\r\n@@ -13,15 +16,30 @@\n     @Id\r\n     @GeneratedValue(strategy = GenerationType.IDENTITY)\r\n     private Long id_empleado;\r\n \r\n-    \r\n+    @NotEmpty\r\n     private String nombre;\r\n+\r\n+    @NotEmpty\r\n     private String apellido;\r\n     private String apellido_dos;\r\n+\r\n+    @NotEmpty\r\n     private String direccion;\r\n+\r\n+    @NotEmpty\r\n+    @Email\r\n     private String correo_empleado;\r\n+\r\n+    @NotNull\r\n     private boolean estado_empleado;\r\n-    private String cargo;\r\n+    private String empleado_fk;\r\n     // private salario salario;\r\n \r\n+    // PARA UNA FECHA\r\n+    // @NotNull\r\n+    // @Temporal(TemporalType.DATE)\r\n+    // DateTimeFormat(pattern = \"dd/MM/yyyy\")\r\n+    // private Date fecha;\r\n+\r\n }\r\n"
+                },
+                {
+                    "date": 1695696822197,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -41,5 +41,76 @@\n     // @Temporal(TemporalType.DATE)\r\n     // DateTimeFormat(pattern = \"dd/MM/yyyy\")\r\n     // private Date fecha;\r\n \r\n+    // Constructor vacio\r\n+    public Empleado() {\r\n+    }\r\n+\r\n+    // Constructor\r\n+\r\n+    // Setters y Getters\r\n+    public Long getId_empleado() {\r\n+        return id_empleado;\r\n+    }\r\n+\r\n+    public void setId_empleado(Long id_empleado) {\r\n+        this.id_empleado = id_empleado;\r\n+    }\r\n+\r\n+    public String getNombre() {\r\n+        return nombre;\r\n+    }\r\n+\r\n+    public void setNombre(String nombre) {\r\n+        this.nombre = nombre;\r\n+    }\r\n+\r\n+    public String getApellido() {\r\n+        return apellido;\r\n+    }\r\n+\r\n+    public void setApellido(String apellido) {\r\n+        this.apellido = apellido;\r\n+    }\r\n+\r\n+    public String getApellido_dos() {\r\n+        return apellido_dos;\r\n+    }\r\n+\r\n+    public void setApellido_dos(String apellido_dos) {\r\n+        this.apellido_dos = apellido_dos;\r\n+    }\r\n+\r\n+    public String getDireccion() {\r\n+        return direccion;\r\n+    }\r\n+\r\n+    public void setDireccion(String direccion) {\r\n+        this.direccion = direccion;\r\n+    }\r\n+\r\n+    public String getCorreo_empleado() {\r\n+        return correo_empleado;\r\n+    }\r\n+\r\n+    public void setCorreo_empleado(String correo_empleado) {\r\n+        this.correo_empleado = correo_empleado;\r\n+    }\r\n+\r\n+    public boolean isEstado_empleado() {\r\n+        return estado_empleado;\r\n+    }\r\n+\r\n+    public void setEstado_empleado(boolean estado_empleado) {\r\n+        this.estado_empleado = estado_empleado;\r\n+    }\r\n+\r\n+    public String getEmpleado_fk() {\r\n+        return empleado_fk;\r\n+    }\r\n+\r\n+    public void setEmpleado_fk(String empleado_fk) {\r\n+        this.empleado_fk = empleado_fk;\r\n+    }\r\n+    \r\n }\r\n"
+                },
+                {
+                    "date": 1695703931042,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -44,73 +44,6 @@\n \r\n     // Constructor vacio\r\n     public Empleado() {\r\n     }\r\n-\r\n-    // Constructor\r\n-\r\n-    // Setters y Getters\r\n-    public Long getId_empleado() {\r\n-        return id_empleado;\r\n-    }\r\n-\r\n-    public void setId_empleado(Long id_empleado) {\r\n-        this.id_empleado = id_empleado;\r\n-    }\r\n-\r\n-    public String getNombre() {\r\n-        return nombre;\r\n-    }\r\n-\r\n-    public void setNombre(String nombre) {\r\n-        this.nombre = nombre;\r\n-    }\r\n-\r\n-    public String getApellido() {\r\n-        return apellido;\r\n-    }\r\n-\r\n-    public void setApellido(String apellido) {\r\n-        this.apellido = apellido;\r\n-    }\r\n-\r\n-    public String getApellido_dos() {\r\n-        return apellido_dos;\r\n-    }\r\n-\r\n-    public void setApellido_dos(String apellido_dos) {\r\n-        this.apellido_dos = apellido_dos;\r\n-    }\r\n-\r\n-    public String getDireccion() {\r\n-        return direccion;\r\n-    }\r\n-\r\n-    public void setDireccion(String direccion) {\r\n-        this.direccion = direccion;\r\n-    }\r\n-\r\n-    public String getCorreo_empleado() {\r\n-        return correo_empleado;\r\n-    }\r\n-\r\n-    public void setCorreo_empleado(String correo_empleado) {\r\n-        this.correo_empleado = correo_empleado;\r\n-    }\r\n-\r\n-    public boolean isEstado_empleado() {\r\n-        return estado_empleado;\r\n-    }\r\n-\r\n-    public void setEstado_empleado(boolean estado_empleado) {\r\n-        this.estado_empleado = estado_empleado;\r\n-    }\r\n-\r\n-    public String getEmpleado_fk() {\r\n-        return empleado_fk;\r\n-    }\r\n-\r\n-    public void setEmpleado_fk(String empleado_fk) {\r\n-        this.empleado_fk = empleado_fk;\r\n-    }\r\n     \r\n }\r\n"
+                },
+                {
+                    "date": 1695703939648,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -8,8 +8,9 @@\n import jakarta.validation.constraints.Email;\r\n import jakarta.validation.constraints.NotEmpty;\r\n import jakarta.validation.constraints.NotNull;\r\n \r\n+@Data\r\n @Entity\r\n @Table(name = \"empleado\")\r\n public class Empleado {\r\n     \r\n"
+                },
+                {
+                    "date": 1695704054988,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -42,10 +42,6 @@\n     // @NotNull\r\n     // @Temporal(TemporalType.DATE)\r\n     // DateTimeFormat(pattern = \"dd/MM/yyyy\")\r\n     // private Date fecha;\r\n-\r\n-    // Constructor vacio\r\n-    public Empleado() {\r\n-    }\r\n     \r\n }\r\n"
+                }
+            ],
+            "date": 1695695257258,
+            "name": "Commit-0",
+            "content": "package com.jacquis.jacquis_system.entitys;\r\n\r\nimport jakarta.persistence.Entity;\r\nimport jakarta.persistence.GeneratedValue;\r\nimport jakarta.persistence.GenerationType;\r\nimport jakarta.persistence.Id;\r\nimport jakarta.persistence.Table;\r\n\r\n@Entity\r\n@Table(name = \"empleado\")\r\npublic class Empleado {\r\n    \r\n    @Id\r\n    @GeneratedValue(strategy = GenerationType.IDENTITY)\r\n    private Long id_empleado;\r\n\r\n    \r\n    private String nombre;\r\n    private String apellido;\r\n    private String apellido_dos;\r\n    private String direccion;\r\n    private String correo_empleado;\r\n    private boolean estado_empleado;\r\n    private String cargo;\r\n    // private salario salario;\r\n\r\n}\r\n"
+        }
+    ]
+}

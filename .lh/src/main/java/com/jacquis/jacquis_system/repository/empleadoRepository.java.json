@@ -1,0 +1,38 @@
+{
+    "sourceFile": "src/main/java/com/jacquis/jacquis_system/repository/EmpleadoRepository.java",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 5,
+            "patches": [
+                {
+                    "date": 1695696715084,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1695698302233,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,7 +3,7 @@\n import org.springframework.data.repository.PagingAndSortingRepository;\r\n \r\n import com.jacquis.jacquis_system.entitys.Empleado;\r\n \r\n-public interface empleadoRepository extends PagingAndSortingRepository<Empleado, Long>{\r\n+public interface EmpleadoRepository extends PagingAndSortingRepository<Empleado, Long>{\r\n     \r\n }\r\n"
+                },
+                {
+                    "date": 1695701227673,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,7 +3,8 @@\n import org.springframework.data.repository.PagingAndSortingRepository;\r\n \r\n import com.jacquis.jacquis_system.entitys.Empleado;\r\n \r\n+\r\n public interface EmpleadoRepository extends PagingAndSortingRepository<Empleado, Long>{\r\n     \r\n }\r\n"
+                },
+                {
+                    "date": 1695701236668,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,8 +3,8 @@\n import org.springframework.data.repository.PagingAndSortingRepository;\r\n \r\n import com.jacquis.jacquis_system.entitys.Empleado;\r\n \r\n-\r\n+@Reposito\r\n public interface EmpleadoRepository extends PagingAndSortingRepository<Empleado, Long>{\r\n     \r\n }\r\n"
+                },
+                {
+                    "date": 1695701751092,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,11 @@\n+package com.jacquis.jacquis_system.repository;\r\n+\r\n+import org.springframework.data.repository.PagingAndSortingRepository;\r\n+import org.springframework.stereotype.Repository;\r\n+\r\n+import com.jacquis.jacquis_system.entitys.Empleado;\r\n+\r\n+@Repository\r\n+public interface EmpleadoRepository extends PagingAndSortingRepository<Empleado, Long> {\r\n+    \r\n+}\r\n"
+                },
+                {
+                    "date": 1695782573546,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,21 +1,11 @@\n package com.jacquis.jacquis_system.repository;\r\n \r\n-import org.springframework.data.repository.PagingAndSortingRepository;\r\n+import org.springframework.data.jpa.repository.JpaRepository;\r\n import org.springframework.stereotype.Repository;\r\n \r\n-import com.jacquis.jacquis_system.entitys.Empleado;\r\n+import com.jacquis.jacquis_system.model.Empleado;\r\n \r\n @Repository\r\n-public interface EmpleadoRepository extends PagingAndSortingRepository<Empleado, Long> {\r\n+public interface EmpleadoRepository extends JpaRepository<Empleado, Long>{\r\n     \r\n }\r\n-package com.jacquis.jacquis_system.repository;\r\n-\r\n-import org.springframework.data.repository.PagingAndSortingRepository;\r\n-\r\n-import com.jacquis.jacquis_system.entitys.Empleado;\r\n-\r\n-@Reposito\r\n-public interface EmpleadoRepository extends PagingAndSortingRepository<Empleado, Long>{\r\n-    \r\n-}\r\n"
+                }
+            ],
+            "date": 1695696715084,
+            "name": "Commit-0",
+            "content": "package com.jacquis.jacquis_system.repository;\r\n\r\nimport org.springframework.data.repository.PagingAndSortingRepository;\r\n\r\nimport com.jacquis.jacquis_system.entitys.Empleado;\r\n\r\npublic interface empleadoRepository extends PagingAndSortingRepository<Empleado, Long>{\r\n    \r\n}\r\n"
+        }
+    ]
+}

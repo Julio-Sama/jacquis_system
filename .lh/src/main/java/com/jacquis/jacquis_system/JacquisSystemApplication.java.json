@@ -1,0 +1,30 @@
+{
+    "sourceFile": "src/main/java/com/jacquis/jacquis_system/JacquisSystemApplication.java",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 3,
+            "patches": [
+                {
+                    "date": 1695803468269,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1695803589027,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,7 @@\n package com.jacquis.jacquis_system;\n \n+import org.springframework.beans.factory.annotation.Autowired;\n import org.springframework.boot.CommandLineRunner;\n import org.springframework.boot.SpringApplication;\n import org.springframework.boot.autoconfigure.SpringBootApplication;\n \n@@ -12,8 +13,9 @@\n \tpublic static void main(String[] args) {\n \t\tSpringApplication.run(JacquisSystemApplication.class, args);\n \t}\n \n+\t@Autowired\n \tEmpleadoService empleadoService;\n \n \t@Override\n \tpublic void run(String... args) throws Exception {\n"
+                },
+                {
+                    "date": 1696043186033,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,25 +1,13 @@\n package com.jacquis.jacquis_system;\n \n-import org.springframework.beans.factory.annotation.Autowired;\n-import org.springframework.boot.CommandLineRunner;\n import org.springframework.boot.SpringApplication;\n import org.springframework.boot.autoconfigure.SpringBootApplication;\n \n-import com.jacquis.jacquis_system.services.EmpleadoService;\n-\n @SpringBootApplication\n-public class JacquisSystemApplication implements CommandLineRunner{\n+public class JacquisSystemApplication{\n \n \tpublic static void main(String[] args) {\n \t\tSpringApplication.run(JacquisSystemApplication.class, args);\n \t}\n \n-\t@Autowired\n-\tEmpleadoService empleadoService;\n-\n-\t@Override\n-\tpublic void run(String... args) throws Exception {\n-\t\tSystem.out.println(empleadoService.getEmpleados());\n-\t}\n-\n }\n"
+                },
+                {
+                    "date": 1696043202377,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,9 +3,9 @@\n import org.springframework.boot.SpringApplication;\n import org.springframework.boot.autoconfigure.SpringBootApplication;\n \n @SpringBootApplication\n-public class JacquisSystemApplication{\n+public class JacquisSystemApplication {\n \n \tpublic static void main(String[] args) {\n \t\tSpringApplication.run(JacquisSystemApplication.class, args);\n \t}\n"
+                }
+            ],
+            "date": 1695803468269,
+            "name": "Commit-0",
+            "content": "package com.jacquis.jacquis_system;\n\nimport org.springframework.boot.CommandLineRunner;\nimport org.springframework.boot.SpringApplication;\nimport org.springframework.boot.autoconfigure.SpringBootApplication;\n\nimport com.jacquis.jacquis_system.services.EmpleadoService;\n\n@SpringBootApplication\npublic class JacquisSystemApplication implements CommandLineRunner{\n\n\tpublic static void main(String[] args) {\n\t\tSpringApplication.run(JacquisSystemApplication.class, args);\n\t}\n\n\tEmpleadoService empleadoService;\n\n\t@Override\n\tpublic void run(String... args) throws Exception {\n\t\tSystem.out.println(empleadoService.getEmpleados());\n\t}\n\n}\n"
+        }
+    ]
+}
