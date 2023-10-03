@@ -23,7 +23,7 @@
                         <a th:href="@{/empleados/nuevo}" class="au-btn au-btn-icon au-btn--green au-btn--small">
                             <i class="zmdi zmdi-plus"></i> NUEVO EMPLEADO
                             <button type="button" style="display: none;"></button>
-                        </a>                        
+                        </a>
                         <div class="rs-select2--dark rs-select2--sm rs-select2--dark2">
                             <select class="js-select2" name="type">
                                 <option selected="selected">Exportar</option>
@@ -64,12 +64,13 @@
                                 <td th:text="${empleado.empleado_fk}"></td>
                                 <td>
                                     <div class="table-data-feature">
-                                        <button class="item" data-toggle="tooltip" data-placement="top" title="Editar"
-                                            th:href="@{/edit_empleados}">
+                                        <a th:href="@{/empleados/editar/{id_empleado}(id_empleado=${empleado.id_empleado})}"
+                                            class="item" data-toggle="tooltip" data-placement="top" title="Editar">
                                             <i class="zmdi zmdi-edit"></i>
-                                        </button>
-                                        <button class="item" data-toggle="tooltip" data-placement="top"
-                                            title="Dar de baja">
+                                            <button type="button" style="display: none;"></button>
+                                        </a>
+                                        <button type="button" data-target="#smallmodal" class="item"
+                                            data-toggle="modal" data-placement="top" title="Dar de baja">
                                             <i class="zmdi zmdi-long-arrow-down"></i>
                                         </button>
                                         <button class="item" data-toggle="tooltip" data-placement="top" title="More">
@@ -79,9 +80,30 @@
                                 </td>
                             </tr>
                             <tr class="spacer"></tr>
-
                         </tbody>
                     </table>
+                </div>
+                <!-- MODAL -->
+                <div class="modal fade" id="smallmodal" tabindex="-1" role="dialog" aria-labelledby="smallmodalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-sm" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="smallmodalLabel">Dará de baja a un empleado</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <p>
+                                    ¿Está seguro que desea dar de baja a este empleado?
+                                </p>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                                <button type="button" class="btn btn-primary">Confirmar</button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

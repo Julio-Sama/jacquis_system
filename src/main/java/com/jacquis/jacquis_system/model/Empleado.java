@@ -12,7 +12,6 @@ import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
 
 
 @Entity
@@ -26,7 +25,7 @@ public class Empleado {
     @NotNull
     @Column(name = "dui_empleado", columnDefinition = "BIGINT")
     // @ Size(min = 9, message = "El DUI debe tener 9 dígitos")
-    private int duiEmpleado;
+    private Long duiEmpleado;
 
     private String nombre;
     private String apellido;
@@ -37,7 +36,7 @@ public class Empleado {
     private int empleado_fk;
 
     @OneToMany(mappedBy = "empleado")
-    @Size(min = 1, message = "Debe tener al menos un teléfono")
+    // @Size(min = 1, message = "Debe tener al menos un teléfono")
     private List<TelefonoEmpleado> telefonos;
     
     public Empleado(EmpleadoDTO empleadoDTO){
@@ -48,7 +47,7 @@ public class Empleado {
         super();
     }
 
-    public Empleado(int duiEmpleado, String nombre, String apellido, String apellido_dos, String direccion,
+    public Empleado(Long duiEmpleado, String nombre, String apellido, String apellido_dos, String direccion,
             String correo_empleado, String estado_empleado, int empleado_fk) {
         this.duiEmpleado = duiEmpleado;
         this.nombre = nombre;
@@ -68,13 +67,11 @@ public class Empleado {
         this.id_empleado = id_empleado;
     }
 
-
-
-    public int getDuiEmpleado() {
+    public Long getDuiEmpleado() {
         return duiEmpleado;
     }
 
-    public void setDuiEmpleado(int duiEmpleado) {
+    public void setDuiEmpleado(Long duiEmpleado) {
         this.duiEmpleado = duiEmpleado;
     }
 
