@@ -1,0 +1,4 @@
+01-09-2023
+Se modificaron los datos de la tabla empleados(se asigno la llave primaria
+y se agrego el campo DUI establecido como campo unico) por este cambio las tablas ventas, tel_empleados y usuarios
+se modificaron para que la relacion con la tabla empleados fuera por medio del campo unico DUI. 
