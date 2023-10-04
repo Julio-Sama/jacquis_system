@@ -146,9 +146,19 @@
                             <a href="clientes.html">
                                 <i class="fas fa-users"></i>Clientes</a>
                         </li>
-                        <li>
-                            <a href="proveedores.html">
-                                <i class="fas fa-truck"></i>Proveedores</a>
+                        <li class="has-sub">
+                            <a class="js-arrow" href="#">
+                                <i class="fas fa-shopping-cart"></i>Proveedores</a>
+                            <ul class="list-unstyled navbar__sub-list js-sub-list">
+                                <li>
+                                    <a href="proveedores.html">
+                                        <i class="fas fa-plus-square"></i>Gestionar Proveedores</a>
+                                </li>
+                                <li>
+                                    <a href="representantes.html">
+                                        <i class="fas fa-book"></i>Gestionar Representantes</a>
+                                </li>
+                            </ul>
                         </li>
                         <!-- <li>
                             <a href="map.html">
@@ -280,6 +290,7 @@
                 <div class="section__content section__content--p30">
 
                     <div th:replace="~{${contenido}}">
+                        
                     </div>
                     <!-- FIN DE LA TABLA DE REGISTROS ACTUALES -->
 
