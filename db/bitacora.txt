@@ -2,3 +2,12 @@
 Se modificaron los datos de la tabla empleados(se asigno la llave primaria
 y se agrego el campo DUI establecido como campo unico) por este cambio las tablas ventas, tel_empleados y usuarios
 se modificaron para que la relacion con la tabla empleados fuera por medio del campo unico DUI. 
+
+07/10/2023 - Luis
+Se modificaron los datos de la tabla Proveedor; eliminando telefono de proveedor (ya se tenia creada una tabla
+correspondiente a los telefonos del proveedor).
+Se modificó el campo de estado_prov a varchar(255).
+
+08/10/2023
+Se debe cambiará la FK de Proveedor (id_representante) a la FK de Representante (id_proveedor) para evitar 
+la duplicidad de datos en los registros.
