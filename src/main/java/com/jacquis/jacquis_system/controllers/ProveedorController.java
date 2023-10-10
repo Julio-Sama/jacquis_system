@@ -2,6 +2,8 @@ package com.jacquis.jacquis_system.controllers;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -10,42 +12,48 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.jacquis.jacquis_system.model.Proveedor;
 import com.jacquis.jacquis_system.services.ProveedorService;
 
 @Controller
+@RequestMapping("/proveedores")
 public class ProveedorController {
-    
+
     @Autowired
     private ProveedorService proveedorService;
 
-    private void proveedor(Model model) {
-        model.addAttribute("contenido", "prov");
-    } // carga la vista proveedor.html
-    
-    @GetMapping("/proveedores") 
+    @GetMapping
     public String mostrarProveedor(Model modelo) {
         modelo.addAttribute("proveedorList", proveedorService.getProveedores());
-        proveedor(modelo);
-        return "index"; // retorna al archivo index.html con los datos cargados en el modelo
+        return "prov"; // retorna al archivo index.html con los datos cargados en el modelo
     }
 
-    // Muestra el formulario para crear un nuevo proveedor
-    //private void nuevoProveedorVista(Model model) {
-       // model.addAttribute("contenido", "nuevo_proveedor");
-    //} // carga la vista nuevo_proveedor.html
+    @GetMapping("/filtro")
+    public String filtroProveedor(Model modelo,
+            @RequestParam(name = "mostrarInactivosProv", defaultValue = "false") boolean mostrarInactivosProv) {
+        List<Proveedor> proveedorList = proveedorService.getProveedores();
 
-    @GetMapping("/proveedores/nuevo")
+        if (!mostrarInactivosProv) {
+            proveedorList = proveedorList.stream()
+                    .filter(proveedor -> !proveedor.getEstado_prov().equals("INACTIVO"))
+                    .collect(Collectors.toList());
+        }
+        modelo.addAttribute("proveedorList", proveedorList);
+        return "prov :: tablaProveedores";
+    }
+
+    @GetMapping("/nuevo")
     public String nuevoProveedor(Model modelo) {
         Proveedor proveedor = new Proveedor();
-        modelo.addAttribute("contenido", "nuevo_proveedor");
         modelo.addAttribute("proveedores", proveedor);
-        return "index";
+        return "nuevo_proveedor";
     }
 
     // Guarda o actualiza un proveedor
-    @PostMapping("/proveedores")
+    @PostMapping
     public String guardarProveedor(@ModelAttribute("proveedores") Proveedor proveedor) {
         proveedor.setEstado_prov("ACTIVO");
 
@@ -59,30 +67,26 @@ public class ProveedorController {
             java.sql.Date fechaInicioProveedor = new java.sql.Date(fechaInicioProveedorUtil.getTime());
             proveedor.setFecha_inicio_proveedor(fechaInicioProveedor);
         } catch (java.text.ParseException e) {
-        // Maneja la excepción si ocurre un error de formato
-        e.printStackTrace();    
+            // Maneja la excepción si ocurre un error de formato
+            e.printStackTrace();
         }
 
         proveedorService.guardarActualizar(proveedor);
         return "redirect:/proveedores";
     }
 
-    private void editarProveedorVista(Model model) {
-        model.addAttribute("contenido", "edit_proveedores");
-    } // carga la vista editar_prov.html
 
     // Muestra el formulario para editar un proveedor
-    @GetMapping("/proveedores/editar/{id_proveedor}")
+    @GetMapping("/editar/{id_proveedor}")
     public String editarProveedor(@PathVariable("id_proveedor") Long idProveedor, Model modelo) {
         Proveedor proveedor = proveedorService.getProveedorById(idProveedor);
         modelo.addAttribute("proveedores", proveedor);
-        editarProveedorVista(modelo);
-        return "index";
+        return "edit_proveedores";
     }
 
-    //Actualiza un proveedor
-    @PostMapping("/proveedores/{id_proveedor}")
-    public String actualizarProveedor(@PathVariable("id_proveedor") Long idProveedor, 
+    // Actualiza un proveedor
+    @PostMapping("/{id_proveedor}")
+    public String actualizarProveedor(@PathVariable("id_proveedor") Long idProveedor,
             @ModelAttribute("proveedores") Proveedor proveedor) {
         Proveedor proveedorActual = proveedorService.getProveedorById(idProveedor);
         proveedorActual.setNombre(proveedor.getNombre());
@@ -92,13 +96,15 @@ public class ProveedorController {
         return "redirect:/proveedores";
     }
 
-    //Dar de baja un proveedor
-    @GetMapping("/proveedores/baja/{id_proveedor}")
+    // Dar de baja un proveedor
+    @GetMapping("/baja/{id_proveedor}")
     public String bajaProveedor(@PathVariable("id_proveedor") Long idProveedor, Model modelo) {
         Proveedor proveedor = proveedorService.getProveedorById(idProveedor);
+        modelo.addAttribute("id_proveedor", proveedor.getId_proveedor());
         proveedor.setEstado_prov("INACTIVO");
+        
         proveedorService.guardarActualizar(proveedor);
-        return "redirect:/index/proveedores";
+        return "redirect:/proveedores";
     }
 
 }

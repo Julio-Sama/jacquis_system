@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.jacquis.jacquis_system.model.Empleado;
+import com.jacquis.jacquis_system.repository.EmpleadoRepository;
 import com.jacquis.jacquis_system.services.EmpleadoService;
 
 import jakarta.validation.Valid;
@@ -25,6 +26,9 @@ public class EmpleadoController {
 
     @Autowired
     private EmpleadoService empleadoService;
+
+    @Autowired
+    private EmpleadoRepository empleadoRepository;
 
     @GetMapping
     public String mostrarEmpleados(Model modelo) {
@@ -61,9 +65,15 @@ public class EmpleadoController {
         if (errores.hasErrors()) {
             return "nuevo_empleado";
         } else {
-            empleado.setEstado_empleado("ACTIVO");
-            empleadoService.saveOrUpdate(empleado);
-            return "redirect:/empleados";
+            int count = empleadoRepository.countEmpleadosByDui(empleado.getDuiEmpleado());
+            if (count > 0) {
+                errores.rejectValue("duiEmpleado", "duiEmpleado.duplicate", "El DUI ya existe en la base de datos");
+                return "nuevo_empleado";
+            } else {
+                empleado.setEstado_empleado("ACTIVO");
+                empleadoService.saveOrUpdate(empleado);
+                return "redirect:/empleados";
+            }
         }
 
         // return "redirect:/empleados";
@@ -75,7 +85,7 @@ public class EmpleadoController {
         Empleado empleado = empleadoService.getEmpleadoById(idEmpleado);
         modelo.addAttribute("empleados", empleado);
 
-        return "empleados"; // retorna al archivo index.html con los datos cargados en el modelo
+        return "edit_empleados"; // retorna al archivo index.html con los datos cargados en el modelo
     }
 
     // Actualiza un empleado

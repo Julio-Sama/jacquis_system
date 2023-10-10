@@ -26,6 +26,10 @@ public class EmpleadoService {
         empleadoRepository.save(empleado);
     }
 
+    public boolean existsById(Long id) {
+        return empleadoRepository.existsById(id);
+    }
+
     public void delete(Long id) {
         empleadoRepository.deleteById(id);
     }

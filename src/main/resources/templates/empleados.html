@@ -123,7 +123,7 @@
                                 <i class="fas fa-truck"></i>Proveedores</a>
                             <ul class="list-unstyled navbar__sub-list js-sub-list">
                                 <li>
-                                    <a href="nuevaVenta.html">
+                                    <a th:href="@{/proveedores}">
                                         <i class="fas fa-wrench"></i>Gestión de proveedores</a>
                                 </li>
                                 <li>
@@ -384,7 +384,7 @@
                     </div>
                     <div class="modal-body">
                         <p class="error-text">
-                            ¿Está seguro que desea dar de baja al <strong th:text="${nombre}"></strong>?
+                            ¿Está segura que desea dar de baja a <strong th:text="${nombre}"></strong>?
                         </p>
                     </div>
                     <div class="modal-footer">
