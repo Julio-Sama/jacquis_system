@@ -7,6 +7,9 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "proveedor")
@@ -16,8 +19,13 @@ public class Proveedor {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id_proveedor;
 
+    @NotBlank(message = "El nombre es obligatorio")
     private String nombre;
+
+    @Email(message = "No es formato de correo válido")
     private String correo;
+
+    @NotBlank(message = "La dirección es obligatoria")
     private String direccion;
     private String estado_prov;
     private Date fecha_inicio_proveedor;

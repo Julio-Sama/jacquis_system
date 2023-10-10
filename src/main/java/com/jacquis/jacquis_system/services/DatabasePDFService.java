@@ -6,6 +6,8 @@ import java.io.ByteArrayOutputStream;
 import java.util.List;
 import java.util.stream.Stream;
 
+import org.apache.poi.common.usermodel.fonts.FontFamily;
+
 import com.jacquis.jacquis_system.model.Proveedor;
 import com.lowagie.text.Chunk;
 import com.lowagie.text.Document;
@@ -25,13 +27,12 @@ public class DatabasePDFService {
         Document document = new Document();
         ByteArrayOutputStream out = new ByteArrayOutputStream();
  
-        try {
- 
-            PdfWriter.getInstance(document, out);
+        try {   
+            PdfWriter.getInstance(document, out);   
             document.open();
  
             // Add Content to PDF file ->
-            Font fontHeader = FontFactory.getFont(FontFactory.defaultEncoding, 18);
+            Font fontHeader = FontFactory.getFont(FontFactory.defaultEncoding, 15);
             Paragraph para = new Paragraph("Informe de proveedores - Jacquis Store", fontHeader);
             para.setAlignment(Element.ALIGN_CENTER);
             document.add(para);
@@ -44,20 +45,20 @@ public class DatabasePDFService {
                 Font headFont = FontFactory.getFont(FontFactory.defaultEncoding, 12);
                 header.setBackgroundColor(Color.PINK);
                 header.setHorizontalAlignment(Element.ALIGN_CENTER);
-                header.setBorderWidth(1);
+                header.setBorderWidth(2);
                 header.setPhrase(new Phrase(headerTitle, headFont));
                 table.addCell(header);
             });
  
-            for (Proveedor prov : proveedor) {
+            for (Proveedor prov : proveedor) {  
                 PdfPCell id = new PdfPCell(new Phrase(prov.getId_proveedor().toString()));
-                id.setPaddingLeft(4);
+                id.setPaddingLeft(1);
                 id.setVerticalAlignment(Element.ALIGN_MIDDLE);
                 id.setHorizontalAlignment(Element.ALIGN_CENTER);
                 table.addCell(id);
  
                 PdfPCell nombrePDF = new PdfPCell(new Phrase(prov.getNombre()));
-                nombrePDF.setPaddingLeft(4);
+                nombrePDF.setPaddingLeft(6);
                 nombrePDF.setVerticalAlignment(Element.ALIGN_MIDDLE);
                 nombrePDF.setHorizontalAlignment(Element.ALIGN_CENTER);
                 table.addCell(nombrePDF);
