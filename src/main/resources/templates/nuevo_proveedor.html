@@ -257,22 +257,34 @@
                                     </div>
                                     <div class="card-body card-block">
                                         <form th:action="@{/proveedores}" th:object="${proveedores}" method="POST">
+                                            <div th:if="${#fields.hasErrors()}" class="alert alert-danger" role="alert">
+                                                Por favor, corrija los errores indicados en rojo
+                                            </div>
                                             <div class="form-group">
                                                 <label for="nombre" class=" form-control-label">Nombre</label>
                                                 <input type="text" th:field="*{nombre}" name="nombre" id="nombre"
                                                     placeholder="Ingrese nombre del proveedor" class="form-control">
+                                                <div th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}"
+                                                    class="alert alert-danger" role="alert">
+                                                </div>
                                             </div>
                                             <div class="form-group">
                                                 <label for="direccion" class=" form-control-label">Dirección</label>
                                                 <input type="text" th:field="*{direccion}" name="direccion"
                                                     id="direccion" placeholder="Ingrese la dirección"
                                                     class="form-control">
+                                                <div th:if="${#fields.hasErrors('direccion')}" th:errors="*{direccion}"
+                                                    class="alert alert-danger" role="alert">
+                                                </div>
                                             </div>
                                             <div class="form-group">
                                                 <label for="correo" class="form-control-label"> Correo
                                                     electronico</label>
-                                                <input type="email" th:field="*{correo}" name="correo" id="correo"
+                                                <input type="text" th:field="*{correo}" name="correo" id="correo"
                                                     placeholder="Ingrese el correo electronico" class="form-control">
+                                                <div th:if="${#fields.hasErrors('correo')}" th:errors="*{correo}"
+                                                    class="alert alert-danger" role="alert">
+                                                </div>
                                             </div>
 
                                             <div class="card-footer">

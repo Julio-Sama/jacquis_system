@@ -3,6 +3,8 @@ package com.jacquis.jacquis_system.model;
 import java.sql.Date;
 import java.util.List;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -10,23 +12,32 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
 
 @Entity
 @Table(name = "proveedor")
 public class Proveedor {
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id_proveedor;
 
-
+    @NotBlank(message = "El nombre es obligatorio")
     private String nombre;
+
+    @Email(message = "El correo debe ser válido")
     private String correo;
+
+    @NotBlank(message = "La dirección es obligatoria")
     private String direccion;
+
     private String estado_prov;
+
+    @DateTimeFormat(pattern = "dd/MM/yyyy")
     private Date fecha_inicio_proveedor;
 
-    @OneToMany(mappedBy = "proveedor", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "proveedor", cascade = CascadeType.ALL)
     private List<Representante> representantes;
 
     public String getNombre() {
@@ -43,13 +54,11 @@ public class Proveedor {
         this.fecha_inicio_proveedor = fecha_inicio_proveedor;
     }
 
-
-
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
-    
-     public String getCorreo() {
+
+    public String getCorreo() {
         return correo;
     }
 
@@ -57,14 +66,13 @@ public class Proveedor {
         this.correo = correo;
     }
 
-     public String getDireccion() {
+    public String getDireccion() {
         return direccion;
     }
 
     public void setDireccion(String direccion) {
         this.direccion = direccion;
     }
-
 
     public String getEstado_prov() {
         return estado_prov;
@@ -74,7 +82,7 @@ public class Proveedor {
         this.estado_prov = estado_prov;
     }
 
-     public Date getFecha_inicio_proveedor() {
+    public Date getFecha_inicio_proveedor() {
         return fecha_inicio_proveedor;
     }
 
@@ -94,6 +102,4 @@ public class Proveedor {
         super();
     }
 
-
-    
 }
