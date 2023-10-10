@@ -7,22 +7,55 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 
 @Entity
 @Table(name = "representante")
 public class Representante {
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id_repre;
 
+    @NotNull
     @Column(name = "dui_repre", unique = true)
+    @Size(min = 9, message = "El DUI debe tener 9 dígitos, sin guiones")
     private String dui_repre;
 
+    @NotBlank(message = "El nombre es obligatorio")
     private String nombre;
+
+    @NotBlank(message = "El apellido es obligatorio")
     private String apellido;
+
     private Date fecha_inicio_repre;
+
+    private String estado_repre;
+
+    public String getEstado_repre() {
+        return estado_repre;
+    }
+
+    public void setEstado_repre(String estado_repre) {
+        this.estado_repre = estado_repre;
+    }
+
+    @ManyToOne
+    @JoinColumn(name = "id_proveedor")
+    private Proveedor proveedor;
+
+    public Proveedor getProveedor() {
+        return proveedor;
+    }
+
+    public void setProveedor(Proveedor proveedor) {
+        this.proveedor = proveedor;
+    }
 
     public Representante() {
         super();
@@ -68,5 +101,4 @@ public class Representante {
         this.fecha_inicio_repre = fecha_inicio_repre;
     }
 
-    
 }

@@ -7,12 +7,10 @@ import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import com.jacquis.jacquis_system.model.Proveedor;
-import com.jacquis.jacquis_system.repository.ProveedorRepository;
 import com.jacquis.jacquis_system.services.ExcelGenerator;
 import com.jacquis.jacquis_system.services.ProveedorService;
 

@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 33,
+            "activePatchIndex": 34,
             "patches": [
                 {
                     "date": 1695782415665,
@@ -140,6 +140,10 @@
                 {
                     "date": 1696306223859,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -24,9 +24,9 @@\n \r\n     @NotNull\r\n     @Column(name = \"dui_empleado\", columnDefinition = \"BIGINT\")\r\n     // @ Size(min = 9, message = \"El DUI debe tener 9 dígitos\")\r\n-    private int duiEmpleado;\r\n+    private Long duiEmpleado;\r\n \r\n     private String nombre;\r\n     private String apellido;\r\n     private String apellido_dos;\r\n@@ -46,9 +46,9 @@\n     public Empleado() {\r\n         super();\r\n     }\r\n \r\n-    public Empleado(int duiEmpleado, String nombre, String apellido, String apellido_dos, String direccion,\r\n+    public Empleado(Long duiEmpleado, String nombre, String apellido, String apellido_dos, String direccion,\r\n             String correo_empleado, String estado_empleado, int empleado_fk) {\r\n         this.duiEmpleado = duiEmpleado;\r\n         this.nombre = nombre;\r\n         this.apellido = apellido;\r\n@@ -66,15 +66,13 @@\n     public void setId_empleado(Long id_empleado) {\r\n         this.id_empleado = id_empleado;\r\n     }\r\n \r\n-\r\n-\r\n-    public int getDuiEmpleado() {\r\n+    public Long getDuiEmpleado() {\r\n         return duiEmpleado;\r\n     }\r\n \r\n-    public void setDuiEmpleado(int duiEmpleado) {\r\n+    public void setDuiEmpleado(Long duiEmpleado) {\r\n         this.duiEmpleado = duiEmpleado;\r\n     }\r\n \r\n     public String getNombre() {\r\n"
+                },
+                {
+                    "date": 1696916840603,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -10,9 +10,12 @@\n import jakarta.persistence.GenerationType;\r\n import jakarta.persistence.Id;\r\n import jakarta.persistence.OneToMany;\r\n import jakarta.persistence.Table;\r\n+import jakarta.validation.constraints.Email;\r\n+import jakarta.validation.constraints.NotBlank;\r\n import jakarta.validation.constraints.NotNull;\r\n+import jakarta.validation.constraints.Size;\r\n \r\n \r\n @Entity\r\n @Table(name = \"empleado\")\r\n@@ -23,17 +26,27 @@\n     private Long id_empleado;\r\n \r\n     @NotNull\r\n     @Column(name = \"dui_empleado\", unique = true)\r\n-    // @ Size(min = 9, message = \"El DUI debe tener 9 dígitos\")\r\n+    @Size(min = 9, message = \"El DUI debe tener 9 dígitos, sin guiones\")\r\n     private String duiEmpleado;\r\n \r\n+    @NotBlank(message = \"El nombre es obligatorio\")\r\n     private String nombre;\r\n+    @NotBlank(message = \"El apellido es obligatorio\")\r\n     private String apellido;\r\n+\r\n     private String apellido_dos;\r\n+\r\n+    @NotBlank(message = \"La dirección es obligatoria\")\r\n     private String direccion;\r\n+\r\n+    @Email(message = \"No es un correo válido\")\r\n     private String correo_empleado;\r\n+\r\n     private String estado_empleado;\r\n+\r\n+\r\n     private int empleado_fk;\r\n \r\n     @OneToMany(mappedBy = \"empleado\")\r\n     // @Size(min = 1, message = \"Debe tener al menos un teléfono\")\r\n"
                 }
             ],
             "date": 1695782415665,

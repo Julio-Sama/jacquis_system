@@ -18,19 +18,19 @@ import com.jacquis.jacquis_system.services.DatabasePDFService;
 
 @Controller
 public class PDFExportController {
-     
+
     @Autowired
     ProveedorRepository proveedorRepository;
- 
+
     @GetMapping(value = "/openpdf/proveedores", produces = MediaType.APPLICATION_PDF_VALUE)
-    public ResponseEntity<InputStreamResource> proveedorReport()  throws IOException {
+    public ResponseEntity<InputStreamResource> proveedorReport() throws IOException {
         List<Proveedor> proveedor = (List<Proveedor>) proveedorRepository.findAll();
- 
+
         ByteArrayInputStream bis = DatabasePDFService.proveedorPDFReport(proveedor);
- 
+
         HttpHeaders headers = new HttpHeaders();
         headers.add("Content-Disposition", "inline; filename=reporte_proveedores.pdf");
- 
+
         return ResponseEntity.ok().headers(headers).contentType(MediaType.APPLICATION_PDF)
                 .body(new InputStreamResource(bis));
     }

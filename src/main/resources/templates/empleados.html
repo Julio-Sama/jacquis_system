@@ -2,114 +2,445 @@
 <html lang="es" xmlns:th="https://www.thymeleaf.org">
 
 <head>
-    <meta charset="UTF-8">
+    <!-- Title Page-->
+    <title>Empleados</title>
+    <div th:replace="~{fragments/header :: header-css}"></div>
 </head>
 
-<body>
-    <div th:fragment="contenido" class="container-fluid">
-        <!-- AQUI VA LA TABLA -->
-        <div class="row">
-            <div class="col-md-12">
-                <!-- DATA TABLE -->
-                <!-- Pongo el breadcrumbs? -->
-                <h3 class="title-5 m-b-25">Empleados</h3>
-                <div class="table-data__tool">
-                    <div class="table-data__tool-left">
-                        <!-- BUSCADOR DE EMPLEADO -->
-                        <!-- NAYELLY AGREGARA BUSCADOR -->
-                        <div class="rs-select2--light rs-select2--md"></div>
-                    </div>
-                    <div class="table-data__tool-right">
-                        <a th:href="@{/empleados/nuevo}" class="au-btn au-btn-icon au-btn--green au-btn--small">
-                            <i class="zmdi zmdi-plus"></i> NUEVO EMPLEADO
-                            <button type="button" style="display: none;"></button>
+<body class="animsition">
+    <div class="page-wrapper">
+        <!-- HEADER MOBILE-->
+        <header class="header-mobile d-block d-lg-none">
+            <div class="header-mobile__bar">
+                <div class="container-fluid">
+                    <div class="header-mobile-inner">
+                        <a class="logo" th:href="@{index}">
+                            <img th:src="@{/images/icon/logo.png}" alt="JacquisStore" />
                         </a>
-                        <div class="rs-select2--dark rs-select2--sm rs-select2--dark2">
-                            <select class="js-select2" name="type">
-                                <option selected="selected">Exportar</option>
-                                <option value="">EXCEL</option>
-                                <option value="">PDF</option>
-                            </select>
-                            <div class="dropDownSelect2"></div>
-                        </div>
+                        <button class="hamburger hamburger--slider" type="button">
+                            <span class="hamburger-box">
+                                <span class="hamburger-inner"></span>
+                            </span>
+                        </button>
                     </div>
                 </div>
-                <div class="table-responsive table-responsive-data2">
-                    <table class="table table-data2">
-                        <thead>
-                            <tr>
+            </div>
+            <nav class="navbar-mobile">
+                <div class="container-fluid">
+                    <ul class="navbar-mobile__list list-unstyled">
+                        <li class="has-sub">
+                            <a class="js-arrow" th:href="@{/index}">
+                                <i class="fas fa-tachometer-alt"></i>Panel Principal</a>
+                        </li>
+                        <li>
+                            <a href="empleados.html">
+                                <i class="fas fa-sitemap"></i>Empleados</a>
+                        </li>
+                        <li>
+                            <a href="inventario.html">
+                                <i class="fas fa-archive"></i>Inventario</a>
+                        </li>
+                        <li>
+                            <a href="ventas.html">
+                                <i class="fas fa-shopping-cart"></i>Ventas</a>
+                        </li>
+                        <li>
+                            <a href="clientes.html">
+                                <i class="fas fa-users"></i>Clientes</a>
+                        </li>
+                        <li>
+                            <a href="proveedores.html">
+                                <i class="fas fa-truck"></i>Proveedores</a>
+                        </li>
 
-                                <th>Nombres</th>
-                                <th>Apellidos</th>
-                                <th>Dirección</th>
-                                <th>Correo</th>
-                                <th>Estado</th>
-                                <th>ROL</th>
-                                <th></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr th:each="empleado: ${empleadoList}" class="tr-shadow">
-                                <td th:text="${empleado.nombre}"></td>
-                                <td th:text="${empleado.apellido}"></td>
-                                <td th:text="${empleado.direccion}" class="desc"></td>
-                                <td>
-                                    <span th:text="${empleado.correo_empleado}" class="block-email"></span>
-                                </td>
-                                <td>
-                                    <!-- <span th:text="${empleado.estado_empleado}" class="status--process"></span> -->
-                                    <span th:text="${empleado.estado_empleado}"
-                                        th:classappend="${empleado.estado_empleado == 'ACTIVO'} ? 'status--process' : 'status--denied'"></span>
-                                </td>
-                                <td th:text="${empleado.empleado_fk}"></td>
-                                <td>
-                                    <div class="table-data-feature">
-                                        <a th:href="@{/empleados/editar/{id_empleado}(id_empleado=${empleado.id_empleado})}"
-                                            class="item" data-toggle="tooltip" data-placement="top" title="Editar">
-                                            <i class="zmdi zmdi-edit"></i>
-                                            <button type="button" style="display: none;"></button>
-                                        </a>
-                                        <!-- th:href="@{/empleados/editar/{id_empleado}(id_empleado=${empleado.id_empleado})}" -->
-                                        <button type="button" data-target="#smallmodal" class="item" data-toggle="modal"
-                                            data-placement="top" title="Dar de baja">
-                                            <i class="zmdi zmdi-long-arrow-down"></i>
-                                        </button>
-                                        <button class="item" data-toggle="tooltip" data-placement="top" title="More">
-                                            <i class="zmdi zmdi-more"></i>
-                                        </button>
+                        <!-- <li>
+                            <a href="map.html">
+                                <i class="fas fa-map-marker-alt"></i>Maps</a>
+                        </li> -->
+                        <!-- <li class="has-sub">
+                            <a class="js-arrow" href="#">
+                                <i class="fas fa-copy"></i>Pages</a>
+                            <ul class="navbar-mobile-sub__list list-unstyled js-sub-list">
+                                <li>
+                                    <a href="login.html">Login</a>
+                                </li>
+                                <li>
+                                    <a href="register.html">Register</a>
+                                </li>
+                                <li>
+                                    <a href="forget-pass.html">Forget Password</a>
+                                </li>
+                            </ul>
+                        </li> -->
+                    </ul>
+                </div>
+            </nav>
+        </header>
+        <!-- END HEADER MOBILE-->
+
+        <!-- MENU SIDEBAR-->
+        <aside class="menu-sidebar d-none d-lg-block">
+            <div class="logo">
+                <a th:href="@{/index}">
+                    <img th:src="@{/images/icon/.png}" alt="Jacqui's Store" />
+                </a>
+            </div>
+            <div class="menu-sidebar__content js-scrollbar1">
+                <nav class="navbar-sidebar">
+                    <ul class="list-unstyled navbar__list">
+                        <li class="active has-sub">
+                            <a class="js-arrow" th:href="@{/index}">
+                                <i class="fas fa-tachometer-alt"></i>Panel Principal</a>
+                        </li>
+                        <li>
+                            <a th:href="@{/empleados}">
+                                <i class="fas fa-sitemap"></i>Empleados</a>
+                        </li>
+                        <li>
+                            <a href="inventario.html">
+                                <i class="fas fa-archive"></i>Inventario</a>
+                        </li>
+                        <li class="has-sub">
+                            <a class="js-arrow" href="#">
+                                <i class="fas fa-shopping-cart"></i>Ventas</a>
+                            <ul class="list-unstyled navbar__sub-list js-sub-list">
+                                <li>
+                                    <a href="nuevaVenta.html">
+                                        <i class="fas fa-plus-square"></i>Nueva venta</a>
+                                </li>
+                                <li>
+                                    <a href="bitacora.html">
+                                        <i class="fas fa-book"></i>Bitacora</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="clientes.html">
+                                <i class="fas fa-users"></i>Clientes</a>
+                        </li>
+                        <li class="has-sub">
+                            <a class="js-arrow" href="#">
+                                <i class="fas fa-truck"></i>Proveedores</a>
+                            <ul class="list-unstyled navbar__sub-list js-sub-list">
+                                <li>
+                                    <a th:href="@{/proveedores}">
+                                        <i class="fas fa-wrench"></i>Gestión de proveedores</a>
+                                </li>
+                                <li>
+                                    <a th:href="@{/representantes}">
+                                        <i class="fas fa-users"></i>Gestión de representante</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <!-- <li>
+                            <a href="map.html">
+                                <i class="fas fa-map-marker-alt"></i>Maps</a>
+                        </li> -->
+
+                    </ul>
+                </nav>
+            </div>
+        </aside>
+        <!-- END MENU SIDEBAR-->
+
+        <!-- PAGE CONTAINER-->
+        <div class="page-container">
+            <!-- HEADER DESKTOP-->
+            <header class="header-desktop">
+                <div class="section__content section__content--p30">
+                    <div class="container-fluid">
+                        <div class="header-wrap">
+                            <!-- Buscar como programar -->
+                            <form class="form-header" action="" method="POST">
+                                <input class="au-input au-input--xl" type="text" name="buscar"
+                                    placeholder="Buscar datos &amp; reportes." />
+                                <button class="au-btn--submit" type="submit">
+                                    <i class="zmdi zmdi-search"></i>
+                                </button>
+                            </form>
+                            <div class="header-button">
+                                <div class="noti-wrap">
+                                    <!-- AQUI IBA EL MENSAJE -->
+
+                                    <!-- AQUI IBA EL MENSAJE DE EMAIL -->
+                                    <div class="noti__item js-item-menu">
+                                        <i class="zmdi zmdi-notifications"></i>
+                                        <span class="quantity">1</span>
+                                        <div class="notifi-dropdown js-dropdown">
+                                            <div class="notifi__title">
+                                                <p>Tienes 3 nuevas notificaciones</p>
+                                            </div>
+                                            <div class="notifi__item">
+                                                <div class="bg-c1 img-cir img-40">
+                                                    <i class="zmdi zmdi-email-open"></i>
+                                                </div>
+                                                <div class="content">
+                                                    <p>Quedan 5 unidades de blusas</p>
+                                                    <span class="date">12 Abril, 2023 18:50</span>
+                                                </div>
+                                            </div>
+                                            <div class="notifi__item">
+                                                <div class="bg-c2 img-cir img-40">
+                                                    <i class="zmdi zmdi-account-box"></i>
+                                                </div>
+                                                <div class="content">
+                                                    <p>Quedan 3 unidades de pantalones CASIO</p>
+                                                    <span class="date">13 Abril, 2023 18:50</span>
+                                                </div>
+                                            </div>
+                                            <div class="notifi__item">
+                                                <div class="bg-c3 img-cir img-40">
+                                                    <i class="zmdi zmdi-file-text"></i>
+                                                </div>
+                                                <div class="content">
+                                                    <p>Tienes 0 camisas Secret</p>
+                                                    <span class="date">11 Abril, 2023 18:50</span>
+                                                </div>
+                                            </div>
+                                            <div class="notifi__footer">
+                                                <a href="#">Mostrar todo</a>
+                                            </div>
+                                        </div>
                                     </div>
-                                </td>
-                            </tr>
-                            <tr class="spacer"></tr>
-                        </tbody>
-                    </table>
-                    <!-- MODAL -->
-                    <div class="modal" id="smallmodal" tabindex="-1" role="dialog"
-                        aria-labelledby="smallmodalLabel" aria-hidden="true">
-                        <div class="modal-dialog modal-sm" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="smallmodalLabel">Dará de baja a un empleado</h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
                                 </div>
-                                <div class="modal-body">
-                                    <p>
-                                        ¿Está seguro que desea dar de baja a este empleado?
-                                    </p>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                                    <button type="button" class="btn btn-danger">Confirmar</button>
+                                <div class="account-wrap">
+                                    <div class="account-item clearfix js-item-menu">
+                                        <div class="image">
+                                            <!-- Buscar como cargar imagen de usuario -->
+                                            <img th:src="@{images/icon/Jaquis.jpg}" alt="image user" />
+                                        </div>
+                                        <div class="content">
+                                            <!-- AQUI TENGO QUE SETEAR EL NOMBRE DEL USUARIO  -->
+                                            <a class="js-acc-btn" href="#">Jacqui Díaz</a>
+                                        </div>
+                                        <div class="account-dropdown js-dropdown">
+                                            <div class="info clearfix">
+                                                <div class="image">
+                                                    <a href="#">
+                                                        <img th:src="@{images/icon/Jaquis.jpg}"
+                                                            alt="Imagen de usuario" />
+                                                    </a>
+                                                </div>
+                                                <div class="content">
+                                                    <h5 class="name">
+                                                        <!-- usuario -->
+                                                        <a href="#">Jacqui Díaz</a>
+                                                    </h5>
+                                                    <span class="email">jacquidiaz11@gmail.com</span>
+                                                </div>
+                                            </div>
+                                            <div class="account-dropdown__body">
+                                                <div class="account-dropdown__item">
+                                                    <a href="#">
+                                                        <i class="zmdi zmdi-account"></i>Cuenta</a>
+                                                </div>
+                                                <div class="account-dropdown__item">
+                                                    <a href="#">
+                                                        <i class="zmdi zmdi-settings"></i>Configuración</a>
+                                                </div>
+                                                <div class="account-dropdown__item">
+                                                    <a href="#">
+                                                        <i class="zmdi zmdi-money-box"></i>Facturación</a>
+                                                </div>
+                                            </div>
+                                            <div class="account-dropdown__footer">
+                                                <a href="#">
+                                                    <i class="zmdi zmdi-power"></i>Cerrar Sesión</a>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
+            </header>
+            <!-- HEADER DESKTOP-->
+
+            <!-- MAIN CONTENT-->
+            <div class="main-content">
+                <div class="section__content section__content--p30">
+                    <div class="container-fluid">
+                        <!-- AQUI VA LA TABLA -->
+                        <div class="row">
+                            <div class="col-md-12">
+                                <!-- DATA TABLE -->
+                                <!-- Pongo el breadcrumbs? -->
+                                <h3 class="title-5 m-b-25">Empleados</h3>
+                                <div class="table-data__tool">
+                                    <div class="table-data__tool-left">
+                                        <!-- BUSCADOR DE EMPLEADO -->
+                                        <!-- NAYELLY AGREGARA BUSCADOR -->
+                                        <div class="rs-select2--light rs-select2--md">
+                                            <strong>Mostrar inactivos</strong>
+                                            <label class="switch switch-text switch-primary">
+                                                <input type="checkbox" class="switch-input" name="mostrarInactivos"
+                                                    id="mostrarInactivos">
+                                                <span data-on="On" data-off="Off" class="switch-label"></span>
+                                                <span class="switch-handle"></span>
+                                            </label>
+
+                                        </div>
+                                    </div>
+                                    <div class="table-data__tool-right">
+                                        <a th:href="@{/empleados/nuevo}"
+                                            class="au-btn au-btn-icon au-btn--green au-btn--small">
+                                            <i class="zmdi zmdi-plus"></i> NUEVO EMPLEADO
+                                            <button type="button" style="display: none;"></button>
+                                        </a>
+                                        <div class="rs-select2--dark rs-select2--sm rs-select2--dark2">
+                                            <select class="js-select2" name="type">
+                                                <option selected="selected">Exportar</option>
+                                                <option value="">EXCEL</option>
+                                                <option value="">PDF</option>
+                                            </select>
+                                            <div class="dropDownSelect2"></div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div th:fragment="tablaEmpleados" id="tablaEmpleados" class="table-responsive table-responsive-data2">
+                                    <table class="table table-data2">
+                                        <thead>
+                                            <tr>
+                                                <th>Nombres</th>
+                                                <th>Apellidos</th>
+                                                <th>Dirección</th>
+                                                <th>Correo</th>
+                                                <th>Estado</th>
+                                                <th>ROL</th>
+                                                <th></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr th:each="empleado: ${empleadoList}" class="tr-shadow">
+                                                <td th:text="${empleado.nombre}"></td>
+                                                <td th:text="${empleado.apellido}"></td>
+                                                <td th:text="${empleado.direccion}" class="desc"></td>
+                                                <td>
+                                                    <span th:text="${empleado.correo_empleado}"
+                                                        class="block-email"></span>
+                                                </td>
+                                                <td>
+                                                    <!-- <span th:text="${empleado.estado_empleado}" class="status--process"></span> -->
+                                                    <span th:text="${empleado.estado_empleado}"
+                                                        th:classappend="${empleado.estado_empleado == 'ACTIVO'} ? 'status--process' : 'status--denied'"></span>
+                                                </td>
+                                                <!-- <td th:text="${empleado.empleado_fk}"></td> -->
+                                                <td th:hidden="${empleado.id_empleado}"></td>
+                                                <td>
+                                                    <div class="table-data-feature">
+                                                        <a th:href="@{/empleados/editar/{id_empleado}(id_empleado=${empleado.id_empleado})}"
+                                                            class="item" data-toggle="tooltip" data-placement="top"
+                                                            title="Editar">
+                                                            <i class="zmdi zmdi-edit"></i>
+                                                            <!-- <button type="button" style="display: none;"></button> -->
+                                                        </a>
+                                                        <!-- th:href="@{/empleados/editar/{id_empleado}(id_empleado=${empleado.id_empleado})}" -->
+                                                        <button class="item btn-baja-empleado" data-placement="top"
+                                                            title="Dar de baja" data-toggle="modal"
+                                                            data-target="#modalEmpleados"
+                                                            th:attr="data-id=${empleado.id_empleado}, data-nombre=${empleado.nombre}">
+                                                            <i class="zmdi zmdi-long-arrow-down"></i>
+                                                        </button>
+                                                        <button class="item" data-toggle="tooltip" data-placement="top"
+                                                            title="Perfil">
+                                                            <i class="zmdi zmdi-more"></i>
+                                                        </button>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr class="spacer"></tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                        </div>
+                    </div>
+                </div>
+                <!-- Aqui va todo el contenido -->
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="copyright">
+                            <p>Copyright © 2023 Jacqui's Store. Todos los derechos reservados</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- END MAIN CONTENT-->
+        <!-- Modal para dar de baja -->
+        <div class="modal fade" id="modalEmpleados" tabindex="-1" role="dialog" aria-labelledby="smallmodalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog modal-sm" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="smallmodalLabel">
+                            <strong>¡Precaución!</strong>
+                        </h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <p class="error-text">
+                            ¿Está segura que desea dar de baja a <strong th:text="${nombre}"></strong>?
+                        </p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                        <!-- <button type="button" class="btn btn-primary">Confirmar</button> -->
+                        <a th:href="@{/empleados/baja/{id_empleado}(id_empleado=${id_empleado})}"
+                            class="btn btn-danger">Confirmar</a>
+                        <!-- th:href="@{/empleados/baja/{id_empleado}(id_empleado=${empleado.id_empleado})}" -->
+                    </div>
+                </div>
             </div>
         </div>
     </div>
+    <!-- END PAGE CONTAINER-->
+    </div>
+
+    </div>
+
+    <th:block th:replace="~{fragments/scripts :: scripts-main}">todos los scripts</th:block>
+    <script>
+        $(document).ready(function () {
+            $(document).on("click", ".btn-baja-empleado", function(){
+                var id = $(this).attr("data-id");
+                var nombre = $(this).attr("data-nombre");
+
+                $("#modalEmpleados .modal-body p strong").text(nombre);
+                $("#modalEmpleados .modal-footer a").attr("href", "/empleados/baja/" + id);
+            });
+        });
+
+        $(document).ready(function () {
+            $("#mostrarInactivos").change(function () {
+                const mostrarInactivos = $(this).is(":checked");
+                cargarTablaEmpleados(mostrarInactivos);
+            });
+
+            // funcion para cargar la tabla de empleados
+            function cargarTablaEmpleados(mostrarInactivos) {
+                $.ajax({
+                    url: "/empleados/filtro",
+                    type: "GET",
+                    data: { mostrarInactivos: mostrarInactivos },
+                    success: function (data) {
+                        $("#tablaEmpleados").html(data);
+                    },
+                    error: function () {
+                        alert("Error al cargar la tabla de empleados");
+                    }
+                });
+            }
+
+            cargarTablaEmpleados(false); // false para que no muestre los inactivos
+        });
+    </script>
+    <!-- script para cargar los datos de la tabla al modal -->
 </body>
 
 </html>
+<!-- end document-->
