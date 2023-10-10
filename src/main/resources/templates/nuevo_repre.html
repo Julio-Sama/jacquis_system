@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="https://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+</head>
+
+<body>
+    <div th:fragment="contenido" class="container-fluid">
+        <!-- AQUI VA LA TABLA -->
+        <div class="row">
+            <div class="col-md-12">
+                <!-- DATA TABLE -->
+                <!-- Pongo el breadcrumbs? -->
+                <h3 class="title-5 m-b-25">Nuevo Representante</h3>
+
+                <!-- Formulario de registro de nuevo empleado -->
+                <div class="card">
+                    <div class="card-header">
+                        <strong>Formulario</strong> de registro
+                    </div>
+                    <div class="card-body card-block">
+                        <form th:action="@{/representantes}" th:object="${representantes}" method="POST">
+                            <div th:if="${#fields.hasErrors()}" class="alert alert-danger" role="alert">
+                                Por favor, corrija los errores indicados en rojo
+                            </div>
+                            <div class="form-group">
+                                <label for="dui" class="form-control-label"> DUI </label>
+                                <!-- Documento Unico de Identidad-->
+                                <input type="text" th:field="*{dui_repre}" name="dui" id="dui"
+                                    placeholder="Ingrese el DUI..." class="form-control"
+                                    data-inputmask="'mask': '99999999-9'">
+                            </div>
+                            <div th:if="${#fields.hasErrors('dui_repre')}"
+                            th:errors="*{dui_repre}" class="alert alert-danger" role="alert">
+                        </div>
+                            <div class="form-group">
+                                <label for="nombre" class=" form-control-label">Nombre</label>
+                                <input type="text" th:field="*{nombre}" name="nombre" id="nombre"
+                                    placeholder="Ingrese el nombre..." class="form-control">
+                            </div>
+                            <div th:if="${#fields.hasErrors('nombre')}"
+                            th:errors="*{nombre}" class="alert alert-danger" role="alert">
+                        </div>
+                            <div class="form-group">
+                                <label for="apellido" class=" form-control-label">Apellido</label>
+                                <input type="text" th:field="*{apellido}" name="apellido" id="apellido"
+                                    placeholder="Ingrese el apellido..." class="form-control">
+                            </div>
+                            <div th:if="${#fields.hasErrors('apellido')}"
+                            th:errors="*{apellido}" class="alert alert-danger" role="alert">
+                        </div>
+                            <div class="form-group">
+                                <label for="fechaInicio" class="form-control-label">Fecha de Inicio</label>
+                                <input type="date" th:field="*{fecha_inicio_repre}" name="fechaI" id="fechaI"
+                                    placeholder="Ingrese la fecha de inicio" class="form-control">
+                            </div>
+                
+                            <div class="form-group">
+                                <label for="proveedor">Proveedor:</label>
+                                <select name="proveedor" id="proveedor" required>
+                                    <option value="">Selecciona un proveedor</option>
+                                    <option th:each="prov: ${proveedorSelected}"
+                                        th:value="${prov.id_proveedor}"
+                                        th:text="${prov.nombre}"
+                                        th:if="${prov.estado_prov != 'INACTIVO'}">
+                                    </option>
+                                </select>
+                            </div>                            <!-- <div class="form-group">
+                                <label for="telefono" class="form-control-label"> Telefono</label>
+                                <input type="text" name="telefono" id="telefono" placeholder="Ingrese el telefono..."
+                                    class="form-control">
+                            </div> -->
+                            <!-- <div class="form-group">
+                                <label for="estado" class="form-control-label">Estado</label>
+                                <select name="estado" id="estado" class="form-control" th:field="*{estado_empleado}">
+                                    <option value="0">Seleccione el estado...</option>
+                                    <option value="ACTIVO">Activo</option>
+                                    <option value="INACTIVO">Inactivo</option>
+                                </select>
+                            </div> -->
+                            <div class="card-footer">
+                                <button type="submit" class="btn btn-primary btn-sm">
+                                    <i class="fa fa-dot-circle-o"></i> Guardar
+                                </button>
+                                <button type="reset" class="btn btn-danger btn-sm" onclick="history.go(-1);">
+                                    <i class="fa fa-ban"></i> Cancelar
+                                </button>
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>

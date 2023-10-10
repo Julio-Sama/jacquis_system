@@ -2,19 +2,138 @@
 <html lang="en" xmlns:th="https://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <!-- <meta name="viewport" content="width=, initial-scale="> -->
-    <title>Representante</title>
 </head>
 <body>
     <div th:fragment="contenido" class="container-fluid">
         <!-- AQUI VA LA TABLA -->
         <div class="row">
             <div class="col-md-12">
-                <h3 class="title-5 m-b-25">Representantes</h3>
-                
-
+                <!-- DATA TABLE -->
+                <!-- Pongo el breadcrumbs? -->
+                <h3 class="title-5 m-b-25">REPRESENTANTES</h3>
+                <div class="table-data__tool">
+                    <div class="table-data__tool-left">
+                        <!-- BUSCADOR DE EMPLEADO -->
+                        <div class="input-group">
+                            <input type="text" id="searchInput" class="form-control" placeholder="Buscar representante...">
+                            <div class="input-group-append">
+                                <button class="btn btn-primary" type="button">
+                                    <i class="zmdi zmdi-search"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="table-data__tool-right">
+                        <a th:href="@{/representantes/nuevo}" class="au-btn au-btn-icon au-btn--green au-btn--small">
+                            <i class="zmdi zmdi-plus"></i> NUEVO REPRESENTANTE
+                            <button type="button" style="display: none;"></button>
+                        </a>
+                        <div class="rs-select2--dark rs-select2--sm rs-select2--dark2">
+                            <select class="js-select2" name="type">
+                                <option selected="selected">Exportar</option>
+                                <option value="">EXCEL</option>
+                                <option value="">PDF</option>
+                            </select>
+                            <div class="dropDownSelect2"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="table-responsive table-responsive-data2">
+                    <table class="table table-data2">
+                        <thead>
+                            <tr>
+                                <th>DUI</th>
+                                <th>Nombres</th>
+                                <th>Apellidos</th>
+                                <th>Fecha de inicio</th>
+                                <th>Proveedor</th>
+                                <th>Estado</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody id="representanteTable">
+                            <!-- Filas de la tabla aquí -->
+                            <tr th:each="representante: ${representanteList}" class="tr-shadow" >
+                                <td th:text="${representante.dui_repre}"></td>
+                                <td th:text="${representante.nombre}"></td>
+                                <td th:text="${representante.apellido}"></td>
+                                <td th:text="${representante.fecha_inicio_repre}" class="desc"></td>
+                                <td th:text="${representante.proveedor.nombre}" class="desc"></td>
+                                <td>
+                                    <span th:text="${representante.estado_repre}"
+                                        th:classappend="${representante.estado_repre == 'ACTIVO'} ? 'status--process' : 'status--denied'"></span>
+                                </td>
+                                <td>
+                                    <div class="table-data-feature">
+                                        <a th:href="@{/representantes/editar/{id_repre}(id_repre=${representante.id_repre})}"
+                                            class="item" data-toggle="tooltip" data-placement="top" title="Editar">
+                                            <i class="zmdi zmdi-edit"></i>
+                                            <button type="button" style="display: none;"></button>
+                                        </a>
+                                        <button type="button" data-target="#smallmodal" class="item" data-toggle="modal"
+                                            data-placement="top" title="Dar de baja">
+                                            <i class="zmdi zmdi-long-arrow-down"></i>
+                                        </button>
+                                        <button class="item" data-toggle="tooltip" data-placement="top" title="More">
+                                            <i class="zmdi zmdi-more"></i>
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr class="spacer"></tr>
+                        </tbody>
+                    </table>
+                    <!-- MODAL -->
+                    <div class="modal fade" id="smallmodal" tabindex="-1" role="dialog"
+                        aria-labelledby="smallmodalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-sm" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="smallmodalLabel">Dará de baja a un empleado</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <p>
+                                        ¿Está seguro que desea dar de baja a este empleado?
+                                    </p>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                                    <button type="button" class="btn btn-danger">Confirmar</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+    $(document).ready(function() {
+        // Obtén la referencia al campo de búsqueda
+        var searchInput = $('#searchInput');
+
+        // Obtén todas las filas de la tabla que quieres filtrar
+        var rows = $('.table-data2 tbody tr');
+
+        // Configura el evento de entrada para el campo de búsqueda
+        searchInput.on('input', function() {
+            var searchText = $(this).val().toLowerCase(); // Obtén el texto de búsqueda en minúsculas
+
+            // Filtra las filas de la tabla en función del texto de búsqueda
+            rows.each(function() {
+                var rowText = $(this).text().toLowerCase();
+                if (rowText.indexOf(searchText) === -1) {
+                    $(this).hide(); // Oculta la fila si no coincide con el texto de búsqueda
+                } else {
+                    $(this).show(); // Muestra la fila si coincide con el texto de búsqueda
+                }
+            });
+        });
+    });
+</script>
 </body>
 </html>
