@@ -24,7 +24,7 @@ public class Representante {
 
     @NotNull
     @Column(name = "dui_repre", unique = true)
-    @Size(min = 9, message = "El DUI debe tener 9 dígitos, sin guiones")
+    @Size(min = 9, max = 9, message = "El DUI debe tener 9 dígitos, sin guiones")
     private String dui_repre;
 
     @NotBlank(message = "El nombre es obligatorio")
