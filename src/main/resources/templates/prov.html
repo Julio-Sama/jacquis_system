@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <!-- <meta name="viewport" content="width=, initial-scale="> -->
+    <title>Proveedores </title>
+</head>
+<body>
+    <div th:fragment="contenido" class="container-fluid">
+        <!-- AQUI VA LA TABLA -->
+        <div class="row">
+            <div class="col-md-12">
+                <h3 class="title-5 m-b-25">Proveedores</h3>
+                <div class="table-data__tool">
+                    <div class="table-data__tool-left">
+                        <!-- BUSCADOR DE PROVEEDOR -->
+                        <!-- NAYELLY AGREGARA BUSCADOR -->
+                        <div class="rs-select2--light rs-select2--md"></div>
+                    </div>
+                    <div class="table-data__tool-right">
+                        <a th:href="@{/proveedores/nuevo}" class="au-btn au-btn-icon au-btn--green au-btn--small">
+                            <i class="zmdi zmdi-plus"></i> NUEVO PROVEEDOR
+                            <button type="button" style="display: none;"></button>
+                        </a>
+
+                        <a th:href="@{/openpdf/proveedores}" class="au-btn au-btn-icon au-btn--green au-btn--small">
+                            <i class="zmdi zmdi-assignment-o"></i>EXPORTAR A PDF
+                            <button type="button" class="btn btn-outline-info" style="display: none;"></button>
+                        </a>
+                        <a th:href="@{/export/excel/proveedores}" class="au-btn au-btn-icon au-btn--green au-btn--small">
+                            <i class="zmdi zmdi-assignment-o"></i>EXPORTAR A EXCEL
+                            <button type="button" class="btn btn-outline-info" style="display: none;"></button>
+                        </a>
+                        <!-- <div class="rs-select2--dark rs-select2--sm rs-select2--dark2"> -->
+                            <!-- <select class="js-select2" name="type"> -->
+                                <!-- <option selected="selected">Exportar</option> -->
+                                <!-- <option value="">EXCEL</option> -->
+                                <!--<option value="">PDF</option> -->
+                            <!--</select> -->
+                            <!--<div class="dropDownSelect2"></div> -->
+                        <!-- </div> -->
+                    </div>
+                </div>
+                <div class="table-responsive table-responsive-data2">   
+                    <table class="table table-data2">
+                        <thead>
+                            <tr>
+                                <th>Nombre</th>
+                                <th>Dirección</th>
+                                <th>Correo</th>
+                                <th>Estado</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr th:each="proveedor: ${proveedorList}" class="tr-shadow">
+                                <td th:text="${proveedor.nombre}"></td>
+                                <td th:text="${proveedor.direccion}"></td>
+                                <td>
+                                    <span th:text="${proveedor.correo}" class="block-email"></span>
+                                </td>
+                                <td>
+                                    <!-- <span th:text="${empleado.estado_empleado}" class="status--process"></span> -->
+                                    <span th:text="${proveedor.estado_prov}"
+                                        th:classappend="${proveedor.estado_prov == 'ACTIVO'} ? 'status--process' : 'status--denied'"></span>
+                                </td>
+                                <td>
+                                    <div class="table-data-feature">
+                                        <a th:href="@{/proveedores/editar/{id_proveedor}(id_proveedor=${proveedor.id_proveedor})}"
+                                            class="item" data-toogle="tooltip" data-placement="top" title="Editar">
+                                            <i class="zmdi zmdi-edit"></i>
+                                            <button type="button" style="display: none;"></button>
+                                        </a>
+
+                                        <button type="button" data-target="#smallmodal" class="item" data-toggle="modal"
+                                            data-placement="top" title="Dar de baja">
+                                            <i class="zmdi zmdi-long-arrow-down"></i>
+                                        </button>
+                                        <button class="item" data-toggle="tooltip" data-placement="top" title="Más info">
+                                            <i class="zmdi zmdi-more"></i>
+                                        </button>
+                                    </div>
+                                </td>
+
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="https://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+</head>
+
+<body>
+    <div th:fragment="contenido" class="container-fluid">
+        <!-- AQUI VA LA TABLA -->
+        <div class="row">
+            <div class="col-md-12">
+                <!-- DATA TABLE -->
+                <!-- Pongo el breadcrumbs? -->
+                <h3 class="title-5 m-b-25">Editar proveedor</h3>
+
+                <!-- Formulario de registro de nuevo proveedor -->
+                <div class="card">
+                    <div class="card-header">
+                        <strong>Complete el Formulario</strong>
+                    </div>
+                    <div class="card-body card-block">
+                        <form th:action="@{/proveedores/{id_proveedor}(id_proveedor=${proveedores.id_proveedor})}" th:object="${proveedores}" method="POST">
+                            <!-- <div class="form-group"> -->
+                                <!-- <label for="id_proveedor" class="form-control-label"> ID. </label> -->
+                                <!-- Documento Unico de Identidad, aqui no se puede editar-->
+                                <!-- <input type="text" th:field="*{id_proveedor}" name="id_proveedor" id="id_proveedor" class="form-control" disabled>-->
+                            <!-- </div> -->
+                            
+                            <div class="form-group">
+                                <label for="nombre" class=" form-control-label">Nombre</label>
+                                <input type="text" th:field="*{nombre}" name="nombre" id="nombre"
+                                    placeholder="Ingrese nombre de proveedor" class="form-control">
+                                <!-- <input type="email" id="nf-email" name="nf-email" placeholder="Enter Email.." class="form-control"> -->
+                                <!-- <span class="help-block">Please enter your email</span> -->
+                            </div>
+                            <div class="form-group">
+                                <label for="direccion" class=" form-control-label">Dirección</label>
+                                <input type="text" th:field="*{direccion}" name="direccion" id="direccion"
+                                    placeholder="Ingrese la direccion del proveedor" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="correo" class="form-control-label"> Correo electronico</label>
+                                <input type="email" th:field="*{correo}" name="correo" id="correo"
+                                    placeholder="Ingrese el correo electronico del proveedor" class="form-control">
+                            </div>
+                            
+                            <div class="card-footer">
+                                <button type="submit" class="btn btn-primary btn-sm">
+                                    <i class="fa fa-dot-circle-o"></i> Guardar
+                                </button>
+                                <button type="reset" class="btn btn-danger btn-sm" onClick="history.go(-1);">
+                                    <i class="fa fa-ban"></i> Cancelar
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>
