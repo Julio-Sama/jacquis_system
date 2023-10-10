@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="https://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+</head>
+
+<body>
+    <div th:fragment="contenido" class="container-fluid">
+        <!-- AQUI VA LA TABLA -->
+        <div class="row">
+            <div class="col-md-12">
+                <!-- DATA TABLE -->
+                <!-- Pongo el breadcrumbs? -->
+                <h3 class="title-5 m-b-25">Editar Representante</h3>
+
+                <!-- Formulario de registro de nuevo empleado -->
+                <div class="card">
+                    <div class="card-header">
+                        Complete el <strong>Formulario</strong>
+                    </div>
+                    <div class="card-body card-block">
+                        <form th:action="@{/representantes/{id_repre}(id_repre=${representantes.id_repre})}" th:object="${representantes}" method="POST">
+                            <div class="form-group">
+                                <label for="dui" class="form-control-label"> DUI </label>
+                                <!-- Documento Unico de Identidad, aqui no se puede editar-->
+                                <input type="text" th:field="*{dui_repre}" name="dui" id="dui"
+                                    class="form-control" disabled>
+                            </div>
+                            <div class="form-group">
+                                <label for="nombre" class=" form-control-label">Nombre</label>
+                                <input type="text" th:field="*{nombre}" name="nombre" id="nombre"
+                                    placeholder="Ingrese el nombre..." class="form-control">
+                                <!-- <input type="email" id="nf-email" name="nf-email" placeholder="Enter Email.." class="form-control"> -->
+                                <!-- <span class="help-block">Please enter your email</span> -->
+                            </div>
+                            <div class="form-group">
+                                <label for="apellido" class=" form-control-label">Apellido</label>
+                                <input type="text" th:field="*{apellido}" name="apellido" id="apellido"
+                                    placeholder="Ingrese el apellido..." class="form-control">
+                            </div>
+                
+                            <div class="form-group">
+                                <label for="fechaInicio" class="form-control-label"> Fecha de Inicio</label>
+                                <input type="date" th:field="*{fecha_inicio_repre}" name="fechaInicio" id="fechaInicio"
+                                    placeholder="Ingrese la Fecha de Inicio" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="proveedor">Proveedor:</label>
+                                <select name="proveedor" id="proveedor" required th:field="*{proveedor.id_proveedor}">
+                                    <option value="">Selecciona un proveedor</option>
+                                    <option th:each="prov: ${proveedorSelected}" th:value="${prov.id_proveedor}" th:text="${prov.nombre}" th:selected="${prov.id_proveedor == representantes.proveedor?.id_proveedor}" th:if="${prov.estado_prov != 'INACTIVO'}">
+                                    </option>
+                                </select>
+                            </div>
+                            <!-- <div class="form-group">
+                                <label for="telefono" class="form-control-label"> Telefono</label>
+                                <input type="text" name="telefono" id="telefono" placeholder="Ingrese el telefono..."
+                                    class="form-control">
+                            </div> -->
+                            <div class="card-footer">
+                                <button type="submit" class="btn btn-primary btn-sm">
+                                    <i class="fa fa-dot-circle-o"></i> Guardar
+                                </button>
+                                <button type="reset" class="btn btn-danger btn-sm" onclick="history.go(-1);">
+                                    <i class="fa fa-ban"></i> Cancelar
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>

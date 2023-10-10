@@ -22,7 +22,7 @@ public class RepresentanteService {
         return repreRepository.findById(id).orElse(null);
     }
 
-    public void guardarActualizar(Representante representante) {
+    public void saveOrUpdate(Representante representante) {
         repreRepository.save(representante);
     }
 

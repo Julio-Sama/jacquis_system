@@ -7,12 +7,14 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "representante")
 public class Representante {
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id_repre;
@@ -23,6 +25,27 @@ public class Representante {
     private String nombre;
     private String apellido;
     private Date fecha_inicio_repre;
+    private String estado_repre;
+
+    public String getEstado_repre() {
+        return estado_repre;
+    }
+
+    public void setEstado_repre(String estado_repre) {
+        this.estado_repre = estado_repre;
+    }
+
+    @ManyToOne
+    @JoinColumn(name = "id_proveedor")
+    private Proveedor proveedor;
+
+    public Proveedor getProveedor() {
+        return proveedor;
+    }
+
+    public void setProveedor(Proveedor proveedor) {
+        this.proveedor = proveedor;
+    }
 
     public Representante() {
         super();
@@ -68,5 +91,4 @@ public class Representante {
         this.fecha_inicio_repre = fecha_inicio_repre;
     }
 
-    
 }
