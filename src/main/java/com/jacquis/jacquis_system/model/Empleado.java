@@ -11,7 +11,10 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 
 
 @Entity
@@ -23,16 +26,26 @@ public class Empleado {
     private Long id_empleado;
 
     @NotNull
-    @Column(name = "dui_empleado", columnDefinition = "BIGINT")
-    // @ Size(min = 9, message = "El DUI debe tener 9 dígitos")
-    private Long duiEmpleado;
+    @Column(name = "dui_empleado", unique = true)
+    @Size(min = 9, message = "El DUI debe tener 9 dígitos, sin guiones")
+    private String duiEmpleado;
 
+    @NotBlank(message = "El nombre es obligatorio")
     private String nombre;
+    @NotBlank(message = "El apellido es obligatorio")
     private String apellido;
+
     private String apellido_dos;
+
+    @NotBlank(message = "La dirección es obligatoria")
     private String direccion;
+
+    @Email(message = "No es un correo válido")
     private String correo_empleado;
+
     private String estado_empleado;
+
+
     private int empleado_fk;
 
     @OneToMany(mappedBy = "empleado")
@@ -47,7 +60,7 @@ public class Empleado {
         super();
     }
 
-    public Empleado(Long duiEmpleado, String nombre, String apellido, String apellido_dos, String direccion,
+    public Empleado(String duiEmpleado, String nombre, String apellido, String apellido_dos, String direccion,
             String correo_empleado, String estado_empleado, int empleado_fk) {
         this.duiEmpleado = duiEmpleado;
         this.nombre = nombre;
@@ -67,11 +80,11 @@ public class Empleado {
         this.id_empleado = id_empleado;
     }
 
-    public Long getDuiEmpleado() {
+    public String getDuiEmpleado() {
         return duiEmpleado;
     }
 
-    public void setDuiEmpleado(Long duiEmpleado) {
+    public void setDuiEmpleado(String duiEmpleado) {
         this.duiEmpleado = duiEmpleado;
     }
 

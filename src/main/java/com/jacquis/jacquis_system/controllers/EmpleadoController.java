@@ -1,69 +1,85 @@
 package com.jacquis.jacquis_system.controllers;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
 import com.jacquis.jacquis_system.model.Empleado;
 import com.jacquis.jacquis_system.services.EmpleadoService;
 
+import jakarta.validation.Valid;
+
 @Controller
-// @RequestMapping("empleados")
+@RequestMapping("/empleados")
 public class EmpleadoController {
 
     @Autowired
     private EmpleadoService empleadoService;
 
-    private void empleados(Model model) {
-        model.addAttribute("contenido", "empleados");
-    } // carga la vista empleados.html
-
-    @GetMapping("/empleados")
+    @GetMapping
     public String mostrarEmpleados(Model modelo) {
         modelo.addAttribute("empleadoList", empleadoService.getEmpleados());
-        empleados(modelo);
-        return "index"; // retorna al archivo index.html con los datos cargados en el modelo
+        return "empleados"; // retorna al archivo index.html con los datos cargados en el modelo
     }
 
-    // Muestra el formulario para crear un nuevo empleado
-    private void nuevoEmpleadoVista(Model model) {
-        model.addAttribute("contenido", "nuevo_empleado");
-    } // carga la vista nuevo_empleado.html
+    @GetMapping("/filtro")
+    public String filtroEmpleado(Model modelo,
+            @RequestParam(name = "mostrarInactivos", defaultValue = "false") boolean mostrarInactivos) {
+        List<Empleado> empleadoList = empleadoService.getEmpleados();
 
-    @GetMapping("/empleados/nuevo")
+        if (!mostrarInactivos) {
+            empleadoList = empleadoList.stream()
+                    .filter(empleado -> !empleado.getEstado_empleado().equals("INACTIVO"))
+                    .collect(Collectors.toList());
+        }
+        modelo.addAttribute("empleadoList", empleadoList);
+        return "empleados :: tablaEmpleados";// retorna al archivo index.html con los datos cargados en el modelo
+    }
+
+    @GetMapping("/nuevo")
     public String nuevoEmpleado(Model modelo) {
         Empleado empleado = new Empleado();
         modelo.addAttribute("empleados", empleado);
-        nuevoEmpleadoVista(modelo);
-        return "index"; // retorna al archivo index.html con los datos cargados en el modelo
+
+        return "nuevo_empleado"; // retorna al archivo index.html con los datos cargados en el modelo
     }
 
     // Guarda o actualiza un empleado
-    @PostMapping("/empleados")
-    public String guardarEmpleado(@ModelAttribute("empleados") Empleado empleado) {
-        empleado.setEstado_empleado("ACTIVO");
-        empleadoService.saveOrUpdate(empleado);
-        return "redirect:/index/empleados";
+    @PostMapping
+    public String guardarEmpleado(@Valid @ModelAttribute("empleados") Empleado empleado, Errors errores) {
+
+        if (errores.hasErrors()) {
+            return "nuevo_empleado";
+        } else {
+            empleado.setEstado_empleado("ACTIVO");
+            empleadoService.saveOrUpdate(empleado);
+            return "redirect:/empleados";
+        }
+
+        // return "redirect:/empleados";
     }
 
-    private void editarEmpleadoVista(Model model) {
-        model.addAttribute("contenido", "edit_empleados");
-    } // carga la vista editar_empleado.html
-
     // Muestra el formulario para editar un empleado
-    @GetMapping("/empleados/editar/{id_empleado}")
+    @GetMapping("/editar/{id_empleado}")
     public String editarEmpleado(@PathVariable("id_empleado") Long idEmpleado, Model modelo) {
         Empleado empleado = empleadoService.getEmpleadoById(idEmpleado);
         modelo.addAttribute("empleados", empleado);
-        editarEmpleadoVista(modelo);
-        return "index"; // retorna al archivo index.html con los datos cargados en el modelo
+
+        return "empleados"; // retorna al archivo index.html con los datos cargados en el modelo
     }
 
     // Actualiza un empleado
-    @PostMapping("/empleados/{id_empleado}")
+    @PostMapping("/{id_empleado}")
     public String actualizarEmpleado(@PathVariable("id_empleado") Long idEmpleado,
             @ModelAttribute("empleados") Empleado empleado) {
         Empleado empleadoActual = empleadoService.getEmpleadoById(idEmpleado);
@@ -77,19 +93,22 @@ public class EmpleadoController {
     }
 
     // Dar de baja un empleado
-    @GetMapping("/empleados/baja/{id_empleado}")
+    @GetMapping("/baja/{id_empleado}")
     public String bajaEmpleado(@PathVariable("id_empleado") Long idEmpleado, Model modelo) {
         Empleado empleado = empleadoService.getEmpleadoById(idEmpleado);
+        modelo.addAttribute("id_empleado", empleado.getId_empleado());
         empleado.setEstado_empleado("INACTIVO");
+
         empleadoService.saveOrUpdate(empleado);
         return "redirect:/empleados";
     }
 
     // // Elimina un empleado
     // @DeleteMapping("/empleados/{id_empleado}")
-    // public String eliminarEmpleado(@PathVariable("id_empleado") Long idEmpleado) {
-    //     empleadoService.delete(idEmpleado);
-    //     return "redirect:/index/empleados";
+    // public String eliminarEmpleado(@PathVariable("id_empleado") Long idEmpleado)
+    // {
+    // empleadoService.delete(idEmpleado);
+    // return "redirect:/index/empleados";
     // }
 
 }

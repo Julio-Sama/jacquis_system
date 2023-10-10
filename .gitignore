@@ -1,6 +1,6 @@
 HELP.md
 target/
-.lh
+.lh/
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
 !**/src/test/**/target/

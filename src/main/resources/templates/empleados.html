@@ -2,7 +2,6 @@
 <html lang="es" xmlns:th="https://www.thymeleaf.org">
 
 <head>
-    <link rel="shortcut icon" href="images/icon/favicon.ico">
     <!-- Title Page-->
     <title>Empleados</title>
     <div th:replace="~{fragments/header :: header-css}"></div>
@@ -272,7 +271,16 @@
                                     <div class="table-data__tool-left">
                                         <!-- BUSCADOR DE EMPLEADO -->
                                         <!-- NAYELLY AGREGARA BUSCADOR -->
-                                        <div class="rs-select2--light rs-select2--md"></div>
+                                        <div class="rs-select2--light rs-select2--md">
+                                            <strong>Mostrar inactivos</strong>
+                                            <label class="switch switch-text switch-primary">
+                                                <input type="checkbox" class="switch-input" name="mostrarInactivos"
+                                                    id="mostrarInactivos">
+                                                <span data-on="On" data-off="Off" class="switch-label"></span>
+                                                <span class="switch-handle"></span>
+                                            </label>
+
+                                        </div>
                                     </div>
                                     <div class="table-data__tool-right">
                                         <a th:href="@{/empleados/nuevo}"
@@ -290,11 +298,11 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="table-responsive table-responsive-data2">
+
+                                <div th:fragment="tablaEmpleados" id="tablaEmpleados" class="table-responsive table-responsive-data2">
                                     <table class="table table-data2">
                                         <thead>
                                             <tr>
-
                                                 <th>Nombres</th>
                                                 <th>Apellidos</th>
                                                 <th>Dirección</th>
@@ -329,82 +337,109 @@
                                                             <!-- <button type="button" style="display: none;"></button> -->
                                                         </a>
                                                         <!-- th:href="@{/empleados/editar/{id_empleado}(id_empleado=${empleado.id_empleado})}" -->
-                                                        <a class="item" data-toggle="modal"
-                                                            data-target="#modalEmpleados" data-placement="top"
-                                                            th:attr="data-target='#modalEmpleados'+${empleado.id_empleado}"
-                                                            title="Dar de baja">
-                                                            <i class="zmdi zmdi-long-arrow-down" data-toggle="tooltip"
-                                                                data-placement="top"></i>
-                                                            <!-- <button type="button" style="display: none;"></button> -->
-                                                        </a>
+                                                        <button class="item btn-baja-empleado" data-placement="top"
+                                                            title="Dar de baja" data-toggle="modal"
+                                                            data-target="#modalEmpleados"
+                                                            th:attr="data-id=${empleado.id_empleado}, data-nombre=${empleado.nombre}">
+                                                            <i class="zmdi zmdi-long-arrow-down"></i>
+                                                        </button>
                                                         <button class="item" data-toggle="tooltip" data-placement="top"
-                                                            title="More">
+                                                            title="Perfil">
                                                             <i class="zmdi zmdi-more"></i>
                                                         </button>
                                                     </div>
                                                 </td>
-                                                <!-- Modal para dar de baja -->
-                                                <div class="modal modalEmpleados"
-                                                    th:id="modalEmpleados+${empleado.id_empleado}" tabindex="-1" aria-hidden="true">
-                                                    <div class="modal-dialog modal-sm">
-                                                        <div class="modal-content">
-                                                            <div class="modal-header">
-                                                                <h5 class="modal-title" id="smallmodalLabel"><strong>¡Precaución!</strong></h5>
-                                                                <button type="button" class="close" data-dismiss="modal"
-                                                                    aria-hidden="true">
-                                                                    <span aria-hidden="true">&times;</span>
-                                                                </button>
-                                                            </div>
-                                                            <div class="modal-body">
-                                                                <p class="error-text">
-                                                                    ¿Está seguro que desea dar de baja a  <strong th:text="${empleado.nombre}"></strong>?
-                                                                </p>
-                                                            </div>
-                                                            <div class="modal-footer">
-                                                                <button type="button" class="btn btn-secondary"
-                                                                    data-dismiss="modal">Cancelar</button>
-                                                                <a th:href="@{/empleados/baja/{id_empleado}(id_empleado=${empleado.id_empleado})}"
-                                                                    class="btn btn-danger">Dar de baja</a>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
                                             </tr>
                                             <tr class="spacer"></tr>
                                         </tbody>
                                     </table>
-
                                 </div>
-                            </div>
+
                         </div>
-                        <!-- <div th:replace="~{_baja :: modal('smallmodal')}">modal</div> -->
                     </div>
-                    <!-- Aqui va todo el contenido -->
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="copyright">
-                                <p>Copyright © 2023 Jacqui's Store. Todos los derechos reservados</p>
-                            </div>
+                </div>
+                <!-- Aqui va todo el contenido -->
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="copyright">
+                            <p>Copyright © 2023 Jacqui's Store. Todos los derechos reservados</p>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
         <!-- END MAIN CONTENT-->
-        <!-- END PAGE CONTAINER-->
+        <!-- Modal para dar de baja -->
+        <div class="modal fade" id="modalEmpleados" tabindex="-1" role="dialog" aria-labelledby="smallmodalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog modal-sm" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="smallmodalLabel">
+                            <strong>¡Precaución!</strong>
+                        </h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <p class="error-text">
+                            ¿Está seguro que desea dar de baja al <strong th:text="${nombre}"></strong>?
+                        </p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                        <!-- <button type="button" class="btn btn-primary">Confirmar</button> -->
+                        <a th:href="@{/empleados/baja/{id_empleado}(id_empleado=${id_empleado})}"
+                            class="btn btn-danger">Confirmar</a>
+                        <!-- th:href="@{/empleados/baja/{id_empleado}(id_empleado=${empleado.id_empleado})}" -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- END PAGE CONTAINER-->
     </div>
 
     </div>
 
     <th:block th:replace="~{fragments/scripts :: scripts-main}">todos los scripts</th:block>
-
-    <!-- Script para cargar el modal -->
     <script>
-        $('#modalEmpleados').on('show.bs.modal',function (e) {
-            $(this).find('.btn-ok').attr('href', $(e.relatedTarget).data('href'));
-            $('#modalEmpleadosHiddenId').val($(this).find('.btn-ok').attr('href'));
+        $(document).ready(function () {
+            $(document).on("click", ".btn-baja-empleado", function(){
+                var id = $(this).attr("data-id");
+                var nombre = $(this).attr("data-nombre");
+
+                $("#modalEmpleados .modal-body p strong").text(nombre);
+                $("#modalEmpleados .modal-footer a").attr("href", "/empleados/baja/" + id);
+            });
+        });
+
+        $(document).ready(function () {
+            $("#mostrarInactivos").change(function () {
+                const mostrarInactivos = $(this).is(":checked");
+                cargarTablaEmpleados(mostrarInactivos);
+            });
+
+            // funcion para cargar la tabla de empleados
+            function cargarTablaEmpleados(mostrarInactivos) {
+                $.ajax({
+                    url: "/empleados/filtro",
+                    type: "GET",
+                    data: { mostrarInactivos: mostrarInactivos },
+                    success: function (data) {
+                        $("#tablaEmpleados").html(data);
+                    },
+                    error: function () {
+                        alert("Error al cargar la tabla de empleados");
+                    }
+                });
+            }
+
+            cargarTablaEmpleados(false); // false para que no muestre los inactivos
         });
     </script>
+    <!-- script para cargar los datos de la tabla al modal -->
 </body>
 
 </html>

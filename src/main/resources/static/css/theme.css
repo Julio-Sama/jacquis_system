@@ -83,6 +83,7 @@ p {
 
 .table-responsive {
     padding-right: 1px;
+    z-index: 5;
 }
 
 .card {
@@ -574,7 +575,7 @@ section {
     position: fixed;
     right: 0;
     top: 0;
-    z-index: 99999;
+    z-index: 99999; /*  */ 
 }
 
 .page-loader__spin {
