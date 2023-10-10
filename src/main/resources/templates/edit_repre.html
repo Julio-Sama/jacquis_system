@@ -27,6 +27,16 @@
                                 <input type="text" th:field="*{dui_repre}" name="dui" id="dui"
                                     class="form-control" disabled>
                             </div>
+
+                            <div class="form-group">
+                                <label for="dui" class="form-control-label"> DUI </label>
+                                <!-- Documento Unico de Identidad-->
+                                <input type="text" th:field="*{dui_repreo}" name="dui" id="dui"
+                                    placeholder="Ingrese el DUI..." class="form-control">
+                                <div th:if="${#fields.hasErrors('dui_repre')}"
+                                    th:errors="*{dui_repre}" class="alert alert-danger" role="alert">
+                                </div>
+                            </div>
                             <div class="form-group">
                                 <label for="nombre" class=" form-control-label">Nombre</label>
                                 <input type="text" th:field="*{nombre}" name="nombre" id="nombre"

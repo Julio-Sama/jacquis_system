@@ -5,14 +5,18 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+
 import com.jacquis.jacquis_system.model.Proveedor;
 import com.jacquis.jacquis_system.model.Representante;
 import com.jacquis.jacquis_system.services.ProveedorService;
 import com.jacquis.jacquis_system.services.RepresentanteService;
+
+import jakarta.validation.Valid;
 
 @Controller
 // @RequestMapping("representantes")
@@ -54,10 +58,15 @@ public class RepreController {
     } // carga la vista editar_empleado.html
 
     @PostMapping("/representantes")
-    public String guardarRepresentantes(@ModelAttribute("representantes") Representante representante) {
+   public String guardarRepresentantes(@Valid @ModelAttribute("representantes") Representante representante, Errors errores) {
+
+        if (errores.hasErrors()) {
+            return "nuevo_repre";
+        } else {
         representante.setEstado_repre("ACTIVO");
         representanteService.saveOrUpdate(representante);
         return "redirect:/representantes";
+        }
     }
 
     // Muestra el formulario para editar un empleado
