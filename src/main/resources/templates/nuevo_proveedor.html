@@ -12,69 +12,46 @@
             <div class="col-md-12">
                 <!-- DATA TABLE -->
                 <!-- Pongo el breadcrumbs? -->
-                <h3 class="title-5 m-b-25">Editar empleado</h3>
+                <h3 class="title-5 m-b-25">Nuevo proveedor</h3>
 
                 <!-- Formulario de registro de nuevo empleado -->
                 <div class="card">
                     <div class="card-header">
-                        Complete el <strong>Formulario</strong>
+                        <strong>Formulario</strong> de registro
                     </div>
                     <div class="card-body card-block">
-                        <form th:action="@{/empleados/{id_empleado}(id_empleado=${empleados.id_empleado})}" th:object="${empleados}" method="POST">
-                            <div class="form-group">
-                                <label for="dui" class="form-control-label"> DUI </label>
-                                <!-- Documento Unico de Identidad, aqui no se puede editar-->
-                                <input type="text" th:field="*{duiEmpleado}" name="dui" id="dui"
-                                    class="form-control" disabled>
-                            </div>
+                        <form th:action="@{/proveedores}" th:object="${proveedores}" method="POST">
                             <div class="form-group">
                                 <label for="nombre" class=" form-control-label">Nombre</label>
                                 <input type="text" th:field="*{nombre}" name="nombre" id="nombre"
-                                    placeholder="Ingrese el nombre..." class="form-control">
+                                    placeholder="Ingrese nombre del proveedor" class="form-control">
                                 <!-- <input type="email" id="nf-email" name="nf-email" placeholder="Enter Email.." class="form-control"> -->
                                 <!-- <span class="help-block">Please enter your email</span> -->
                             </div>
                             <div class="form-group">
-                                <label for="apellido" class=" form-control-label">Apellido</label>
-                                <input type="text" th:field="*{apellido}" name="apellido" id="apellido"
-                                    placeholder="Ingrese el apellido..." class="form-control">
-                            </div>
-                            <div class="form-group">
-                                <label for="apellido2" class="form-control-label">Segundo apellido</label>
-                                <input type="text" th:field="*{apellido_dos}" name="apellido2" id="apellido2"
-                                    placeholder="Ingrese el segundo apellido..." class="form-control">
-                            </div>
-                            <div class="form-group">
                                 <label for="direccion" class=" form-control-label">Dirección</label>
                                 <input type="text" th:field="*{direccion}" name="direccion" id="direccion"
-                                    placeholder="Ingrese la dirección..." class="form-control">
+                                    placeholder="Ingrese la dirección" class="form-control">
                             </div>
                             <div class="form-group">
                                 <label for="correo" class="form-control-label"> Correo electronico</label>
-                                <input type="email" th:field="*{correo_empleado}" name="correo" id="correo"
-                                    placeholder="Ingrese el correo electronico..." class="form-control">
+                                <input type="email" th:field="*{correo}" name="correo" id="correo"
+                                    placeholder="Ingrese el correo electronico" class="form-control">
                             </div>
+
                             <!-- <div class="form-group">
                                 <label for="telefono" class="form-control-label"> Telefono</label>
                                 <input type="text" name="telefono" id="telefono" placeholder="Ingrese el telefono..."
                                     class="form-control">
                             </div> -->
-                            <div class="form-group">
+                            <!-- <div class="form-group">
                                 <label for="estado" class="form-control-label">Estado</label>
                                 <select name="estado" id="estado" class="form-control" th:field="*{estado_empleado}">
                                     <option value="0">Seleccione el estado...</option>
                                     <option value="ACTIVO">Activo</option>
                                     <option value="INACTIVO">Inactivo</option>
                                 </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="rol" class="form-control-label">Rol</label>
-                                <select name="rol" id="rol" class="form-control" th:field="*{empleado_fk}">
-                                    <option value="0">Seleccione el rol...</option>
-                                    <option value="1">Administrador</option>
-                                    <option value="2">Empleado</option>
-                                </select>
-                            </div>
+                            </div> -->
                             <div class="card-footer">
                                 <button type="submit" class="btn btn-primary btn-sm">
                                     <i class="fa fa-dot-circle-o"></i> Guardar

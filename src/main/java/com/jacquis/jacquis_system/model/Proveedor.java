@@ -1,0 +1,76 @@
+package com.jacquis.jacquis_system.model;
+
+import java.sql.Date;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+
+@Entity
+@Table(name = "proveedor")
+public class Proveedor {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id_proveedor;
+
+    private String nombre;
+    private String correo;
+    private String direccion;
+    private String estado_prov;
+    private Date fecha_inicio_proveedor;
+
+    public Proveedor() {
+        super();
+    }
+
+    public Long getId_proveedor() {
+        return id_proveedor;
+    }
+
+    public void setId_proveedor(Long id_proveedor) {
+        this.id_proveedor = id_proveedor;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }       
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public Date getFecha_inicio_proveedor() {
+        return fecha_inicio_proveedor;
+    }
+
+    public void setFecha_inicio_proveedor(Date fecha_inicio_proveedor) {
+        this.fecha_inicio_proveedor = fecha_inicio_proveedor;
+    }
+
+    public String getCorreo() {
+        return correo;
+    }
+
+    public void setCorreo(String correo) {
+        this.correo = correo; 
+    }
+
+    public String getDireccion() {
+        return direccion;
+    }
+
+    public void setDireccion(String direccion) {
+        this.direccion = direccion; 
+    }
+
+    public String getEstado_prov() {
+        return estado_prov;
+    }
+
+    public void setEstado_prov(String estado_prov) {
+        this.estado_prov = estado_prov;
+    }
+}
