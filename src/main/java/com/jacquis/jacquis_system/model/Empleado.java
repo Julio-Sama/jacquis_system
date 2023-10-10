@@ -9,7 +9,9 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
@@ -27,7 +29,7 @@ public class Empleado {
 
     @NotNull
     @Column(name = "dui_empleado", unique = true)
-    @Size(min = 9, message = "El DUI debe tener 9 dígitos, sin guiones")
+    @Size(min = 9, max = 9, message = "El DUI debe tener 9 dígitos, sin guiones")
     private String duiEmpleado;
 
     @NotBlank(message = "El nombre es obligatorio")
@@ -44,9 +46,11 @@ public class Empleado {
     private String correo_empleado;
 
     private String estado_empleado;
-
-
     private int empleado_fk;
+
+    @OneToOne
+    @JoinColumn(name = "dui_usuario")
+    private Usuario usuario;
 
     @OneToMany(mappedBy = "empleado")
     // @Size(min = 1, message = "Debe tener al menos un teléfono")

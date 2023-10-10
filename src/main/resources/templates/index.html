@@ -212,7 +212,7 @@
                                         </div>
                                         <div class="content">
                                             <!-- AQUI TENGO QUE SETEAR EL NOMBRE DEL USUARIO  -->
-                                            <a class="js-acc-btn" href="#">Jacqui Díaz</a>
+                                            <a class="js-acc-btn" href="#">[[${usuario.getNombre()}]]</a>
                                         </div>
                                         <div class="account-dropdown js-dropdown">
                                             <div class="info clearfix">
@@ -245,8 +245,11 @@
                                                 </div>
                                             </div>
                                             <div class="account-dropdown__footer">
-                                                <a href="#">
-                                                    <i class="zmdi zmdi-power"></i>Cerrar Sesión</a>
+                                                <span sec:authorize="isAuthenticated"><i class="zmdi zmdi-power"></i>
+                                                    <a th:href="@{/logout}">
+                                                        Cerrar Sesión
+                                                    </a>
+                                                </span>
                                             </div>
                                         </div>
                                     </div>
@@ -280,7 +283,7 @@
                                                 <i class="zmdi zmdi-account-o"></i>
                                             </div>
                                             <div class="text">
-                                                <h2>2</h2>
+                                                <h2>10</h2>
                                                 <span>T. Empleados</span>
                                             </div>
                                         </div>
