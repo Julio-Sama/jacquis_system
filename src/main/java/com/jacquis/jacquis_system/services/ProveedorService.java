@@ -7,12 +7,15 @@ import org.springframework.stereotype.Service;
 import com.jacquis.jacquis_system.model.Proveedor;
 import com.jacquis.jacquis_system.repository.ProveedorRepository;
 
-
 @Service
 public class ProveedorService {
-    
+
     @Autowired
     private ProveedorRepository proveedorRepository;
+
+    public List<Proveedor> getProveedores() {
+        return proveedorRepository.findAll();
+    }
 
     public List<Proveedor> getProveedoreList() {
         return proveedorRepository.findAll();
@@ -22,8 +25,12 @@ public class ProveedorService {
         return proveedorRepository.findById(id).orElse(null);
     }
 
-    public void saveOrUpdate(Proveedor proveedor) {
-    proveedorRepository.save(proveedor);
+    public void guardarActualizar(Proveedor proveedor) {
+        proveedorRepository.save(proveedor);
+    }
+
+    public void eliminar(Long id) {
+        proveedorRepository.deleteById(id);
     }
 
 }
