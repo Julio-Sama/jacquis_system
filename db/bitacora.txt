@@ -11,3 +11,8 @@ Se modificó el campo de estado_prov a varchar(255).
 08/10/2023
 Se debe cambiará la FK de Proveedor (id_representante) a la FK de Representante (id_proveedor) para evitar 
 la duplicidad de datos en los registros.
+
+15/11/2023 - Luis
+Se importó bd_jacquis(6) para realizar cambios y se subirá bd_jacquis(7) para seguir trabajando con las modificaciones
+realizadas
+Se agregó color y codigo de barras de producto / tabla de tallas con relación hacia productos / tabla de marcas de productos

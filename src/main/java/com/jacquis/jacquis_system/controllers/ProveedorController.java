@@ -56,7 +56,7 @@ public class ProveedorController {
     }
 
     // Guarda o actualiza un proveedor
-    @PostMapping("/proveedores")
+    @PostMapping
     public String guardarProveedor(@Valid @ModelAttribute("proveedores") Proveedor proveedor, Errors errors) {
         
         if (errors.hasErrors()){
