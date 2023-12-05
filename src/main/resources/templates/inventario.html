@@ -317,69 +317,50 @@
                                     <table class="table table-borderless table-data3">
                                         <thead>
                                             <tr>
-                                                <th>date</th>
-                                                <th>type</th>
-                                                <th>description</th>
-                                                <th>status</th>
-                                                <th>price</th>
+                                                <th>CODIGO</th>
+                                                <th>DESCRIPCIÓN</th>
+                                                <th>CATEGORIA</th>
+                                                <th>TALLA</th>
+                                                <th>MARCA</th>
+                                                <th>PROVEEDOR</th>
+                                                <th>ESTADO</th>
+                                                <th>ACCIONES</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
-                                                <td>2018-09-29 05:57</td>
-                                                <td>Mobile</td>
-                                                <td>iPhone X 64Gb Grey</td>
-                                                <td class="process">Processed</td>
-                                                <td>$999.00</td>
-                                            </tr>
-                                            <tr>
-                                                <td>2018-09-28 01:22</td>
-                                                <td>Mobile</td>
-                                                <td>Samsung S8 Black</td>
-                                                <td class="process">Processed</td>
-                                                <td>$756.00</td>
-                                            </tr>
-                                            <tr>
-                                                <td>2018-09-27 02:12</td>
-                                                <td>Game</td>
-                                                <td>Game Console Controller</td>
-                                                <td class="denied">Denied</td>
-                                                <td>$22.00</td>
-                                            </tr>
-                                            <tr>
-                                                <td>2018-09-26 23:06</td>
-                                                <td>Mobile</td>
-                                                <td>iPhone X 256Gb Black</td>
-                                                <td class="denied">Denied</td>
-                                                <td>$1199.00</td>
-                                            </tr>
-                                            <tr>
-                                                <td>2018-09-25 19:03</td>
-                                                <td>Accessories</td>
-                                                <td>USB 3.0 Cable</td>
-                                                <td class="process">Processed</td>
-                                                <td>$10.00</td>
-                                            </tr>
-                                            <tr>
-                                                <td>2018-09-29 05:57</td>
-                                                <td>Accesories</td>
-                                                <td>Smartwatch 4.0 LTE Wifi</td>
-                                                <td class="denied">Denied</td>
-                                                <td>$199.00</td>
-                                            </tr>
-                                            <tr>
-                                                <td>2018-09-24 19:10</td>
-                                                <td>Camera</td>
-                                                <td>Camera C430W 4k</td>
-                                                <td class="process">Processed</td>
-                                                <td>$699.00</td>
-                                            </tr>
-                                            <tr>
-                                                <td>2018-09-22 00:43</td>
-                                                <td>Computer</td>
-                                                <td>Macbook Pro Retina 2017</td>
-                                                <td class="process">Processed</td>
-                                                <td>$10.00</td>
+                                             <!-- Filas de la tabla aquí -->
+                                             <tr th:each="producto: ${productoList}" class="tr-shadow">
+                                                <td th:text="${producto.codigo_producto}"></td>
+                                                <td th:text="${producto.descripcion}"></td>
+                                                <td th:text="${producto.categoria.nombre}"></td>
+                                                <td th:text="${producto.marca.nombre}"></td>
+                                                <td th:text="${producto.talla.nombre}"></td>
+                                                <td th:text="${producto.proveedor.nombre}" class="desc"></td>
+                                                <td>
+                                                    <span th:text="${producto.estado_producto}"
+                                                        th:classappend="${producto.estado_producto == 'ACTIVO'} ? 'status--process' : 'status--denied'"></span>
+                                                </td>
+                                                <td>
+                                                    <div class="table-data-feature">
+                                                        <a th:href="@{/producto/editar/{id_producto}(id_producto=${producto.id_producto})}"
+                                                            class="item" data-toggle="tooltip" data-placement="top"
+                                                            title="Editar">
+                                                            <i class="zmdi zmdi-edit"></i>
+                                                            <button title="Editar" type="button"></button> <!-- style="display: none;" -->
+                                                        </a>
+                                                        <button type="button" data-target="#modalRepre"
+                                                            class="item btn-baja-producto"
+                                                            th:attr="data-id=${producto.id_producto}, data-nombre=${producto.nombre}"
+                                                            data-toggle="modal" data-placement="top"
+                                                            title="Dar de baja">
+                                                            <i class="zmdi zmdi-long-arrow-down"></i>
+                                                        </button>
+                                                        <button class="item" data-toggle="tooltip" data-placement="top"
+                                                            title="More">
+                                                            <i class="zmdi zmdi-more"></i>
+                                                        </button>
+                                                    </div>
+                                                </td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -419,7 +400,7 @@
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
                             <!-- <button type="button" class="btn btn-primary">Confirmar</button> -->
-                            <a th:href="@{/empleados/baja/{id_empleado}(id_empleado=${id_empleado})}"
+                            <a th:href="@{/producto/baja/{id_producto}(id_producto=${id_producto})}"
                                 class="btn btn-danger">Confirmar</a>
                             <!-- th:href="@{/empleados/baja/{id_empleado}(id_empleado=${empleado.id_empleado})}" -->
                         </div>
