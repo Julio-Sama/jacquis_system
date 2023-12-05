@@ -35,14 +35,20 @@ public class PDFExportController {
     @GetMapping(value = "/openpdf/proveedores", produces = MediaType.APPLICATION_PDF_VALUE)
     public ResponseEntity<InputStreamResource> proveedorReport() throws IOException {
         List<Proveedor> proveedor = (List<Proveedor>) proveedorRepository.findAll();
-
-        ByteArrayInputStream bis = DatabasePDFService.proveedorPDFReport(proveedor);
+        byte[] pdfBytes = DatabasePDFService.proveedorPDFReport(proveedor);
+        //ByteArrayInputStream bis = DatabasePDFService.proveedorPDFReport(proveedor);
 
         HttpHeaders headers = new HttpHeaders();
         headers.add("Content-Disposition", "inline; filename=reporte_proveedores.pdf");
 
-        return ResponseEntity.ok().headers(headers).contentType(MediaType.APPLICATION_PDF)
-                .body(new InputStreamResource(bis));
+        return ResponseEntity
+        .ok()
+        .headers(headers)
+        .contentType(MediaType.APPLICATION_PDF)
+        .body(new InputStreamResource(new ByteArrayInputStream(pdfBytes)));
+
+        //return ResponseEntity.ok().headers(headers).contentType(MediaType.APPLICATION_PDF)
+               // .body(new InputStreamResource(bis));
     }
 
     @GetMapping(value="/openpdf/empleados", produces = MediaType.APPLICATION_PDF_VALUE)

@@ -77,7 +77,7 @@ public class ProveedorController {
         proveedorService.guardarActualizar(proveedor);
         return "redirect:/proveedores";
         }
-    }
+    
 
 
     // Muestra el formulario para editar un proveedor

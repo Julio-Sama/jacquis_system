@@ -10,7 +10,6 @@ import org.apache.pdfbox.multipdf.PDFCloneUtility;
 import org.apache.poi.common.usermodel.fonts.FontFamily;
 
 import com.jacquis.jacquis_system.model.Empleado;
-import com.jacquis.jacquis_system.model.Proveedor;
 import com.lowagie.text.Chunk;
 import com.lowagie.text.Document;
 import com.lowagie.text.DocumentException;

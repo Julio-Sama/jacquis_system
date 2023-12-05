@@ -48,9 +48,9 @@ public class Empleado {
     private String estado_empleado;
     private int empleado_fk;
 
-    //@OneToOne
-    //@JoinColumn(name = "dui_usuario")
-    //private Usuario usuario;
+    @OneToOne
+    @JoinColumn(name = "dui_usuario")
+    private Usuario usuario;
 
     @OneToMany(mappedBy = "empleado")
     // @Size(min = 1, message = "Debe tener al menos un teléfono")
