@@ -9,6 +9,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -41,6 +42,10 @@ public class Inventario {
     @ManyToOne
     @JoinColumn(name = "id_marca")
     private Marca marca;
+
+    @OneToOne
+    @JoinColumn(name = "id_estado_producto")
+    private EstadoProducto estadoProducto;
 
     public Inventario() {
     }

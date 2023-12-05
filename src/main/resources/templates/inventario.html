@@ -380,20 +380,6 @@
                 });
             });
         });
-
-        $(document).ready(function () {
-            $('#mostrarInactivosEmp').on('change', function () {
-                if ($(this).is(':checked')) {
-                    $('#tablaProductos tr').filter(function () {
-                        $(this).toggle($(this).text().toLowerCase().indexOf('inactivo') > -1)
-                    });
-                } else {
-                    $('#tablaProductos tr').filter(function () {
-                        $(this).toggle($(this).text().toLowerCase().indexOf('inactivo') > -1)
-                    });
-                }
-            });
-        });
     </script>
     <!-- script para cargar los datos de la tabla al modal -->
 </body>
