@@ -98,7 +98,7 @@ public class EmpleadoController {
         empleadoActual.setDireccion(empleado.getDireccion());
         empleadoActual.setCorreo_empleado(empleado.getCorreo_empleado());
         // empleadoActual.setEstado_empleado(empleado.getEstado_empleado());
-        empleadoService.saveOrUpdate(empleadoActual);
+        empleadoService.saveOrUpdate(empleadoActual); 
         return "redirect:/empleados";
     }
 
