@@ -256,7 +256,8 @@
 
                                     </div>
                                     <div class="card-body card-block"> 
-                                        <form th:action="@{/empleados/{id_empleado}(id_empleado=${empleados.id_empleado})}" th:object="${empleados}" method="POST">
+                                        <form th:action="@{/empleados/{id_empleado}(id_empleado=${empleados.id_empleado})}" 
+                                        th:object="${empleados}" method="POST">
                                             <div th:if="${#fields.hasErrors()}" class="alert alert-danger" role="alert">
                                                 Por favor, corrija los errores indicados en rojo
                                             </div>

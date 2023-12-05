@@ -254,7 +254,8 @@
                                 <strong>Formulario</strong> de registro
                             </div>
                             <div class="card-body card-block">
-                                <form th:action="@{/inventario}" th:object="${inventario}" method="POST">
+                                <form th:action="@{/inventario}"
+                                th:object="${inventario}" method="POST">
 
                                     <!-- Mensaje de errores -->
                                     <div th:if="${#fields.hasErrors()}" class="alert alert-danger" role="alert">
