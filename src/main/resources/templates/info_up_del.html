@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <link rel="shortcut icon" href="images/icon/favicon.ico">
     <!-- Title Page-->
-    <title>Inventario</title>
+    <title>Información del producto</title>
     <div th:replace="~{fragments/header :: header-css}"></div>
 </head>
 
@@ -19,7 +19,7 @@
                         <a class="logo" th:href="@{index}">
                             <img th:src="@{/images/icon/logo.png}" alt="JacquisStore" />
                         </a>
-                        <button title="searchMobile" class="hamburger hamburger--slider" type="button">
+                        <button title="buscarMobile" class="hamburger hamburger--slider" type="button">
                             <span class="hamburger-box">
                                 <span class="hamburger-inner"></span>
                             </span>
@@ -55,25 +55,6 @@
                                 <i class="fas fa-truck"></i>Proveedores</a>
                         </li>
 
-                        <!-- <li>
-                            <a href="map.html">
-                                <i class="fas fa-map-marker-alt"></i>Maps</a>
-                        </li> -->
-                        <!-- <li class="has-sub">
-                            <a class="js-arrow" href="#">
-                                <i class="fas fa-copy"></i>Pages</a>
-                            <ul class="navbar-mobile-sub__list list-unstyled js-sub-list">
-                                <li>
-                                    <a href="login.html">Login</a>
-                                </li>
-                                <li>
-                                    <a href="register.html">Register</a>
-                                </li>
-                                <li>
-                                    <a href="forget-pass.html">Forget Password</a>
-                                </li>
-                            </ul>
-                        </li> -->
                     </ul>
                 </div>
             </nav>
@@ -156,7 +137,7 @@
                             <form class="form-header" action="" method="POST">
                                 <input class="au-input au-input--xl" type="text" name="buscar"
                                     placeholder="Buscar datos &amp; reportes." />
-                                <button title="searchTodo" class="au-btn--submit" type="submit">
+                                <button title="buscarTodo" class="au-btn--submit" type="submit">
                                     <i class="zmdi zmdi-search"></i>
                                 </button>
                             </form>
@@ -263,94 +244,156 @@
             <div class="main-content">
                 <div class="section__content section__content--p30">
                     <div class="container-fluid">
-                        <!-- AQUI VA LA TABLA -->
                         <div class="row">
                             <div class="col-md-12">
-                                <!-- DATA TABLE -->
-                                <!-- Pongo el breadcrumbs? -->
-                                <h3 class="title-5 m-b-25">Inventario</h3>
-                                <div class="table-data__tool">
-                                    <div class="table-data__tool-left">
-                                        <!-- BUSCADOR DE EMPLEADO -->
-                                        <div class="rs-select2--light rs-select2--md">
-                                            <div class="input-group">
-                                                <input type="text" id="searchInputEmp" class="form-control"
-                                                    placeholder="Buscar">
-                                                <div class="input-group-append">
-                                                    <button title="Buscar empleado" class="btn btn-primary"
-                                                        type="button">
-                                                        <i class="zmdi zmdi-search"></i>
-                                                    </button>
+                                <h3 class="title-5 m-b-25">Información del Producto</h3>
+
+                                <div class="card">
+                                    <div class="card-header">
+                                        Complete el <strong>Formulario</strong>
+                                    </div>
+                                    <div class="card-body card-block">
+                                        <form
+                                            th:action="@{/inventario/{id_producto}(id_producto=${inventario.id_producto})}"
+                                            th:object="${inventario}" method="POST">
+                                            <div th:if="${#fields.hasErrors()}" class="alert alert-danger" role="alert">
+                                                Por favor, corrija los errores indicados en rojo
+                                            </div>
+
+                                            <!-- Campo Código de producto -->
+                                            <div class="form-group">
+                                                <label for="codigo_producto" class="form-control-label">Código de
+                                                    producto</label>
+                                                <input type="text" th:field="*{codigo_producto}" name="codigo_producto"
+                                                    id="codigo_producto" placeholder="Ingrese el código de producto..."
+                                                    class="form-control">
+                                                <div th:if="${#fields.hasErrors('codigo_producto')}"
+                                                    th:errors="*{codigo_producto}" class="alert alert-danger"
+                                                    role="alert"></div>
+                                            </div>
+
+                                            <!-- Campo Descripción del producto -->
+                                            <div class="form-group">
+                                                <label for="descripcion" class="form-control-label">Descripción del
+                                                    producto</label>
+                                                <input type="text" th:field="*{descripcion_producto}" name="descripcion"
+                                                    id="descripcion"
+                                                    placeholder="Ingrese la descripción del producto..."
+                                                    class="form-control">
+                                                <div th:if="${#fields.hasErrors('descripcion_producto')}"
+                                                    th:errors="*{descripcion}" class="alert alert-danger" role="alert">
                                                 </div>
                                             </div>
-                                        </div>
-                                        <!-- NAYELLY AGREGARA BUSCADOR -->
-                                        <!-- <div class="rs-select2--light rs-select2--md">
-                                            <label for="mostrarInactivosEmp" class="switch switch-text switch-primary">
-                                                <input title="Selecciona para mostrar empleados inactivos"
-                                                    type="checkbox" class="switch-input" name="mostrarInactivosEmp"
-                                                    id="mostrarInactivosEmp">
-                                                <span data-on="On" data-off="Off" class="switch-label"></span>
-                                                <span class="switch-handle"></span>
-                                            </label>
-                                            <strong>Inactivos</strong>
-                                        </div> -->
-                                    </div>
-                                    <div class="table-data__tool-right">
-                                        <a th:href="@{/inventario/nuevo}"
-                                            class="au-btn au-btn-icon au-btn--green au-btn--small">
-                                            <i class="zmdi zmdi-plus"></i> NUEVO PRODUCTO
-                                            <button title="Nuevo empleado" type="button"></button>
-                                        </a>
-                                        <div class="rs-select2--dark rs-select2--sm rs-select2--dark2">
-                                            <select title="Exportar a" class="js-select2" name="type">
-                                                <option selected="selected">Exportar</option>
-                                                <option value="">EXCEL</option>
-                                                <option value="">PDF</option>
-                                            </select>
-                                            <div class="dropDownSelect2"></div>
-                                        </div>
-                                    </div>
-                                </div>
 
-                                <div th:fragment="tablaProductos" id="tablaProductos" class="table-responsive m-b-40">
-                                    <table class="table table-borderless table-data3">
-                                        <thead>
-                                            <tr>
-                                                <th>Código</th>
-                                                <th>Categoría</th>
-                                                <th>Descripción</th>
-                                                <th>Proveedor</th>
-                                                <th>Marca</th>
-                                                <th>Talla</th>
-                                                <th>Ver</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr th:each="producto: ${inventarioList}">
-                                                <td th:text="${producto.codigo_producto}"></td>
-                                                <td th:text="${producto.categoria.nombre}"></td>
-                                                <td th:text="${producto.descripcion_producto}"></td>
-                                                <td th:text="${producto.proveedor.nombre}"></td>
-                                                <td th:text="${producto.marca.nombre_marca}"></td>
-                                                <td th:text="${producto.talla.nombre_talla}"></td>
-                                                <td th:hidden="${producto.id_producto}"></td>
-                                                <td>
-                                                    <div class="table-data-feature">
-                                                        <a th:href="@{/inventario/info/{id_producto}(id_producto=${producto.id_producto})}"
-                                                        class="item" data-toggle="tooltip" data-placement="top" title="Información">
-                                                            <i class="zmdi zmdi-info"></i>
-                                                        </a>
+                                            <!-- Campo Proveedor -->
+                                            <div class="form-group">
+                                                <label for="proveedor">Proveedor:</label>
+                                                <select name="proveedor" id="proveedor" required
+                                                    th:field="*{proveedor.id_proveedor}">
+                                                    <option value="">Selecciona un proveedor</option>
+                                                    <option th:each="prov: ${proveedorSelected}"
+                                                        th:value="${prov.id_proveedor}" th:text="${prov.nombre}"
+                                                        th:selected="${prov.id_proveedor == inventario.proveedor?.id_proveedor}"
+                                                        th:if="${prov.estado_prov != 'INACTIVO'}"></option>
+                                                </select>
+                                            </div>
+
+                                            <!-- Campo Marca (Agregado) -->
+                                            <div class="form-group">
+                                                <label for="marca">Marca:</label>
+                                                <select name="marca" id="marca" required th:field="*{marca.id_marca}">
+                                                    <option value="">Selecciona una marca</option>
+                                                    <option th:each="mar: ${marcaSelected}" th:value="${mar.id_marca}"
+                                                        th:text="${mar.nombre_marca}"
+                                                        th:selected="${mar.id_marca == inventario.marca?.id_marca}">
+                                                    </option>
+                                                </select>
+                                            </div>
+
+                                            <!-- Campo Talla (Agregado) -->
+                                            <div class="form-group">
+                                                <label for="talla">Talla:</label>
+                                                <select name="talla" id="talla" required th:field="*{talla.id_talla}">
+                                                    <option value="">Selecciona una talla</option>
+                                                    <option th:each="tal: ${tallaSelected}" th:value="${tal.id_talla}"
+                                                        th:text="${tal.nombre_talla}"
+                                                        th:selected="${tal.id_talla == inventario.talla?.id_talla}">
+                                                    </option>
+                                                </select>
+                                            </div>
+
+                                            <!-- Campo Categoría (Agregado) -->
+                                            <div class="form-group">
+                                                <label for="categoria">Categoría:</label>
+                                                <select name="categoria" id="categoria" required
+                                                    th:field="*{categoria.id_categoria}">
+                                                    <option value="">Selecciona una categoría</option>
+                                                    <option th:each="cat: ${categoriaSelected}"
+                                                        th:value="${cat.id_categoria}" th:text="${cat.nombre}"
+                                                        th:selected="${cat.id_categoria == inventario.categoria?.id_categoria}">
+                                                    </option>
+                                                </select>
+                                            </div>
+
+                                            <!-- Otros campos de producto (puedes adaptar según tus atributos) -->
+
+                                            <!-- Botones de acción -->
+                                            <div class="card-footer">
+                                                <!-- Botón de eliminar producto -->
+                                                <div class="form-group">
+                                                    <label for="eliminar">Eliminar producto:</label>
+                                                    <div class="custom-control custom-switch">
+                                                        <input type="checkbox" class="custom-control-input"
+                                                            id="eliminar" name="eliminar"
+                                                            onchange="toggleDeleteButton(this)">
+                                                        <label class="custom-control-label"
+                                                            for="eliminar">Habilitar</label>
                                                     </div>
-                                                </td>
-                                                
-                                            </tr>
-                                        </tbody>
-                                    </table>
+                                                </div>
+
+                                                <!-- Botones de acción -->
+                                                <div class="card-footer">
+                                                    <button type="submit" class="btn btn-primary btn-sm"
+                                                        id="guardarButton">
+                                                        <i class="fa fa-dot-circle-o"></i> Guardar
+                                                    </button>
+                                                    <button type="reset" class="btn btn-danger btn-sm"
+                                                        onclick="history.go(-1);">
+                                                        <i class="fa fa-ban"></i> Cancelar
+                                                    </button>
+                                                    <a
+                                                        th:href="@{/inventario/eliminar/{id_producto}(id_producto=${id_producto})}">
+                                                        <button type="button" class="btn btn-danger btn-sm"
+                                                            id="eliminarButton" disabled>
+                                                            <i class="fa fa-trash"></i> Eliminar
+                                                        </button></a>
+                                                    <!-- Botón para desplegar el modal -->
+                                                    <button type="button" class="btn btn-primary btn-sm" data-toggle="modal"
+                                                        data-target="#infoModal">
+                                                        Ver información
+                                                    </button>
+                                                </div>
+
+                                                <script>
+                                                    function toggleDeleteButton(checkbox) {
+                                                        var eliminarButton = document.getElementById("eliminarButton");
+                                                        if (checkbox.checked) {
+                                                            eliminarButton.disabled = false;
+                                                        } else {
+                                                            eliminarButton.disabled = true;
+                                                        }
+                                                    }
+                                                </script>
+                                            </div>
+
+
+                                        </form>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+
                     <!-- Aqui va todo el contenido -->
                     <div class="row">
                         <div class="col-md-12">
@@ -362,7 +405,31 @@
                 </div>
             </div>
             <!-- END MAIN CONTENT-->
-            <!-- Modal para dar de baja -->
+        </div>
+        <!-- Modal -->
+        <div class="modal fade" id="infoModal" tabindex="-1" role="dialog" aria-labelledby="infoModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="infoModalLabel">Información del producto</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <p><strong>Stock:</strong> <p th:text="${inventario.stock}"></p></p>
+                        <p><strong>Precio de compra:</strong> {{inventario.precio_compra}}</p>
+                        <p><strong>Ganancia:</strong> {{inventario.ganancia}}</p>
+                        <p><strong>Estado del producto:</strong> {{inventario.estado_producto}}</p>
+                        <p><strong>Precio de venta:</strong> {{inventario.precioUventa}}</p>
+                        <p><strong>Color:</strong> {{inventario.color}}</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                    </div>
+                </div>
+            </div>
         </div>
         <!-- END PAGE CONTAINER-->
     </div>
@@ -370,18 +437,6 @@
     </div>
 
     <th:block th:replace="~{fragments/scripts :: scripts-main}">todos los scripts</th:block>
-    <script>
-
-        $(document).ready(function () {
-            $('#searchInputEmp').on('keyup', function () {
-                var value = $(this).val().toLowerCase();
-                $('#tablaProductos tr').filter(function () {
-                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-                });
-            });
-        });
-    </script>
-    <!-- script para cargar los datos de la tabla al modal -->
 </body>
 
 </html>

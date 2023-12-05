@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <link rel="shortcut icon" href="images/icon/favicon.ico">
     <!-- Title Page-->
-    <title>Inventario</title>
+    <title>Nuevo Producto</title>
     <div th:replace="~{fragments/header :: header-css}"></div>
 </head>
 
@@ -55,25 +55,6 @@
                                 <i class="fas fa-truck"></i>Proveedores</a>
                         </li>
 
-                        <!-- <li>
-                            <a href="map.html">
-                                <i class="fas fa-map-marker-alt"></i>Maps</a>
-                        </li> -->
-                        <!-- <li class="has-sub">
-                            <a class="js-arrow" href="#">
-                                <i class="fas fa-copy"></i>Pages</a>
-                            <ul class="navbar-mobile-sub__list list-unstyled js-sub-list">
-                                <li>
-                                    <a href="login.html">Login</a>
-                                </li>
-                                <li>
-                                    <a href="register.html">Register</a>
-                                </li>
-                                <li>
-                                    <a href="forget-pass.html">Forget Password</a>
-                                </li>
-                            </ul>
-                        </li> -->
                     </ul>
                 </div>
             </nav>
@@ -263,106 +244,138 @@
             <div class="main-content">
                 <div class="section__content section__content--p30">
                     <div class="container-fluid">
-                        <!-- AQUI VA LA TABLA -->
-                        <div class="row">
-                            <div class="col-md-12">
-                                <!-- DATA TABLE -->
-                                <!-- Pongo el breadcrumbs? -->
-                                <h3 class="title-5 m-b-25">Inventario</h3>
-                                <div class="table-data__tool">
-                                    <div class="table-data__tool-left">
-                                        <!-- BUSCADOR DE EMPLEADO -->
-                                        <div class="rs-select2--light rs-select2--md">
-                                            <div class="input-group">
-                                                <input type="text" id="searchInputEmp" class="form-control"
-                                                    placeholder="Buscar">
-                                                <div class="input-group-append">
-                                                    <button title="Buscar empleado" class="btn btn-primary"
-                                                        type="button">
-                                                        <i class="zmdi zmdi-search"></i>
-                                                    </button>
-                                                </div>
+
+                        <!-- Encabezado de la página -->
+                        <h3 class="title-5 m-b-25">Nuevo producto a inventario</h3>
+
+                        <!-- Formulario de registro de nuevo producto -->
+                        <div class="card">
+                            <div class="card-header">
+                                <strong>Formulario</strong> de registro
+                            </div>
+                            <div class="card-body card-block">
+                                <form th:action="@{/inventario}"
+                                th:object="${inventario}" method="POST">
+
+                                    <!-- Mensaje de errores -->
+                                    <div th:if="${#fields.hasErrors()}" class="alert alert-danger" role="alert">
+                                        Por favor, corrija los errores indicados en rojo
+                                    </div>
+
+                                    <div class="form-group">
+                                        <div class="row">
+                                            <div class="col col-md-3">
+                                                <label for="codigo_producto" class="form-control-label">Código de
+                                                    producto</label>
+                                            </div>
+                                            <div class="col-12 col-md-9">
+                                                <input type="text" th:field="*{codigo_producto}" name="codigo_producto" id="codigo_producto"
+                                                    placeholder="Digite el código del producto" class="form-control">
                                             </div>
                                         </div>
-                                        <!-- NAYELLY AGREGARA BUSCADOR -->
-                                        <!-- <div class="rs-select2--light rs-select2--md">
-                                            <label for="mostrarInactivosEmp" class="switch switch-text switch-primary">
-                                                <input title="Selecciona para mostrar empleados inactivos"
-                                                    type="checkbox" class="switch-input" name="mostrarInactivosEmp"
-                                                    id="mostrarInactivosEmp">
-                                                <span data-on="On" data-off="Off" class="switch-label"></span>
-                                                <span class="switch-handle"></span>
-                                            </label>
-                                            <strong>Inactivos</strong>
-                                        </div> -->
                                     </div>
-                                    <div class="table-data__tool-right">
-                                        <a th:href="@{/inventario/nuevo}"
-                                            class="au-btn au-btn-icon au-btn--green au-btn--small">
-                                            <i class="zmdi zmdi-plus"></i> NUEVO PRODUCTO
-                                            <button title="Nuevo empleado" type="button"></button>
-                                        </a>
-                                        <div class="rs-select2--dark rs-select2--sm rs-select2--dark2">
-                                            <select title="Exportar a" class="js-select2" name="type">
-                                                <option selected="selected">Exportar</option>
-                                                <option value="">EXCEL</option>
-                                                <option value="">PDF</option>
-                                            </select>
-                                            <div class="dropDownSelect2"></div>
+
+                                    <div class="form-group">
+                                        <div class="row">
+                                            <div class="col col-md-3">
+                                                <label for="descripcion" class="form-control-label">Descripción del producto</label>
+                                            </div>
+                                            <div class="col-12 col-md-9">
+                                                <input type="text" th:field="*{descripcion_producto}" name="descripcion" id="descripcion"
+                                                    placeholder="Ejemplo: Blusa azul talla M" class="form-control">
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
 
-                                <div th:fragment="tablaProductos" id="tablaProductos" class="table-responsive m-b-40">
-                                    <table class="table table-borderless table-data3">
-                                        <thead>
-                                            <tr>
-                                                <th>Código</th>
-                                                <th>Categoría</th>
-                                                <th>Descripción</th>
-                                                <th>Proveedor</th>
-                                                <th>Marca</th>
-                                                <th>Talla</th>
-                                                <th>Ver</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr th:each="producto: ${inventarioList}">
-                                                <td th:text="${producto.codigo_producto}"></td>
-                                                <td th:text="${producto.categoria.nombre}"></td>
-                                                <td th:text="${producto.descripcion_producto}"></td>
-                                                <td th:text="${producto.proveedor.nombre}"></td>
-                                                <td th:text="${producto.marca.nombre_marca}"></td>
-                                                <td th:text="${producto.talla.nombre_talla}"></td>
-                                                <td th:hidden="${producto.id_producto}"></td>
-                                                <td>
-                                                    <div class="table-data-feature">
-                                                        <a th:href="@{/inventario/info/{id_producto}(id_producto=${producto.id_producto})}"
-                                                        class="item" data-toggle="tooltip" data-placement="top" title="Información">
-                                                            <i class="zmdi zmdi-info"></i>
-                                                        </a>
-                                                    </div>
-                                                </td>
-                                                
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
+                                    <div class="form-group">
+                                        <div class="row">
+                                            <div class="col col-md-3">
+                                                <label for="proveedor">Proveedor:</label>
+                                            </div>
+                                            <div class="col-12 col-md-9">
+                                                <select name="proveedor" id="proveedor" class="form-control" required>
+                                                    <option value="">Selecciona un proveedor</option>
+                                                    <option th:each="prov: ${proveedorSelected}"
+                                                        th:value="${prov.id_proveedor}" th:text="${prov.nombre}"
+                                                        th:if="${prov.estado_prov != 'INACTIVO'}"></option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <div class="row">
+                                            <div class="col col-md-3">
+                                                <label for="categoria">Categoría:</label>
+                                            </div>
+                                            <div class="col-12 col-md-9">
+                                                <select name="categoria" id="categoria" class="form-control" required>
+                                                    <option value="">Selecciona una categoría</option>
+                                                    <option th:each="cat: ${categoriaSelected}"
+                                                        th:value="${cat.id_categoria}" th:text="${cat.nombre}"></option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <div class="row">
+                                            <div class="col col-md-3">
+                                                <label for="marca">Marca:</label>
+                                            </div>
+                                            <div class="col-12 col-md-9">
+                                                <select name="marca" id="marca" class="form-control" required>
+                                                    <option value="">Selecciona una marca</option>
+                                                    <option th:each="mar: ${marcaSelected}" th:value="${mar.id_marca}"
+                                                        th:text="${mar.nombre_marca}"></option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <div class="row">
+                                            <div class="col col-md-3">
+                                                <label for="talla">Talla:</label>
+                                            </div>
+                                            <div class="col-12 col-md-9">
+                                                <select name="talla" id="talla" class="form-control" required>
+                                                    <option value="">Selecciona una talla</option>
+                                                    <option th:each="tal: ${tallaSelected}" th:value="${tal.id_talla}"
+                                                        th:text="${tal.nombre_talla}"></option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                    <!-- Botones de acción -->
+                                    <div class="card-footer">
+                                        <button type="submit" class="btn btn-primary btn-sm">
+                                            <i class="fa fa-dot-circle-o"></i> Guardar
+                                        </button>
+                                        <button type="reset" class="btn btn-danger btn-sm" onclick="history.go(-1);">
+                                            <i class="fa fa-ban"></i> Cancelar
+                                        </button>
+                                    </div>
+                                </form>
                             </div>
                         </div>
+
                     </div>
-                    <!-- Aqui va todo el contenido -->
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="copyright">
-                                <p>Copyright © 2023 Jacqui's Store. Todos los derechos reservados</p>
-                            </div>
+                </div>
+
+                <!-- Pie de página -->
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="copyright">
+                            <p>Copyright © 2023 Jacqui's Store. Todos los derechos reservados</p>
                         </div>
                     </div>
                 </div>
             </div>
+
             <!-- END MAIN CONTENT-->
-            <!-- Modal para dar de baja -->
         </div>
         <!-- END PAGE CONTAINER-->
     </div>
@@ -370,18 +383,6 @@
     </div>
 
     <th:block th:replace="~{fragments/scripts :: scripts-main}">todos los scripts</th:block>
-    <script>
-
-        $(document).ready(function () {
-            $('#searchInputEmp').on('keyup', function () {
-                var value = $(this).val().toLowerCase();
-                $('#tablaProductos tr').filter(function () {
-                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-                });
-            });
-        });
-    </script>
-    <!-- script para cargar los datos de la tabla al modal -->
 </body>
 
 </html>

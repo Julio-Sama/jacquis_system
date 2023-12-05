@@ -2,10 +2,10 @@ package com.jacquis.jacquis_system.model;
 
 import java.sql.Date;
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -37,8 +37,11 @@ public class Proveedor {
     @DateTimeFormat(pattern = "dd/MM/yyyy")
     private Date fecha_inicio_proveedor;
 
-    @OneToMany(mappedBy = "proveedor", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "proveedor")
     private List<Representante> representantes;
+
+    @OneToMany(mappedBy = "proveedor")
+    private Set<Inventario> inventario;
 
     public String getNombre() {
         return nombre;

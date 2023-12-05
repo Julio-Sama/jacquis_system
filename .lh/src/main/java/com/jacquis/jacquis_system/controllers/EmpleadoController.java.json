@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 148,
+            "activePatchIndex": 149,
             "patches": [
                 {
                     "date": 1695782573496,
@@ -600,6 +600,10 @@
                 {
                     "date": 1696926181395,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -84,9 +84,9 @@\n     public String editarEmpleado(@PathVariable(\"id_empleado\") Long idEmpleado, Model modelo) {\r\n         Empleado empleado = empleadoService.getEmpleadoById(idEmpleado);\r\n         modelo.addAttribute(\"empleados\", empleado);\r\n \r\n-        return \"empleados\"; // retorna al archivo index.html con los datos cargados en el modelo\r\n+        return \"edit_empleados\"; // retorna al archivo index.html con los datos cargados en el modelo\r\n     }\r\n \r\n     // Actualiza un empleado\r\n     @PostMapping(\"/{id_empleado}\")\r\n"
+                },
+                {
+                    "date": 1701754726724,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -97,9 +97,9 @@\n         empleadoActual.setApellido(empleado.getApellido());\r\n         empleadoActual.setDireccion(empleado.getDireccion());\r\n         empleadoActual.setCorreo_empleado(empleado.getCorreo_empleado());\r\n         // empleadoActual.setEstado_empleado(empleado.getEstado_empleado());\r\n-        empleadoService.saveOrUpdate(empleadoActual);\r\n+        empleadoService.saveOrUpdate(empleadoActual); \r\n         return \"redirect:/empleados\";\r\n     }\r\n \r\n     // Dar de baja un empleado\r\n"
                 }
             ],
             "date": 1695782573496,
