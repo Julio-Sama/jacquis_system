@@ -244,109 +244,136 @@
             <div class="main-content">
                 <div class="section__content section__content--p30">
                     <div class="container-fluid">
-                        <!-- AQUI VA LA TABLA -->
-                        <div class="row">
-                            <div class="col-md-12">
-                                <!-- DATA TABLE -->
-                                <!-- Pongo el breadcrumbs? -->
-                                <h3 class="title-5 m-b-25">Nuevo producto a inventario</h3>
-                                <!-- Formulario de registro de nuevo empleado -->
-                                <div class="card">
-                                    <div class="card-header">
-                                        <strong>Formulario</strong> de registro
+
+                        <!-- Encabezado de la página -->
+                        <h3 class="title-5 m-b-25">Nuevo producto a inventario</h3>
+
+                        <!-- Formulario de registro de nuevo producto -->
+                        <div class="card">
+                            <div class="card-header">
+                                <strong>Formulario</strong> de registro
+                            </div>
+                            <div class="card-body card-block">
+                                <form th:action="@{/inventario}" th:object="${inventario}" method="POST">
+
+                                    <!-- Mensaje de errores -->
+                                    <div th:if="${#fields.hasErrors()}" class="alert alert-danger" role="alert">
+                                        Por favor, corrija los errores indicados en rojo
                                     </div>
-                                    <div class="card-body card-block">
-                                        <form th:action="@{/inventario}" th:object="${inventario}"
-                                            method="POST">
-                                            <div th:if="${#fields.hasErrors()}" class="alert alert-danger" role="alert">
-                                                Por favor, corrija los errores indicados en rojo
+
+                                    <div class="form-group">
+                                        <div class="row">
+                                            <div class="col col-md-3">
+                                                <label for="codigo_producto" class="form-control-label">Código de
+                                                    producto</label>
                                             </div>
-                                            <div class="form-group">
-                                                <label for="dui" class="form-control-label"> Código de producto </label>
-                                                <!-- Documento Unico de Identidad-->
-                                                <input type="text" name="codigo_producto" id="codigo_producto"
-                                                    placeholder="Digite el codigo del producto" class="form-control">
-                                                    <!-- <div th:if="${#fields.hasErrors('dui_repre')}"
-                                                    th:errors="*{dui_repre}" class="alert alert-danger" role="alert"> -->
-                                                </div>
+                                            <div class="col-12 col-md-9">
+                                                <input type="text" th:field="*{codigo_producto}" name="codigo_producto" id="codigo_producto"
+                                                    placeholder="Digite el código del producto" class="form-control">
                                             </div>
-                                            <div class="form-group">
-                                                <label for="descripcion" class=" form-control-label">Describe el producto</label>
-                                                <input type="text" name="descripcion" id="descripcion"
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <div class="row">
+                                            <div class="col col-md-3">
+                                                <label for="descripcion" class="form-control-label">Descripción del producto</label>
+                                            </div>
+                                            <div class="col-12 col-md-9">
+                                                <input type="text" th:field="*{descripcion_producto}" name="descripcion" id="descripcion"
                                                     placeholder="Ejemplo: Blusa azul talla M" class="form-control">
                                             </div>
-                                            <!-- <div th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}"
-                                                class="alert alert-danger" role="alert">
-                                            </div> -->
+                                        </div>
+                                    </div>
 
-                                            <div class="form-group">
+                                    <div class="form-group">
+                                        <div class="row">
+                                            <div class="col col-md-3">
                                                 <label for="proveedor">Proveedor:</label>
-                                                <select name="proveedor" id="proveedor" required>
+                                            </div>
+                                            <div class="col-12 col-md-9">
+                                                <select name="proveedor" id="proveedor" class="form-control" required>
                                                     <option value="">Selecciona un proveedor</option>
                                                     <option th:each="prov: ${proveedorSelected}"
                                                         th:value="${prov.id_proveedor}" th:text="${prov.nombre}"
-                                                        th:if="${prov.estado_prov != 'INACTIVO'}">
-                                                    </option>
+                                                        th:if="${prov.estado_prov != 'INACTIVO'}"></option>
                                                 </select>
-                                            </div> 
-                                            <!-- Select para categoria -->
-                                            <div class="form-group">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <div class="row">
+                                            <div class="col col-md-3">
                                                 <label for="categoria">Categoría:</label>
-                                                <select name="categoria" id="categoria" required>
+                                            </div>
+                                            <div class="col-12 col-md-9">
+                                                <select name="categoria" id="categoria" class="form-control" required>
                                                     <option value="">Selecciona una categoría</option>
                                                     <option th:each="cat: ${categoriaSelected}"
-                                                        th:value="${cat.id_categoria}" th:text="${cat.nombre}">
-                                                    </option>
+                                                        th:value="${cat.id_categoria}" th:text="${cat.nombre}"></option>
                                                 </select>
                                             </div>
-                                            <!-- Select para marca -->
-                                            <div class="form-group">
-                                                <label for="marca">Marca:</label>
-                                                <select name="marca" id="marca" required>
-                                                    <option value="">Selecciona una marca</option>
-                                                    <option th:each="mar: ${marcaSelected}"
-                                                        th:value="${mar.id_marca}" th:text="${mar.nombre_marca}">
-                                                    </option>
-                                                </select>
-                                            </div>
-                                            <!-- Select para talla -->
-                                            <div class="form-group">
-                                                <label for="talla">Talla:</label>
-                                                <select name="talla" id="talla" required>
-                                                    <option value="">Selecciona una talla</option>
-                                                    <option th:each="tal: ${tallaSelected}"
-                                                        th:value="${tal.id_talla}" th:text="${tal.talla}">
-                                                    </option>
-                                                </select>
-                                            </div>
-
-
-                                            <div class="card-footer">
-                                                <button type="submit" class="btn btn-primary btn-sm">
-                                                    <i class="fa fa-dot-circle-o"></i> Guardar
-                                                </button>
-                                                <button type="reset" class="btn btn-danger btn-sm"
-                                                    onclick="history.go(-1);">
-                                                    <i class="fa fa-ban"></i> Cancelar
-                                                </button>
-                                                </button>
-                                            </div>
-                                        </form>
+                                        </div>
                                     </div>
-                                </div>
+
+                                    <div class="form-group">
+                                        <div class="row">
+                                            <div class="col col-md-3">
+                                                <label for="marca">Marca:</label>
+                                            </div>
+                                            <div class="col-12 col-md-9">
+                                                <select name="marca" id="marca" class="form-control" required>
+                                                    <option value="">Selecciona una marca</option>
+                                                    <option th:each="mar: ${marcaSelected}" th:value="${mar.id_marca}"
+                                                        th:text="${mar.nombre_marca}"></option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <div class="row">
+                                            <div class="col col-md-3">
+                                                <label for="talla">Talla:</label>
+                                            </div>
+                                            <div class="col-12 col-md-9">
+                                                <select name="talla" id="talla" class="form-control" required>
+                                                    <option value="">Selecciona una talla</option>
+                                                    <option th:each="tal: ${tallaSelected}" th:value="${tal.id_talla}"
+                                                        th:text="${tal.nombre_talla}"></option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                    <!-- Botones de acción -->
+                                    <div class="card-footer">
+                                        <button type="submit" class="btn btn-primary btn-sm">
+                                            <i class="fa fa-dot-circle-o"></i> Guardar
+                                        </button>
+                                        <button type="reset" class="btn btn-danger btn-sm" onclick="history.go(-1);">
+                                            <i class="fa fa-ban"></i> Cancelar
+                                        </button>
+                                    </div>
+                                </form>
                             </div>
                         </div>
+
                     </div>
-                    <!-- Aqui va todo el contenido -->
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="copyright">
-                                <p>Copyright © 2023 Jacqui's Store. Todos los derechos reservados</p>
-                            </div>
+                </div>
+
+                <!-- Pie de página -->
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="copyright">
+                            <p>Copyright © 2023 Jacqui's Store. Todos los derechos reservados</p>
                         </div>
                     </div>
                 </div>
             </div>
+
             <!-- END MAIN CONTENT-->
         </div>
         <!-- END PAGE CONTAINER-->

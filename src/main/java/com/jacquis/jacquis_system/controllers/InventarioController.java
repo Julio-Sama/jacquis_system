@@ -73,10 +73,14 @@ public class InventarioController {
     public String nuevoProducto(Model modelo) {
         Inventario inventario = new Inventario();
         modelo.addAttribute("inventario", inventario);
+        List<Proveedor> proveedorSelected = proveedorService.getProveedoreList();
         List<Categoria> categoriaSelected = categoriaService.getCategorias();
+        List<Marca> marcaSelected = marcaService.getMarcas();
+        List<Talla> tallaSelected = tallaService.getTallas();
+        modelo.addAttribute("proveedorSelected", proveedorSelected);
         modelo.addAttribute("categoriaSelected", categoriaSelected);
-        modelo.addAttribute("marcaSelected", marcaService.getMarcas());
-        modelo.addAttribute("tallaSelected", tallaService.getTallas());
+        modelo.addAttribute("marcaSelected", marcaSelected);
+        modelo.addAttribute("tallaSelected", tallaSelected);
 
         return "nuevo_producto"; // retorna al archivo index.html con los datos cargados en el modelo
     }
@@ -111,7 +115,7 @@ public class InventarioController {
         modelo.addAttribute("categoriaSelected", categoriaSelected);
         modelo.addAttribute("inventario", inventario);
         
-        return "info_producto";
+        return "info_up_del";
     }
 
     // Actualiza un producto
