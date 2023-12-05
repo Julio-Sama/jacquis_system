@@ -2,6 +2,8 @@
 <html lang="es" xmlns:th="https://www.thymeleaf.org">
 
 <head>
+    <meta charset="UTF-8">
+    <!-- Required meta tags-->
     <link rel="shortcut icon" href="images/icon/favicon.ico">
     <!-- Title Page-->
     <title>Proveedores</title>
@@ -18,7 +20,7 @@
                         <a class="logo" th:href="@{index}">
                             <img th:src="@{/images/icon/logo.png}" alt="JacquisStore" />
                         </a>
-                        <button class="hamburger hamburger--slider" type="button">
+                        <button title="searchButton" class="hamburger hamburger--slider" type="button">
                             <span class="hamburger-box">
                                 <span class="hamburger-inner"></span>
                             </span>
@@ -38,7 +40,7 @@
                                 <i class="fas fa-sitemap"></i>Empleados</a>
                         </li>
                         <li>
-                            <a href="inventario.html">
+                            <a th:href="@{/inventario}">
                                 <i class="fas fa-archive"></i>Inventario</a>
                         </li>
                         <li>
@@ -79,7 +81,7 @@
                                 <i class="fas fa-sitemap"></i>Empleados</a>
                         </li>
                         <li>
-                            <a href="inventario.html">
+                            <a th:href="@{/inventario}">
                                 <i class="fas fa-archive"></i>Inventario</a>
                         </li>
                         <li class="has-sub">
@@ -136,7 +138,7 @@
                             <form class="form-header" action="" method="POST">
                                 <input class="au-input au-input--xl" type="text" name="buscar"
                                     placeholder="Buscar datos &amp; reportes." />
-                                <button class="au-btn--submit" type="submit">
+                                <button title="searchMobileButton" class="au-btn--submit" type="submit">
                                     <i class="zmdi zmdi-search"></i>
                                 </button>
                             </form>
@@ -250,35 +252,45 @@
                                 <div class="table-data__tool">
                                     <div class="table-data__tool-left">
                                         <!-- BUSCADOR DE PROVEEDOR -->
+                                        <div class="rs-select2--light rs-select2--md">
+                                            <div class="input-group">
+                                                <input type="text" id="searchInputProv" class="form-control"
+                                                    placeholder="Buscar">
+                                                <div class="input-group-append">
+                                                    <button title="Buscar Proveedor" class="btn btn-primary" type="button">
+                                                        <i class="zmdi zmdi-search"></i>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
                                         <!-- NAYELLY AGREGARA BUSCADOR -->
                                         <div class="rs-select2--light rs-select2--md">
-                                            <strong>Inactivos</strong>
-                                            <label class="switch switch-text switch-primary">
-                                                <input type="checkbox" class="switch-input" name="mostrarInactivosProv"
+                                            <label for="mostrarInactivosProv" class="switch switch-text switch-primary">
+                                                <input title="Selecciona para mostrar proveedores inactivos"
+                                                    type="checkbox" class="switch-input" name="mostrarInactivosProv"
                                                     id="mostrarInactivosProv">
                                                 <span data-on="On" data-off="Off" class="switch-label"></span>
                                                 <span class="switch-handle"></span>
                                             </label>
+                                            <strong>Inactivos</strong>
                                         </div>
                                     </div>
                                     <div class="table-data__tool-right">
                                         <a th:href="@{/proveedores/nuevo}"
                                             class="au-btn au-btn-icon au-btn--green au-btn--small">
                                             <i class="zmdi zmdi-plus"></i> NUEVO PROVEEDOR
-                                            <button type="button" style="display: none;"></button>
+                                            <button title="Agregar nuevo proveedor" type="button"></button>
                                         </a>
 
-                                        <a th:href="@{/openpdf/proveedores}"
-                                            class="btn btn-secondary btn-sm">
+                                        <a th:href="@{/openpdf/proveedores}" class="btn btn-secondary btn-sm">
                                             <i class="zmdi zmdi-assignment-o"></i>&nbsp;EXPORTAR A PDF
-                                            <button type="button" class="btn btn-outline-info"
-                                                style="display: none;"></button>
+                                            <button title="Generar reporte PDF" type="button" class="btn btn-outline-info"
+                                                ></button>
                                         </a>
-                                        <a th:href="@{/export/excel/proveedores}"
-                                            class="btn btn-secondary btn-sm">
+                                        <a th:href="@{/export/excel/proveedores}" class="btn btn-secondary btn-sm">
                                             <i class="zmdi zmdi-assignment-o"></i>&nbsp;EXPORTAR A EXCEL
-                                            <button type="button" class="btn btn-outline-info"
-                                                style="display: none;"></button>
+                                            <button title="Generar reporte en EXCEL" type="button" class="btn btn-outline-info"
+                                                ></button>
                                         </a>
                                         <!-- <div class="rs-select2--dark rs-select2--sm rs-select2--dark2"> -->
                                         <!-- <select class="js-select2" name="type"> -->
@@ -290,7 +302,8 @@
                                         <!-- </div> -->
                                     </div>
                                 </div>
-                                <div th:fragment="tablaProveedores" id="tablaProveedores" class="table-responsive table-responsive-data2">
+                                <div th:fragment="tablaProveedores" id="tablaProveedores"
+                                    class="table-responsive table-responsive-data2">
                                     <table class="table table-data2">
                                         <thead>
                                             <tr>
@@ -319,7 +332,7 @@
                                                             class="item" data-toogle="tooltip" data-placement="top"
                                                             title="Editar">
                                                             <i class="zmdi zmdi-edit"></i>
-                                                            <button type="button" style="display: none;"></button>
+                                                            <button title="Editar proveedor" type="button"></button>
                                                         </a>
 
                                                         <button type="button" data-target="#modalProveedor"
@@ -420,9 +433,18 @@
                     }
                 });
             }
-
             cargarTablaProveedores(false); // false para que no muestre los inactivos
         });
+
+        $(document).ready(function () {
+            $("#searchInputProv").on("keyup", function () {
+                var value = $(this).val().toLowerCase();
+                $("#tablaProveedores tr").filter(function () {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                });
+            });
+        });
+
     </script>
     <!-- script para cargar los datos de la tabla al modal -->
 </body>

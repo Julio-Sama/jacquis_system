@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 3,
+            "activePatchIndex": 10,
             "patches": [
                 {
                     "date": 1695698240642,
@@ -20,6 +20,34 @@
                 {
                     "date": 1695782706228,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -11,9 +11,9 @@\n @Service\r\n public class EmpleadoService {\r\n     \r\n     @Autowired\r\n-    EmpleadoRepository empleadoRepository;\r\n+    private EmpleadoRepository empleadoRepository;\r\n \r\n     public List<Empleado> getEmpleados() {\r\n         return empleadoRepository.findAll();\r\n     }\r\n"
+                },
+                {
+                    "date": 1696921902785,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -25,8 +25,16 @@\n     public void saveOrUpdate(Empleado empleado) {\r\n         empleadoRepository.save(empleado);\r\n     }\r\n \r\n+    public boolean existsById(Long id) {\r\n+        return empleadoRepository.existsById(id);\r\n+    }\r\n+\r\n+    public boolean existeEmpleadoConDui(String dui) {\r\n+        return empleadoRepository.existsByDui(dui);\r\n+    }\r\n+\r\n     public void delete(Long id) {\r\n         empleadoRepository.deleteById(id);\r\n     }\r\n }\r\n"
+                },
+                {
+                    "date": 1696922657598,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -29,10 +29,10 @@\n     public boolean existsById(Long id) {\r\n         return empleadoRepository.existsById(id);\r\n     }\r\n \r\n-    public boolean existeEmpleadoConDui(String dui) {\r\n-        return empleadoRepository.existsByDui(dui);\r\n+    public boolean existeEmpleadoConDui(String duiEmpleado) {\r\n+        return empleadoRepository.existsByDui(duiEmpleado);\r\n     }\r\n \r\n     public void delete(Long id) {\r\n         empleadoRepository.deleteById(id);\r\n"
+                },
+                {
+                    "date": 1696922989118,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -30,9 +30,9 @@\n         return empleadoRepository.existsById(id);\r\n     }\r\n \r\n     public boolean existeEmpleadoConDui(String duiEmpleado) {\r\n-        return empleadoRepository.existsByDui(duiEmpleado);\r\n+        return empleadoRepository.existsByDui_empleado(duiEmpleado);\r\n     }\r\n \r\n     public void delete(Long id) {\r\n         empleadoRepository.deleteById(id);\r\n"
+                },
+                {
+                    "date": 1696923557250,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -29,10 +29,10 @@\n     public boolean existsById(Long id) {\r\n         return empleadoRepository.existsById(id);\r\n     }\r\n \r\n-    public boolean existeEmpleadoConDui(String duiEmpleado) {\r\n-        return empleadoRepository.existsByDui_empleado(duiEmpleado);\r\n+    public boolean existeEmpleadoConDui(String dui_empleado) {\r\n+        return empleadoRepository.existsByDui_empleado(dui_empleado);\r\n     }\r\n \r\n     public void delete(Long id) {\r\n         empleadoRepository.deleteById(id);\r\n"
+                },
+                {
+                    "date": 1696925059597,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,40 @@\n+package com.jacquis.jacquis_system.services;\r\n+\r\n+import java.util.List;\r\n+\r\n+import org.springframework.beans.factory.annotation.Autowired;\r\n+import org.springframework.stereotype.Service;\r\n+\r\n+import com.jacquis.jacquis_system.model.Empleado;\r\n+import com.jacquis.jacquis_system.repository.EmpleadoRepository;\r\n+\r\n+@Service\r\n+public class EmpleadoService {\r\n+    \r\n+    @Autowired\r\n+    private EmpleadoRepository empleadoRepository;\r\n+\r\n+    public List<Empleado> getEmpleados() {\r\n+        return empleadoRepository.findAll();\r\n+    }\r\n+\r\n+    public Empleado getEmpleadoById(Long id) {\r\n+        return empleadoRepository.findById(id).orElse(null);\r\n+    }\r\n+\r\n+    public void saveOrUpdate(Empleado empleado) {\r\n+        empleadoRepository.save(empleado);\r\n+    }\r\n+\r\n+    public boolean existsById(Long id) {\r\n+        return empleadoRepository.existsById(id);\r\n+    }\r\n+\r\n+    public boolean existeEmpleadoConDui(String duiEmpleado) {\r\n+        return empleadoRepository.existsByDui_empleado(duiEmpleado);\r\n+    }\r\n+\r\n+    public void delete(Long id) {\r\n+        empleadoRepository.deleteById(id);\r\n+    }\r\n+}\r\n"
+                },
+                {
+                    "date": 1696925076675,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -37,44 +37,4 @@\n     public void delete(Long id) {\r\n         empleadoRepository.deleteById(id);\r\n     }\r\n }\r\n-package com.jacquis.jacquis_system.services;\r\n-\r\n-import java.util.List;\r\n-\r\n-import org.springframework.beans.factory.annotation.Autowired;\r\n-import org.springframework.stereotype.Service;\r\n-\r\n-import com.jacquis.jacquis_system.model.Empleado;\r\n-import com.jacquis.jacquis_system.repository.EmpleadoRepository;\r\n-\r\n-@Service\r\n-public class EmpleadoService {\r\n-    \r\n-    @Autowired\r\n-    private EmpleadoRepository empleadoRepository;\r\n-\r\n-    public List<Empleado> getEmpleados() {\r\n-        return empleadoRepository.findAll();\r\n-    }\r\n-\r\n-    public Empleado getEmpleadoById(Long id) {\r\n-        return empleadoRepository.findById(id).orElse(null);\r\n-    }\r\n-\r\n-    public void saveOrUpdate(Empleado empleado) {\r\n-        empleadoRepository.save(empleado);\r\n-    }\r\n-\r\n-    public boolean existsById(Long id) {\r\n-        return empleadoRepository.existsById(id);\r\n-    }\r\n-\r\n-    public boolean existeEmpleadoConDui(String dui_empleado) {\r\n-        return empleadoRepository.existsByDui_empleado(dui_empleado);\r\n-    }\r\n-\r\n-    public void delete(Long id) {\r\n-        empleadoRepository.deleteById(id);\r\n-    }\r\n-}\r\n"
+                },
+                {
+                    "date": 1696925597666,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,36 @@\n+package com.jacquis.jacquis_system.services;\r\n+\r\n+import java.util.List;\r\n+\r\n+import org.springframework.beans.factory.annotation.Autowired;\r\n+import org.springframework.stereotype.Service;\r\n+\r\n+import com.jacquis.jacquis_system.model.Empleado;\r\n+import com.jacquis.jacquis_system.repository.EmpleadoRepository;\r\n+\r\n+@Service\r\n+public class EmpleadoService {\r\n+    \r\n+    @Autowired\r\n+    private EmpleadoRepository empleadoRepository;\r\n+\r\n+    public List<Empleado> getEmpleados() {\r\n+        return empleadoRepository.findAll();\r\n+    }\r\n+\r\n+    public Empleado getEmpleadoById(Long id) {\r\n+        return empleadoRepository.findById(id).orElse(null);\r\n+    }\r\n+\r\n+    public void saveOrUpdate(Empleado empleado) {\r\n+        empleadoRepository.save(empleado);\r\n+    }\r\n+\r\n+    public boolean existsById(Long id) {\r\n+        return empleadoRepository.existsById(id);\r\n+    }\r\n+\r\n+    public void delete(Long id) {\r\n+        empleadoRepository.deleteById(id);\r\n+    }\r\n+}\r\n"
                 }
             ],
             "date": 1695698240642,

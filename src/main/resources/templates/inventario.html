@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <link rel="shortcut icon" href="images/icon/favicon.ico">
     <!-- Title Page-->
-    <title>Representantes</title>
+    <title>Inventario</title>
     <div th:replace="~{fragments/header :: header-css}"></div>
 </head>
 
@@ -19,7 +19,7 @@
                         <a class="logo" th:href="@{index}">
                             <img th:src="@{/images/icon/logo.png}" alt="JacquisStore" />
                         </a>
-                        <button title="buscarMobile" class="hamburger hamburger--slider" type="button">
+                        <button title="searchMobile" class="hamburger hamburger--slider" type="button">
                             <span class="hamburger-box">
                                 <span class="hamburger-inner"></span>
                             </span>
@@ -55,6 +55,25 @@
                                 <i class="fas fa-truck"></i>Proveedores</a>
                         </li>
 
+                        <!-- <li>
+                            <a href="map.html">
+                                <i class="fas fa-map-marker-alt"></i>Maps</a>
+                        </li> -->
+                        <!-- <li class="has-sub">
+                            <a class="js-arrow" href="#">
+                                <i class="fas fa-copy"></i>Pages</a>
+                            <ul class="navbar-mobile-sub__list list-unstyled js-sub-list">
+                                <li>
+                                    <a href="login.html">Login</a>
+                                </li>
+                                <li>
+                                    <a href="register.html">Register</a>
+                                </li>
+                                <li>
+                                    <a href="forget-pass.html">Forget Password</a>
+                                </li>
+                            </ul>
+                        </li> -->
                     </ul>
                 </div>
             </nav>
@@ -137,7 +156,7 @@
                             <form class="form-header" action="" method="POST">
                                 <input class="au-input au-input--xl" type="text" name="buscar"
                                     placeholder="Buscar datos &amp; reportes." />
-                                <button title="buscarTodo" class="au-btn--submit" type="submit">
+                                <button title="searchTodo" class="au-btn--submit" type="submit">
                                     <i class="zmdi zmdi-search"></i>
                                 </button>
                             </form>
@@ -249,80 +268,121 @@
                             <div class="col-md-12">
                                 <!-- DATA TABLE -->
                                 <!-- Pongo el breadcrumbs? -->
-                                <h3 class="title-5 m-b-25">Editar Representante</h3>
-
-                                <!-- Formulario de registro de nuevo empleado -->
-                                <div class="card">
-                                    <div class="card-header">
-                                        Complete el <strong>Formulario</strong>
-                                    </div>
-                                    <div class="card-body card-block">
-                                        <form
-                                            th:action="@{/representantes/{id_repre}(id_repre=${representantes.id_repre})}"
-                                            th:object="${representantes}" method="POST">
-                                            <div th:if="${#fields.hasErrors()}" class="alert alert-danger" role="alert">
-                                                Por favor, corrija los errores indicados en rojo
-                                            </div>
-
-                                            <div class="form-group">
-                                                <label for="dui" class="form-control-label"> DUI </label>
-                                                <!-- Documento Unico de Identidad-->
-                                                <input type="text" th:field="*{dui_repre}" name="dui" id="dui"
-                                                    placeholder="Ingrese el DUI..." class="form-control" >
-                                                <div th:if="${#fields.hasErrors('dui_repre')}" th:errors="*{dui_repre}"
-                                                    class="alert alert-danger" role="alert">
+                                <h3 class="title-5 m-b-25">Inventario</h3>
+                                <div class="table-data__tool">
+                                    <div class="table-data__tool-left">
+                                        <!-- BUSCADOR DE EMPLEADO -->
+                                        <div class="rs-select2--light rs-select2--md">
+                                            <div class="input-group">
+                                                <input type="text" id="searchInputEmp" class="form-control"
+                                                    placeholder="Buscar">
+                                                <div class="input-group-append">
+                                                    <button title="Buscar empleado" class="btn btn-primary"
+                                                        type="button">
+                                                        <i class="zmdi zmdi-search"></i>
+                                                    </button>
                                                 </div>
                                             </div>
-                                            <div class="form-group">
-                                                <label for="nombre" class=" form-control-label">Nombre</label>
-                                                <input type="text" th:field="*{nombre}" name="nombre" id="nombre"
-                                                    placeholder="Ingrese el nombre..." class="form-control">
-                                                <div th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}"
-                                                    class="alert alert-danger" role="alert">
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="apellido" class=" form-control-label">Apellido</label>
-                                                <input type="text" th:field="*{apellido}" name="apellido" id="apellido"
-                                                    placeholder="Ingrese el apellido..." class="form-control">
-                                                <div th:if="${#fields.hasErrors('apellido')}" th:errors="*{apellido}"
-                                                    class="alert alert-danger" role="alert">
-                                            </div>
-
-                                            <div class="form-group">
-                                                <label for="fechaInicio" class="form-control-label"> Fecha de
-                                                    Inicio</label>
-                                                <input type="date" th:field="*{fecha_inicio_repre}" name="fechaInicio"
-                                                    id="fechaInicio" placeholder="Ingrese la Fecha de Inicio"
-                                                    class="form-control">
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="proveedor">Proveedor:</label>
-                                                <select name="proveedor" id="proveedor" required
-                                                    th:field="*{proveedor.id_proveedor}">
-                                                    <option value="">Selecciona un proveedor</option>
-                                                    <option th:each="prov: ${proveedorSelected}"
-                                                        th:value="${prov.id_proveedor}" th:text="${prov.nombre}"
-                                                        th:selected="${prov.id_proveedor == representantes.proveedor?.id_proveedor}"
-                                                        th:if="${prov.estado_prov != 'INACTIVO'}">
-                                                    </option>
-                                                </select>
-                                            </div>
-                                            <!-- <div class="form-group">
-                                                <label for="telefono" class="form-control-label"> Telefono</label>
-                                                <input type="text" name="telefono" id="telefono" placeholder="Ingrese el telefono..."
-                                                    class="form-control">
-                                            </div> -->
-                                            <div class="card-footer">
-                                                <button type="submit" class="btn btn-primary btn-sm">
-                                                    <i class="fa fa-dot-circle-o"></i> Guardar
-                                                </button>
-                                                <button type="reset" class="btn btn-danger btn-sm"
-                                                    onclick="history.go(-1);">
-                                                    <i class="fa fa-ban"></i> Cancelar
-                                                </button>
-                                            </div>
-                                        </form>
+                                        </div>
+                                        <!-- NAYELLY AGREGARA BUSCADOR -->
+                                        <div class="rs-select2--light rs-select2--md">
+                                            <label for="mostrarInactivosEmp" class="switch switch-text switch-primary">
+                                                <input title="Selecciona para mostrar empleados inactivos"
+                                                    type="checkbox" class="switch-input" name="mostrarInactivosEmp"
+                                                    id="mostrarInactivosEmp">
+                                                <span data-on="On" data-off="Off" class="switch-label"></span>
+                                                <span class="switch-handle"></span>
+                                            </label>
+                                            <strong>Inactivos</strong>
+                                        </div>
                                     </div>
+                                    <div class="table-data__tool-right">
+                                        <a th:href="@{/empleados/nuevo}"
+                                            class="au-btn au-btn-icon au-btn--green au-btn--small">
+                                            <i class="zmdi zmdi-plus"></i> NUEVO PRODUCTO
+                                            <button title="Nuevo empleado" type="button"></button>
+                                        </a>
+                                        <div class="rs-select2--dark rs-select2--sm rs-select2--dark2">
+                                            <select title="Exportar a" class="js-select2" name="type">
+                                                <option selected="selected">Exportar</option>
+                                                <option value="">EXCEL</option>
+                                                <option value="">PDF</option>
+                                            </select>
+                                            <div class="dropDownSelect2"></div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="table-responsive m-b-40">
+                                    <table class="table table-borderless table-data3">
+                                        <thead>
+                                            <tr>
+                                                <th>date</th>
+                                                <th>type</th>
+                                                <th>description</th>
+                                                <th>status</th>
+                                                <th>price</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>2018-09-29 05:57</td>
+                                                <td>Mobile</td>
+                                                <td>iPhone X 64Gb Grey</td>
+                                                <td class="process">Processed</td>
+                                                <td>$999.00</td>
+                                            </tr>
+                                            <tr>
+                                                <td>2018-09-28 01:22</td>
+                                                <td>Mobile</td>
+                                                <td>Samsung S8 Black</td>
+                                                <td class="process">Processed</td>
+                                                <td>$756.00</td>
+                                            </tr>
+                                            <tr>
+                                                <td>2018-09-27 02:12</td>
+                                                <td>Game</td>
+                                                <td>Game Console Controller</td>
+                                                <td class="denied">Denied</td>
+                                                <td>$22.00</td>
+                                            </tr>
+                                            <tr>
+                                                <td>2018-09-26 23:06</td>
+                                                <td>Mobile</td>
+                                                <td>iPhone X 256Gb Black</td>
+                                                <td class="denied">Denied</td>
+                                                <td>$1199.00</td>
+                                            </tr>
+                                            <tr>
+                                                <td>2018-09-25 19:03</td>
+                                                <td>Accessories</td>
+                                                <td>USB 3.0 Cable</td>
+                                                <td class="process">Processed</td>
+                                                <td>$10.00</td>
+                                            </tr>
+                                            <tr>
+                                                <td>2018-09-29 05:57</td>
+                                                <td>Accesories</td>
+                                                <td>Smartwatch 4.0 LTE Wifi</td>
+                                                <td class="denied">Denied</td>
+                                                <td>$199.00</td>
+                                            </tr>
+                                            <tr>
+                                                <td>2018-09-24 19:10</td>
+                                                <td>Camera</td>
+                                                <td>Camera C430W 4k</td>
+                                                <td class="process">Processed</td>
+                                                <td>$699.00</td>
+                                            </tr>
+                                            <tr>
+                                                <td>2018-09-22 00:43</td>
+                                                <td>Computer</td>
+                                                <td>Macbook Pro Retina 2017</td>
+                                                <td class="process">Processed</td>
+                                                <td>$10.00</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
                                 </div>
                             </div>
                         </div>
@@ -338,6 +398,34 @@
                 </div>
             </div>
             <!-- END MAIN CONTENT-->
+            <!-- Modal para dar de baja -->
+            <div class="modal fade" id="modalEmpleados" tabindex="-1" role="dialog" aria-labelledby="smallmodalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog modal-sm" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="smallmodalLabel">
+                                <strong>¡Precaución!</strong>
+                            </h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <p class="error-text">
+                                ¿Está segura que desea dar de baja a <strong th:text="${nombre}"></strong>?
+                            </p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                            <!-- <button type="button" class="btn btn-primary">Confirmar</button> -->
+                            <a th:href="@{/empleados/baja/{id_empleado}(id_empleado=${id_empleado})}"
+                                class="btn btn-danger">Confirmar</a>
+                            <!-- th:href="@{/empleados/baja/{id_empleado}(id_empleado=${empleado.id_empleado})}" -->
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
         <!-- END PAGE CONTAINER-->
     </div>
@@ -345,6 +433,51 @@
     </div>
 
     <th:block th:replace="~{fragments/scripts :: scripts-main}">todos los scripts</th:block>
+    <script>
+        $(document).ready(function () {
+            $(document).on("click", ".btn-baja-empleado", function () {
+                var id = $(this).attr("data-id");
+                var nombre = $(this).attr("data-nombre");
+
+                $("#modalEmpleados .modal-body p strong").text(nombre);
+                $("#modalEmpleados .modal-footer a").attr("href", "/empleados/baja/" + id);
+            });
+        });
+
+        $(document).ready(function () {
+            $("#mostrarInactivos").change(function () {
+                const mostrarInactivos = $(this).is(":checked");
+                cargarTablaEmpleados(mostrarInactivos);
+            });
+
+            // funcion para cargar la tabla de empleados
+            function cargarTablaEmpleados(mostrarInactivos) {
+                $.ajax({
+                    url: "/empleados/filtro",
+                    type: "GET",
+                    data: { mostrarInactivos: mostrarInactivos },
+                    success: function (data) {
+                        $("#tablaEmpleados").html(data);
+                    },
+                    error: function () {
+                        alert("Error al cargar la tabla de empleados");
+                    }
+                });
+            }
+
+            cargarTablaEmpleados(false); // false para que no muestre los inactivos
+        });
+
+        $(document).ready(function () {
+            $("#searchInputEmp").on("keyup", function () {
+                var value = $(this).val().toLowerCase();
+                $("#tablaEmpleados tr").filter(function () {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                });
+            });
+        });
+    </script>
+    <!-- script para cargar los datos de la tabla al modal -->
 </body>
 
 </html>

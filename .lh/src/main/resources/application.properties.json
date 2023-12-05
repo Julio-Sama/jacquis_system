@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 7,
+            "activePatchIndex": 8,
             "patches": [
                 {
                     "date": 1695019355909,
@@ -36,6 +36,10 @@
                 {
                     "date": 1696802517650,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -11,9 +11,9 @@\n spring.jpa.generate-ddl=true\r\n spring.jpa.show-sql = true\r\n spring.jpa.properties.hibernate.format_sql=true\r\n \r\n-\r\n+spring.thymeleaf.cache=false\r\n logging.level.org.hibernate.SQL=DEBUG\r\n logging.level.org.hibernate.type=TRACE\r\n \r\n server.port=80\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1700064500077,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,9 +4,9 @@\n # spring.datasource.password=\"\"\r\n spring.datasource.driver-class-name=org.mariadb.jdbc.Driver\r\n \r\n # Configuracion de Spring JPA\r\n-spring.jpa.database-platform=org.hibernate.dialect.MariaDBDialect\r\n+# spring.jpa.database-platform=org.hibernate.dialect.MariaDBDialect\r\n spring.jpa.hibernate.ddl-auto = update\r\n spring.jpa.properties.hibernate.id.new_generator_mappings=false\r\n spring.jpa.generate-ddl=true\r\n spring.jpa.show-sql = true\r\n"
                 }
             ],
             "date": 1695019355909,

@@ -18,6 +18,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.jacquis.jacquis_system.model.Proveedor;
 import com.jacquis.jacquis_system.services.ProveedorService;
 
+import jakarta.validation.Valid;
+
 @Controller
 @RequestMapping("/proveedores")
 public class ProveedorController {
@@ -54,7 +56,7 @@ public class ProveedorController {
 
     // Guarda o actualiza un proveedor
     @PostMapping
-    public String guardarProveedor(@ModelAttribute("proveedores") Proveedor proveedor) {
+    public String guardarProveedor(@Valid @ModelAttribute("proveedores") Proveedor proveedor) {
         proveedor.setEstado_prov("ACTIVO");
 
         Date fechaActual = new Date();

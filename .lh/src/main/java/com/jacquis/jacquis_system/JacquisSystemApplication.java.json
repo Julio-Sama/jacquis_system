@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 3,
+            "activePatchIndex": 5,
             "patches": [
                 {
                     "date": 1695803468269,
@@ -20,6 +20,14 @@
                 {
                     "date": 1696043202377,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,9 +3,9 @@\n import org.springframework.boot.SpringApplication;\n import org.springframework.boot.autoconfigure.SpringBootApplication;\n \n @SpringBootApplication\n-public class JacquisSystemApplication{\n+public class JacquisSystemApplication {\n \n \tpublic static void main(String[] args) {\n \t\tSpringApplication.run(JacquisSystemApplication.class, args);\n \t}\n"
+                },
+                {
+                    "date": 1696956605666,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,13 +1,24 @@\n package com.jacquis.jacquis_system;\r\n \r\n+import org.springframework.beans.factory.annotation.Autowired;\r\n import org.springframework.boot.SpringApplication;\r\n import org.springframework.boot.autoconfigure.SpringBootApplication;\r\n+import org.springframework.security.crypto.password.PasswordEncoder;\r\n \r\n @SpringBootApplication\r\n public class JacquisSystemApplication {\r\n \r\n+\t@Autowired\r\n+\tprivate PasswordEncoder passwordEncoder;\r\n+\r\n \tpublic static void main(String[] args) {\r\n+\t\tJacquisSystemApplication app = new JacquisSystemApplication();\r\n+\t\tapp.run(args);\r\n+\t}\r\n+\r\n+\tpublic void run(String[] args) {\r\n+\t\tSystem.out.println(passwordEncoder.encode(\"12345678\"));\r\n \t\tSpringApplication.run(JacquisSystemApplication.class, args);\r\n \t}\r\n \r\n }\r\n"
+                },
+                {
+                    "date": 1696956657934,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,24 +1,13 @@\n-package com.jacquis.jacquis_system;\n-\n-import org.springframework.beans.factory.annotation.Autowired;\r\n-import org.springframework.boot.SpringApplication;\n-import org.springframework.boot.autoconfigure.SpringBootApplication;\n-import org.springframework.security.crypto.password.PasswordEncoder;\r\n-\n-@SpringBootApplication\n-public class JacquisSystemApplication {\n-\n-\t@Autowired\r\n-\tprivate PasswordEncoder passwordEncoder;\r\n+package com.jacquis.jacquis_system;\r\n \r\n-\tpublic static void main(String[] args) {\n-\t\tJacquisSystemApplication app = new JacquisSystemApplication();\r\n-\t\tapp.run(args);\r\n+import org.springframework.boot.SpringApplication;\r\n+import org.springframework.boot.autoconfigure.SpringBootApplication;\r\n+\r\n+@SpringBootApplication\r\n+public class JacquisSystemApplication {\r\n+\r\n+\tpublic static void main(String[] args) {\r\n+\t\tSpringApplication.run(JacquisSystemApplication.class, args);\r\n \t}\r\n \r\n-\tpublic void run(String[] args) {\r\n-\t\tSystem.out.println(passwordEncoder.encode(\"12345678\"));\r\n-\t\tSpringApplication.run(JacquisSystemApplication.class, args);\n-\t}\n-\n-}\n+}\r\n"
                 }
             ],
             "date": 1695803468269,

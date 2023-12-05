@@ -1,13 +1,13 @@
 <!DOCTYPE html>
-<html xmlns:th="https://www.thymeleaf.org">
+<html lang="es" xmlns:th="https://www.thymeleaf.org">
 
 <head>
     <meta charset="UTF-8">
+    <title>Header</title>
     <div th:fragment="header-css">
-        <meta charset="UTF-8" />
         <!-- Required meta tags-->
-        <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <!-- <meta th:if="${#httpServletRequest.requestURL.toString().contains('/login')}" name="robots" content="noindex"> -->
         <meta name="description" content="au theme template">
         <meta name="author" content="Hau Nguyen">
         <meta name="keywords" content="au theme template">

@@ -2,11 +2,11 @@
 <html lang="es" xmlns:th="https://www.thymeleaf.org">
 
 <head>
-    <meta charset="UTF-8">
+    <meta charset="utf-8">
     <link rel="shortcut icon" href="images/icon/favicon.ico">
     <!-- Title Page-->
-    <title>Representantes</title>
-    <div th:replace="~{fragments/header :: header-css}"></div>
+    <title>Panel Principal</title>
+    </head><div th:replace="~{fragments/header :: header-css}"></div>
 </head>
 
 <body class="animsition">
@@ -19,7 +19,7 @@
                         <a class="logo" th:href="@{index}">
                             <img th:src="@{/images/icon/logo.png}" alt="JacquisStore" />
                         </a>
-                        <button title="buscarMobile" class="hamburger hamburger--slider" type="button">
+                        <button title="header" class="hamburger hamburger--slider" type="button">
                             <span class="hamburger-box">
                                 <span class="hamburger-inner"></span>
                             </span>
@@ -76,10 +76,6 @@
                                 <i class="fas fa-tachometer-alt"></i>Panel Principal</a>
                         </li>
                         <li>
-                            <a th:href="@{/empleados}">
-                                <i class="fas fa-sitemap"></i>Empleados</a>
-                        </li>
-                        <li>
                             <a th:href="@{/inventario}">
                                 <i class="fas fa-archive"></i>Inventario</a>
                         </li>
@@ -91,30 +87,10 @@
                                     <a href="nuevaVenta.html">
                                         <i class="fas fa-plus-square"></i>Nueva venta</a>
                                 </li>
-                                <li>
-                                    <a href="bitacora.html">
-                                        <i class="fas fa-book"></i>Bitacora</a>
-                                </li>
                             </ul>
                         </li>
-                        <li>
-                            <a href="clientes.html">
-                                <i class="fas fa-users"></i>Clientes</a>
-                        </li>
-                        <li class="has-sub">
-                            <a class="js-arrow" href="#">
-                                <i class="fas fa-truck"></i>Proveedores</a>
-                            <ul class="list-unstyled navbar__sub-list js-sub-list">
-                                <li>
-                                    <a th:href="@{/proveedores}">
-                                        <i class="fas fa-wrench"></i>Gestión de proveedores</a>
-                                </li>
-                                <li>
-                                    <a th:href="@{/representantes}">
-                                        <i class="fas fa-users"></i>Gestión de representante</a>
-                                </li>
-                            </ul>
-                        </li>
+
+
                         <!-- <li>
                             <a href="map.html">
                                 <i class="fas fa-map-marker-alt"></i>Maps</a>
@@ -137,7 +113,7 @@
                             <form class="form-header" action="" method="POST">
                                 <input class="au-input au-input--xl" type="text" name="buscar"
                                     placeholder="Buscar datos &amp; reportes." />
-                                <button title="buscarTodo" class="au-btn--submit" type="submit">
+                                <button title="submit" class="au-btn--submit" type="submit">
                                     <i class="zmdi zmdi-search"></i>
                                 </button>
                             </form>
@@ -194,7 +170,7 @@
                                         </div>
                                         <div class="content">
                                             <!-- AQUI TENGO QUE SETEAR EL NOMBRE DEL USUARIO  -->
-                                            <a class="js-acc-btn" href="#">Jacqui Díaz</a>
+                                            <a class="js-acc-btn" href="#">[[${usuario.getNick_usuario}]]</a>
                                         </div>
                                         <div class="account-dropdown js-dropdown">
                                             <div class="info clearfix">
@@ -227,8 +203,11 @@
                                                 </div>
                                             </div>
                                             <div class="account-dropdown__footer">
-                                                <a href="#">
-                                                    <i class="zmdi zmdi-power"></i>Cerrar Sesión</a>
+                                                <span sec:authorize="isAuthenticated"><i class="zmdi zmdi-power"></i>
+                                                    <a th:href="@{/logout}">
+                                                        Cerrar Sesión
+                                                    </a>
+                                                </span>
                                             </div>
                                         </div>
                                     </div>
@@ -243,90 +222,11 @@
             <!-- MAIN CONTENT-->
             <div class="main-content">
                 <div class="section__content section__content--p30">
-                    <div class="container-fluid">
-                        <!-- AQUI VA LA TABLA -->
-                        <div class="row">
-                            <div class="col-md-12">
-                                <!-- DATA TABLE -->
-                                <!-- Pongo el breadcrumbs? -->
-                                <h3 class="title-5 m-b-25">Editar Representante</h3>
 
-                                <!-- Formulario de registro de nuevo empleado -->
-                                <div class="card">
-                                    <div class="card-header">
-                                        Complete el <strong>Formulario</strong>
-                                    </div>
-                                    <div class="card-body card-block">
-                                        <form
-                                            th:action="@{/representantes/{id_repre}(id_repre=${representantes.id_repre})}"
-                                            th:object="${representantes}" method="POST">
-                                            <div th:if="${#fields.hasErrors()}" class="alert alert-danger" role="alert">
-                                                Por favor, corrija los errores indicados en rojo
-                                            </div>
-
-                                            <div class="form-group">
-                                                <label for="dui" class="form-control-label"> DUI </label>
-                                                <!-- Documento Unico de Identidad-->
-                                                <input type="text" th:field="*{dui_repre}" name="dui" id="dui"
-                                                    placeholder="Ingrese el DUI..." class="form-control" >
-                                                <div th:if="${#fields.hasErrors('dui_repre')}" th:errors="*{dui_repre}"
-                                                    class="alert alert-danger" role="alert">
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="nombre" class=" form-control-label">Nombre</label>
-                                                <input type="text" th:field="*{nombre}" name="nombre" id="nombre"
-                                                    placeholder="Ingrese el nombre..." class="form-control">
-                                                <div th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}"
-                                                    class="alert alert-danger" role="alert">
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="apellido" class=" form-control-label">Apellido</label>
-                                                <input type="text" th:field="*{apellido}" name="apellido" id="apellido"
-                                                    placeholder="Ingrese el apellido..." class="form-control">
-                                                <div th:if="${#fields.hasErrors('apellido')}" th:errors="*{apellido}"
-                                                    class="alert alert-danger" role="alert">
-                                            </div>
-
-                                            <div class="form-group">
-                                                <label for="fechaInicio" class="form-control-label"> Fecha de
-                                                    Inicio</label>
-                                                <input type="date" th:field="*{fecha_inicio_repre}" name="fechaInicio"
-                                                    id="fechaInicio" placeholder="Ingrese la Fecha de Inicio"
-                                                    class="form-control">
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="proveedor">Proveedor:</label>
-                                                <select name="proveedor" id="proveedor" required
-                                                    th:field="*{proveedor.id_proveedor}">
-                                                    <option value="">Selecciona un proveedor</option>
-                                                    <option th:each="prov: ${proveedorSelected}"
-                                                        th:value="${prov.id_proveedor}" th:text="${prov.nombre}"
-                                                        th:selected="${prov.id_proveedor == representantes.proveedor?.id_proveedor}"
-                                                        th:if="${prov.estado_prov != 'INACTIVO'}">
-                                                    </option>
-                                                </select>
-                                            </div>
-                                            <!-- <div class="form-group">
-                                                <label for="telefono" class="form-control-label"> Telefono</label>
-                                                <input type="text" name="telefono" id="telefono" placeholder="Ingrese el telefono..."
-                                                    class="form-control">
-                                            </div> -->
-                                            <div class="card-footer">
-                                                <button type="submit" class="btn btn-primary btn-sm">
-                                                    <i class="fa fa-dot-circle-o"></i> Guardar
-                                                </button>
-                                                <button type="reset" class="btn btn-danger btn-sm"
-                                                    onclick="history.go(-1);">
-                                                    <i class="fa fa-ban"></i> Cancelar
-                                                </button>
-                                            </div>
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                    <div class="container-fluid"> <!-- AQUI VA EL CONTENIDO DE LA PAGINA  -->
+                        <h1>Bienvenido </h1>
                     </div>
+
                     <!-- Aqui va todo el contenido -->
                     <div class="row">
                         <div class="col-md-12">
@@ -337,14 +237,14 @@
                     </div>
                 </div>
             </div>
-            <!-- END MAIN CONTENT-->
         </div>
+        <!-- END MAIN CONTENT-->
         <!-- END PAGE CONTAINER-->
     </div>
 
     </div>
 
-    <th:block th:replace="~{fragments/scripts :: scripts-main}">todos los scripts</th:block>
+    <th:block th:replace="~{fragments/scripts :: scripts-main}"></th:block>
 </body>
 
 </html>

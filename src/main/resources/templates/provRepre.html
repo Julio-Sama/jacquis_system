@@ -2,7 +2,9 @@
 <html lang="es" xmlns:th="https://www.thymeleaf.org">
 
 <head>
+    <meta charset="UTF-8" />
     <link rel="shortcut icon" href="images/icon/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <!-- Title Page-->
     <title>Representantes</title>
     <div th:replace="~{fragments/header :: header-css}"></div>
@@ -18,7 +20,7 @@
                         <a class="logo" th:href="@{index}">
                             <img th:src="@{/images/icon/logo.png}" alt="JacquisStore" />
                         </a>
-                        <button class="hamburger hamburger--slider" type="button">
+                        <button title="Buscar" class="hamburger hamburger--slider" type="button">
                             <span class="hamburger-box">
                                 <span class="hamburger-inner"></span>
                             </span>
@@ -38,7 +40,7 @@
                                 <i class="fas fa-sitemap"></i>Empleados</a>
                         </li>
                         <li>
-                            <a href="inventario.html">
+                            <a th:href="@{/inventario}">
                                 <i class="fas fa-archive"></i>Inventario</a>
                         </li>
                         <li>
@@ -79,7 +81,7 @@
                                 <i class="fas fa-sitemap"></i>Empleados</a>
                         </li>
                         <li>
-                            <a href="inventario.html">
+                            <a th:href="@{/inventario}">
                                 <i class="fas fa-archive"></i>Inventario</a>
                         </li>
                         <li class="has-sub">
@@ -136,7 +138,7 @@
                             <form class="form-header" action="" method="POST">
                                 <input class="au-input au-input--xl" type="text" name="buscar"
                                     placeholder="Buscar datos &amp; reportes." />
-                                <button class="au-btn--submit" type="submit">
+                                <button title="Buscar" class="au-btn--submit" type="submit">
                                     <i class="zmdi zmdi-search"></i>
                                 </button>
                             </form>
@@ -251,22 +253,21 @@
                                 <h3 class="title-5 m-b-25">Representantes</h3>
                                 <div class="table-data__tool">
                                     <div class="table-data__tool-left">
-                                        <!-- BUSCADOR DE EMPLEADO -->
+                                        <!-- BUSCADOR DE REPRESENTANTE -->
                                         <div class="rs-select2--light rs-select2--md">
                                             <div class="input-group">
-                                                <input type="text" id="searchInput" class="form-control"
-                                                    placeholder="Buscar representante...">
+                                                <input type="text" id="searchInputRepre" class="form-control"
+                                                    placeholder="Buscar">
                                                 <div class="input-group-append">
-                                                    <button class="btn btn-primary" type="button">
+                                                    <button title="BuscarR" class="btn btn-primary" type="button">
                                                         <i class="zmdi zmdi-search"></i>
                                                     </button>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="rs-select2--light rs-select2--md">
-                                            <label class="switch switch-text switch-primary">
-                                                <input type="checkbox" class="switch-input" name="mostrarInactivosRepre"
-                                                    id="mostrarInactivosRepre">
+                                            <label for="mostrarInactivosRepre" class="switch switch-text switch-primary">
+                                                <input title="Selecciona para mostrar representantes inactivos" type="checkbox" class="switch-input" name="mostrarInactivosRepre" id="mostrarInactivosRepre">
                                                 <span data-on="On" data-off="Off" class="switch-label"></span>
                                                 <span class="switch-handle"></span>
                                             </label>
@@ -277,10 +278,10 @@
                                         <a th:href="@{/representantes/nuevo}"
                                             class="au-btn au-btn-icon au-btn--green au-btn--small">
                                             <i class="zmdi zmdi-plus"></i> NUEVO REPRESENTANTE
-                                            <button type="button" style="display: none;"></button>
+                                            <button title="Nuevo Representante" type="button"></button> <!-- style="display: none;" -->
                                         </a>
                                         <div class="rs-select2--dark rs-select2--sm rs-select2--dark2">
-                                            <select class="js-select2" name="type">
+                                            <select title="Exportar datos de representantes" class="js-select2" name="type">
                                                 <option selected="selected">Exportar</option>
                                                 <option value="">EXCEL</option>
                                                 <option value="">PDF</option>
@@ -303,7 +304,7 @@
                                                 <th></th>
                                             </tr>
                                         </thead>
-                                        <tbody id="representanteTable">
+                                        <tbody>
                                             <!-- Filas de la tabla aquí -->
                                             <tr th:each="representante: ${representanteList}" class="tr-shadow">
                                                 <td th:text="${representante.dui_repre}"></td>
@@ -321,9 +322,10 @@
                                                             class="item" data-toggle="tooltip" data-placement="top"
                                                             title="Editar">
                                                             <i class="zmdi zmdi-edit"></i>
-                                                            <button type="button" style="display: none;"></button>
+                                                            <button title="Editar" type="button"></button> <!-- style="display: none;" -->
                                                         </a>
-                                                        <button type="button" data-target="#modalRepre" class="item btn-baja-repre"
+                                                        <button type="button" data-target="#modalRepre"
+                                                            class="item btn-baja-repre"
                                                             th:attr="data-id=${representante.id_repre}, data-nombre=${representante.nombre}"
                                                             data-toggle="modal" data-placement="top"
                                                             title="Dar de baja">
@@ -389,8 +391,8 @@
 
     </div>
 
-    <th:block th:replace="~{fragments/scripts :: scripts-main}">todos los scripts</th:block>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <th:block th:replace="~{fragments/scripts :: scripts-main}"></th:block>
+    <!-- <script th:src="@{https://code.jquery.com/jquery-3.6.0.min.js}"></script> -->
     <script>
         $(document).ready(function () {
             $(document).on("click", ".btn-baja-repre", function () {
@@ -427,24 +429,10 @@
         });
 
         $(document).ready(function () {
-            // Obtén la referencia al campo de búsqueda
-            var searchInput = $('#searchInput');
-
-            // Obtén todas las filas de la tabla que quieres filtrar
-            var rows = $('.table-data2 tbody tr');
-
-            // Configura el evento de entrada para el campo de búsqueda
-            searchInput.on('input', function () {
-                var searchText = $(this).val().toLowerCase(); // Obtén el texto de búsqueda en minúsculas
-
-                // Filtra las filas de la tabla en función del texto de búsqueda
-                rows.each(function () {
-                    var rowText = $(this).text().toLowerCase();
-                    if (rowText.indexOf(searchText) === -1) {
-                        $(this).hide(); // Oculta la fila si no coincide con el texto de búsqueda
-                    } else {
-                        $(this).show(); // Muestra la fila si coincide con el texto de búsqueda
-                    }
+            $("#searchInputRepre").on("keyup", function () {
+                var value = $(this).val().toLowerCase();
+                $("#tablaRepre tr").filter(function () {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
                 });
             });
         });
