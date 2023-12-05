@@ -57,12 +57,8 @@ public class ProveedorController {
 
     // Guarda o actualiza un proveedor
     @PostMapping
-    public String guardarProveedor(@Valid @ModelAttribute("proveedores") Proveedor proveedor, Errors errors) {
-        
-        if (errors.hasErrors()){
-            return "nuevo_proveedor";
-        } else {
-            proveedor.setEstado_prov("ACTIVO");
+    public String guardarProveedor(@Valid @ModelAttribute("proveedores") Proveedor proveedor) {
+        proveedor.setEstado_prov("ACTIVO");
 
             Date fechaActual = new Date();
             SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yy");

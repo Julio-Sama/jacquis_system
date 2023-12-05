@@ -2,36 +2,10 @@
 <html lang="es" xmlns:th="https://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
 
 <head>
-    <!-- Required meta tags-->
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="au theme template">
-    <meta name="author" content="Hau Nguyen">
-    <meta name="keywords" content="au theme template">
-
     <!-- Title Page-->
-    <title>Registrar</title>
-
-    <!-- Fontfaces CSS-->
-    <link th:href:="@{/css/font-face.css}" rel="stylesheet" media="all">
-    <link th:href:="@{/vendor/font-awesome-4.7/css/font-awesome.min.css}" rel="stylesheet" media="all">
-    <link th:href:="@{/vendor/font-awesome-5/css/fontawesome-all.min.css}" rel="stylesheet" media="all">
-    <link th:href:="@{/vendor/mdi-font/css/material-design-iconic-font.min.css}" rel="stylesheet" media="all">
-
-    <!-- Bootstrap CSS-->
-    <link th:href:="@{/vendor/bootstrap-4.1/bootstrap.min.css}" rel="stylesheet" media="all">
-
-    <!-- Vendor CSS-->
-    <link th:href:="@{/vendor/animsition/animsition.min.css}" rel="stylesheet" media="all">
-    <link th:href:="@{/vendor/bootstrap-progressbar/bootstrap-progressbar-3.3.4.min.css}" rel="stylesheet" media="all">
-    <link th:href:="@{/vendor/wow/animate.css}" rel="stylesheet" media="all">
-    <link th:href:="@{/vendor/css-hamburgers/hamburgers.min.css}" rel="stylesheet" media="all">
-    <link th:href:="@{/vendor/slick/slick.css}" rel="stylesheet" media="all">
-    <link th:href:="@{/vendor/select2/select2.min.css}" rel="stylesheet" media="all">
-    <link th:href:="@{/vendor/perfect-scrollbar/perfect-scrollbar.css}" rel="stylesheet" media="all">
-
-    <!-- Main CSS-->
-    <link th:href:="@{/css/theme.css}" rel="stylesheet" media="all">
+    <title>Registro</title>
+    <meta charset="UTF-8">
+    <div th:replace="~{fragments/header :: header-css}"></div>
 
 </head>
 
@@ -47,10 +21,14 @@
                             </a>
                         </div>
                         <div class="login-form">
-                            <form action="" method="post">
+                            <div th:if="${message != null}" class="alert alert-info" role="alert">
+                                <p>[[${message}]]</p>
+                            </div>
+                            <form th:action="${/registrar}" method="post"
+                            th:object="${usuario}">
                                 <div class="form-group">
                                     <label>Nombre de usuario</label>
-                                    <input class="au-input au-input--full" type="text" name="username" placeholder="Ingrese nombre de usuario del empleado">
+                                    <input th:field="*{nick_usuario}" class="au-input au-input--full" type="text" name="username" placeholder="Ingrese nombre de usuario del empleado">
                                 </div>
                                 <!-- <div class="form-group">
                                     <label>Correo</label>
@@ -58,23 +36,22 @@
                                 </div> -->
                                 <div class="form-group">
                                     <label>Contraseña</label>
-                                    <input class="au-input au-input--full" type="password" name="password" placeholder="Contraseña del empleado">
+                                    <input th:field="*{clave_usuario}" class="au-input au-input--full" type="password" name="password" placeholder="Contraseña del empleado">
                                 </div>
                                 <!-- <div class="login-checkbox">
                                     <label>
                                         <input type="checkbox" name="aggree">Agree the terms and policy
                                     </label>
                                 </div> -->
-                                <div class="form-group">
                                     <label for="rol">Rol</label>
-                                    <select class="form-control" id="rol" name="rol">
+                                    <select class="form-control" id="rol" name="rol" title="Seleccion de rol">
                                         <option value="ROL_ADMIN">Administrador</option>
                                         <option value="ROL_USER">Empleado</option>
                                     </select>
                                 </div>
                                 <div class="form-group">
-                                    <label class="switch switch-default switch-primary mr-2">
-                                        <input type="checkbox" class="switch-input" checked="true">
+                                    <label for="checkbox" class="switch switch-default switch-primary mr-2">
+                                        <input type="checkbox" class="switch-input" id="checkbox" checked="true" title="Marca Aqui">
                                         <span class="switch-label"></span>
                                         <span class="switch-handle"></span>
                                     </label>

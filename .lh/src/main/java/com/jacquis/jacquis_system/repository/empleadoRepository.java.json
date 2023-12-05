@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 5,
+            "activePatchIndex": 11,
             "patches": [
                 {
                     "date": 1695696715084,
@@ -28,6 +28,30 @@
                 {
                     "date": 1695782573546,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,21 +1,11 @@\n package com.jacquis.jacquis_system.repository;\r\n \r\n-import org.springframework.data.repository.PagingAndSortingRepository;\r\n+import org.springframework.data.jpa.repository.JpaRepository;\r\n import org.springframework.stereotype.Repository;\r\n \r\n-import com.jacquis.jacquis_system.entitys.Empleado;\r\n+import com.jacquis.jacquis_system.model.Empleado;\r\n \r\n @Repository\r\n-public interface EmpleadoRepository extends PagingAndSortingRepository<Empleado, Long> {\r\n+public interface EmpleadoRepository extends JpaRepository<Empleado, Long>{\r\n     \r\n }\r\n-package com.jacquis.jacquis_system.repository;\r\n-\r\n-import org.springframework.data.repository.PagingAndSortingRepository;\r\n-\r\n-import com.jacquis.jacquis_system.entitys.Empleado;\r\n-\r\n-@Reposito\r\n-public interface EmpleadoRepository extends PagingAndSortingRepository<Empleado, Long>{\r\n-    \r\n-}\r\n"
+                },
+                {
+                    "date": 1696921950678,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,6 +6,6 @@\n import com.jacquis.jacquis_system.model.Empleado;\r\n \r\n @Repository\r\n public interface EmpleadoRepository extends JpaRepository<Empleado, Long>{\r\n-    \r\n+    boolean existsByDui(String dui);\r\n }\r\n"
+                },
+                {
+                    "date": 1696922407429,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,6 +6,6 @@\n import com.jacquis.jacquis_system.model.Empleado;\r\n \r\n @Repository\r\n public interface EmpleadoRepository extends JpaRepository<Empleado, Long>{\r\n-    boolean existsByDui(String dui);\r\n+    boolean existsByDui(String duiEmpleado);\r\n }\r\n"
+                },
+                {
+                    "date": 1696922977265,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,6 +6,6 @@\n import com.jacquis.jacquis_system.model.Empleado;\r\n \r\n @Repository\r\n public interface EmpleadoRepository extends JpaRepository<Empleado, Long>{\r\n-    boolean existsByDui(String duiEmpleado);\r\n+    boolean existsByDui_empleado(String duiEmpleado);\r\n }\r\n"
+                },
+                {
+                    "date": 1696923291468,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,6 +6,6 @@\n import com.jacquis.jacquis_system.model.Empleado;\r\n \r\n @Repository\r\n public interface EmpleadoRepository extends JpaRepository<Empleado, Long>{\r\n-    boolean existsByDui_empleado(String duiEmpleado);\r\n+    boolean existsByDui_empleado(String dui_empleado);\r\n }\r\n"
+                },
+                {
+                    "date": 1696925042095,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,6 +6,6 @@\n import com.jacquis.jacquis_system.model.Empleado;\r\n \r\n @Repository\r\n public interface EmpleadoRepository extends JpaRepository<Empleado, Long>{\r\n-    boolean existsByDui_empleado(String dui_empleado);\r\n+    boolean existsByDui_empleado(String duiEmpleado);\r\n }\r\n"
+                },
+                {
+                    "date": 1696925581318,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,11 +1,15 @@\n package com.jacquis.jacquis_system.repository;\r\n \r\n import org.springframework.data.jpa.repository.JpaRepository;\r\n+import org.springframework.data.jpa.repository.Query;\r\n+import org.springframework.data.repository.query.Param;\r\n import org.springframework.stereotype.Repository;\r\n \r\n import com.jacquis.jacquis_system.model.Empleado;\r\n \r\n @Repository\r\n public interface EmpleadoRepository extends JpaRepository<Empleado, Long>{\r\n-    boolean existsByDui_empleado(String duiEmpleado);\r\n+    \r\n+    @Query(value = \"SELECT COUNT(*) FROM empleado WHERE dui_empleado = :dui\", nativeQuery = true)\r\n+    int countEmpleadosByDui(@Param(\"dui\") String dui);\r\n }\r\n"
                 }
             ],
             "date": 1695696715084,
