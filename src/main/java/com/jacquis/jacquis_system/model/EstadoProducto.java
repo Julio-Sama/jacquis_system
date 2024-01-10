@@ -24,8 +24,8 @@ public class EstadoProducto {
     private double precio_compra;
     @Column(name = "ganancia")
     private double ganancia;
-    @Column(name = "estado_producto")
-    private String estado_producto;
+    @Column(name = "estado_p")
+    private String estado_p;
     @Column(name = "precioUventa")
     private double precioUventa;
     @Column(name = "color")
@@ -41,14 +41,19 @@ public class EstadoProducto {
 
     }
 
-    public EstadoProducto(Long id_estado_producto, int stock, double precio_compra, double ganancia, String estado_producto, double precioUventa, String color) {
+    
+
+
+    public EstadoProducto(Long id_estado_producto, int stock, double precio_compra, double ganancia, String estado_p,
+            double precioUventa, String color, Inventario inventario) {
         this.id_estado_producto = id_estado_producto;
         this.stock = stock;
         this.precio_compra = precio_compra;
         this.ganancia = ganancia;
-        this.estado_producto = estado_producto;
+        this.estado_p = estado_p;
         this.precioUventa = precioUventa;
         this.color = color;
+        this.inventario = inventario;
     }
 
     public Long getId_estado_producto() {
@@ -83,13 +88,7 @@ public class EstadoProducto {
         this.ganancia = ganancia;
     }
 
-    public String getEstado_producto() {
-        return estado_producto;
-    }
-
-    public void setEstado_producto(String estado_producto) {
-        this.estado_producto = estado_producto;
-    }
+    
 
     public double getPrecioUventa() {
         return precioUventa;
@@ -115,6 +114,13 @@ public class EstadoProducto {
         this.inventario = inventario;
     }
 
-    
+    public String getEstado_p() {
+        return estado_p;
+    }
+
+    public void setEstado_p(String estado_p) {
+        this.estado_p = estado_p;
+    }
+
 
 }

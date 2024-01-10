@@ -1,7 +1,6 @@
 package com.jacquis.jacquis_system.model;
 
-import java.util.Set;
-
+import java.util.List;
 import com.jacquis.jacquis_system.dto.TallaDTO;
 
 import jakarta.persistence.Column;
@@ -24,7 +23,7 @@ public class Talla {
     private String nombre_talla;
 
     @OneToMany(mappedBy = "talla")
-    private Set<Inventario> inventario;
+    private List<Inventario> inventario;
 
     public Talla(TallaDTO tallaDTO) {
     }

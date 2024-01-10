@@ -53,7 +53,7 @@ public class Empleado {
     private Usuario usuario;
 
     @OneToMany(mappedBy = "empleado")
-    // @Size(min = 1, message = "Debe tener al menos un teléfono")
+    @Size(min = 1, message = "Debe tener al menos un teléfono")
     private List<TelefonoEmpleado> telefonos;
     
     public Empleado(EmpleadoDTO empleadoDTO){

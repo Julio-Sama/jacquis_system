@@ -62,7 +62,7 @@ public class InventarioController {
 
         if (!mostrarInactivos) {
             inventarioList = inventarioList.stream()
-                    .filter(inventario -> !inventario.getEstado_producto().equals("INACTIVO"))
+                    .filter(inventario -> !inventario.getEstado_producto_p().equals("INACTIVO"))
                     .collect(Collectors.toList());
         }
         modelo.addAttribute("inventarioList", inventarioList);
@@ -82,6 +82,8 @@ public class InventarioController {
         modelo.addAttribute("marcaSelected", marcaSelected);
         modelo.addAttribute("tallaSelected", tallaSelected);
 
+        
+
         return "nuevo_producto"; // retorna al archivo index.html con los datos cargados en el modelo
     }
 
@@ -95,7 +97,7 @@ public class InventarioController {
                 errores.rejectValue("codigo_producto", "inventario.duplicate", "El código de producto ya existe");
                 return "nuevo_producto";
             } else {
-                inventario.setEstado_producto("ACTIVO");
+                inventario.setEstado_producto_p("ACTIVO");
                 inventarioService.saveOrUpdate(inventario);
                 return "redirect:/inventario";
             }
@@ -125,7 +127,7 @@ public class InventarioController {
         Inventario inventarioActual = inventarioService.getInventarioById(id_producto);
         inventarioActual.setCodigo_producto(inventario.getCodigo_producto());
         inventarioActual.setDescripcion_producto(inventario.getDescripcion_producto());
-        inventarioActual.setEstado_producto(inventario.getEstado_producto());
+        inventarioActual.setEstado_producto_p(inventario.getEstado_producto_p());
         // Tablas relacionadas
         inventarioActual.setProveedor(inventario.getProveedor());
         inventarioActual.setCategoria(inventario.getCategoria());
@@ -147,7 +149,7 @@ public class InventarioController {
     public String bajaProducto(@PathVariable("id_producto") Long id_producto, Model modelo) {
         Inventario inventario = inventarioService.getInventarioById(id_producto);
         modelo.addAttribute("id_producto", inventario.getId_producto());
-        inventario.setEstado_producto("INACTIVO");
+        inventario.setEstado_producto_p("INACTIVO");
 
         inventarioService.saveOrUpdate(inventario);
         return "redirect:/inventario";

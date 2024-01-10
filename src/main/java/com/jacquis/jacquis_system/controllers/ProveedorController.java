@@ -8,6 +8,7 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -56,27 +57,27 @@ public class ProveedorController {
 
     // Guarda o actualiza un proveedor
     @PostMapping
-    public String guardarProveedor(@Valid @ModelAttribute("proveedores") Proveedor proveedor) {
-        proveedor.setEstado_prov("ACTIVO");
-
-        Date fechaActual = new Date();
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yy");
-        String fechaFormateada = sdf.format(fechaActual);
-
-        // Convierte la cadena formateada de nuevo a Date
-        try {
-            Date fechaInicioProveedorUtil = sdf.parse(fechaFormateada);
-            java.sql.Date fechaInicioProveedor = new java.sql.Date(fechaInicioProveedorUtil.getTime());
-            proveedor.setFecha_inicio_proveedor(fechaInicioProveedor);
-        } catch (java.text.ParseException e) {
-            // Maneja la excepción si ocurre un error de formato
-            e.printStackTrace();
+    public String guardarProveedor(@Valid @ModelAttribute("proveedores") Proveedor proveedor, Errors errores) {
+        if (errores.hasErrors()) {
+            return "nuevo_proveedor";
+        } else {
+            proveedor.setEstado_prov("ACTIVO");
+            Date fechaActual = new Date();
+            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yy");
+            String fechaFormateada = sdf.format(fechaActual);
+            // Convierte la cadena formateada de nuevo a Date
+            try {
+                Date fechaInicioProveedorUtil = sdf.parse(fechaFormateada);
+                java.sql.Date fechaInicioProveedor = new java.sql.Date(fechaInicioProveedorUtil.getTime());
+                proveedor.setFecha_inicio_proveedor(fechaInicioProveedor);
+            } catch (java.text.ParseException e) {
+                // Maneja la excepción si ocurre un error de formato
+                e.printStackTrace();
+            }
+            proveedorService.guardarActualizar(proveedor);
+            return "redirect:/proveedores";
         }
-
-        proveedorService.guardarActualizar(proveedor);
-        return "redirect:/proveedores";
     }
-
 
     // Muestra el formulario para editar un proveedor
     @GetMapping("/editar/{id_proveedor}")
@@ -104,7 +105,7 @@ public class ProveedorController {
         Proveedor proveedor = proveedorService.getProveedorById(idProveedor);
         modelo.addAttribute("id_proveedor", proveedor.getId_proveedor());
         proveedor.setEstado_prov("INACTIVO");
-        
+
         proveedorService.guardarActualizar(proveedor);
         return "redirect:/proveedores";
     }

@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 8,
+            "activePatchIndex": 13,
             "patches": [
                 {
                     "date": 1695019355909,
@@ -40,6 +40,26 @@
                 {
                     "date": 1700064500077,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,9 +4,9 @@\n # spring.datasource.password=\"\"\r\n spring.datasource.driver-class-name=org.mariadb.jdbc.Driver\r\n \r\n # Configuracion de Spring JPA\r\n-spring.jpa.database-platform=org.hibernate.dialect.MariaDBDialect\r\n+# spring.jpa.database-platform=org.hibernate.dialect.MariaDBDialect\r\n spring.jpa.hibernate.ddl-auto = update\r\n spring.jpa.properties.hibernate.id.new_generator_mappings=false\r\n spring.jpa.generate-ddl=true\r\n spring.jpa.show-sql = true\r\n"
+                },
+                {
+                    "date": 1704609453382,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,8 +4,9 @@\n # spring.datasource.password=\"\"\r\n spring.datasource.driver-class-name=org.mariadb.jdbc.Driver\r\n \r\n # Configuracion de Spring JPA\r\n+spring.jpa.properties.hibernate.dialect = org.hibernate.dialect.MySQL5InnoDBDialect\r\n # spring.jpa.database-platform=org.hibernate.dialect.MariaDBDialect\r\n spring.jpa.hibernate.ddl-auto = update\r\n spring.jpa.properties.hibernate.id.new_generator_mappings=false\r\n spring.jpa.generate-ddl=true\r\n"
+                },
+                {
+                    "date": 1704609502603,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,9 +4,8 @@\n # spring.datasource.password=\"\"\r\n spring.datasource.driver-class-name=org.mariadb.jdbc.Driver\r\n \r\n # Configuracion de Spring JPA\r\n-spring.jpa.properties.hibernate.dialect = org.hibernate.dialect.MySQL5InnoDBDialect\r\n # spring.jpa.database-platform=org.hibernate.dialect.MariaDBDialect\r\n spring.jpa.hibernate.ddl-auto = update\r\n spring.jpa.properties.hibernate.id.new_generator_mappings=false\r\n spring.jpa.generate-ddl=true\r\n"
+                },
+                {
+                    "date": 1704650862717,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,9 +4,9 @@\n # spring.datasource.password=\"\"\r\n spring.datasource.driver-class-name=org.mariadb.jdbc.Driver\r\n \r\n # Configuracion de Spring JPA\r\n-# spring.jpa.database-platform=org.hibernate.dialect.MariaDBDialect\r\n+spring.jpa.database-platform=org.hibernate.dialect.MariaDBDialect\r\n spring.jpa.hibernate.ddl-auto = update\r\n spring.jpa.properties.hibernate.id.new_generator_mappings=false\r\n spring.jpa.generate-ddl=true\r\n spring.jpa.show-sql = true\r\n"
+                },
+                {
+                    "date": 1704652419997,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,8 @@\n # Configuracion de la base de datos\r\n spring.datasource.url=jdbc:mariadb://localhost:3306/bd_jacquis\r\n spring.datasource.username=root\r\n+spring.datasource.password=\"\"\r\n # spring.datasource.password=\"\"\r\n spring.datasource.driver-class-name=org.mariadb.jdbc.Driver\r\n \r\n # Configuracion de Spring JPA\r\n"
+                },
+                {
+                    "date": 1704666281185,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,7 @@\n # Configuracion de la base de datos\r\n spring.datasource.url=jdbc:mariadb://localhost:3306/bd_jacquis\r\n spring.datasource.username=root\r\n-spring.datasource.password=\"\"\r\n # spring.datasource.password=\"\"\r\n spring.datasource.driver-class-name=org.mariadb.jdbc.Driver\r\n \r\n # Configuracion de Spring JPA\r\n"
                 }
             ],
             "date": 1695019355909,

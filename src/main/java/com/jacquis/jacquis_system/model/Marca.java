@@ -1,7 +1,6 @@
 package com.jacquis.jacquis_system.model;
 
-import java.util.Set;
-
+import java.util.List;
 import com.jacquis.jacquis_system.dto.MarcaDTO;
 
 import jakarta.persistence.Column;
@@ -24,7 +23,7 @@ public class Marca {
     private String nombre_marca;
 
     @OneToMany(mappedBy = "marca")
-    private Set<Inventario> inventario;
+    private List<Inventario> inventario;
 
     public Marca(MarcaDTO marcaDTO) {
     }

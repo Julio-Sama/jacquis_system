@@ -6,22 +6,27 @@ public class EstadoProductoDTO {
     private int stock;
     private double precio_compra;
     private double ganancia;
-    private String estado_producto;
+    private String producto_estado;
     private double precioUventa;
     private String color;
 
     public EstadoProductoDTO() {
     }
 
-    public EstadoProductoDTO(Long id_estado_producto, int stock, double precio_compra, double ganancia, String estado_producto, double precioUventa, String color) {
+    
+
+    public EstadoProductoDTO(Long id_estado_producto, int stock, double precio_compra, double ganancia,
+            String producto_estado, double precioUventa, String color) {
         this.id_estado_producto = id_estado_producto;
         this.stock = stock;
         this.precio_compra = precio_compra;
         this.ganancia = ganancia;
-        this.estado_producto = estado_producto;
+        this.producto_estado = producto_estado;
         this.precioUventa = precioUventa;
         this.color = color;
     }
+
+
 
     public Long getId_estado_producto() {
         return id_estado_producto;
@@ -55,13 +60,7 @@ public class EstadoProductoDTO {
         this.ganancia = ganancia;
     }
 
-    public String getEstado_producto() {
-        return estado_producto;
-    }
-
-    public void setEstado_producto(String estado_producto) {
-        this.estado_producto = estado_producto;
-    }
+    
 
     public double getPrecioUventa() {
         return precioUventa;
@@ -77,6 +76,18 @@ public class EstadoProductoDTO {
 
     public void setColor(String color) {
         this.color = color;
+    }
+
+
+
+    public String getProducto_estado() {
+        return producto_estado;
+    }
+
+
+
+    public void setProducto_estado(String producto_estado) {
+        this.producto_estado = producto_estado;
     }
 
     
