@@ -4,6 +4,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
@@ -24,9 +25,11 @@ public class Usuario {
     private String clave_usuario;
 
     private String estado_usuario;
+
     private String rol_usuario;
 
-    @OneToOne(mappedBy = "usuario")
+    @OneToOne
+    @JoinColumn(name = "dui_empleado")
     private Empleado empleado;
 
     public Usuario() {

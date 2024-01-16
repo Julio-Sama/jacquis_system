@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 21,
+            "activePatchIndex": 22,
             "patches": [
                 {
                     "date": 1695020131045,
@@ -92,6 +92,10 @@
                 {
                     "date": 1701725153570,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,9 +4,9 @@\n \t<modelVersion>4.0.0</modelVersion>\r\n \t<parent>\r\n \t\t<groupId>org.springframework.boot</groupId>\r\n \t\t<artifactId>spring-boot-starter-parent</artifactId>\r\n-\t\t<version>3.1.5</version>\r\n+\t\t<version>3.1.6</version>\r\n \t\t<relativePath/> <!-- lookup parent from repository -->\r\n \t</parent>\r\n \t<groupId>com.jacquis</groupId>\r\n \t<artifactId>jacquis_system</artifactId>\r\n"
+                },
+                {
+                    "date": 1704648058963,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,9 +4,9 @@\n \t<modelVersion>4.0.0</modelVersion>\r\n \t<parent>\r\n \t\t<groupId>org.springframework.boot</groupId>\r\n \t\t<artifactId>spring-boot-starter-parent</artifactId>\r\n-\t\t<version>3.1.6</version>\r\n+\t\t<version>3.1.7</version>\r\n \t\t<relativePath/> <!-- lookup parent from repository -->\r\n \t</parent>\r\n \t<groupId>com.jacquis</groupId>\r\n \t<artifactId>jacquis_system</artifactId>\r\n"
                 }
             ],
             "date": 1695020131045,

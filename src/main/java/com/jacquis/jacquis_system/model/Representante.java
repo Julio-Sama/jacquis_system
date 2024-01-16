@@ -1,6 +1,7 @@
 package com.jacquis.jacquis_system.model;
 
 import java.sql.Date;
+import java.util.List;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -9,6 +10,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -36,6 +38,14 @@ public class Representante {
     private Date fecha_inicio_repre;
 
     private String estado_repre;
+    
+    @ManyToOne
+    @JoinColumn(name = "id_proveedor")
+    private Proveedor proveedor;
+
+    @OneToMany(mappedBy = "representante")
+    private List<TelefonoRepre> telefono_representante;
+
 
     public String getEstado_repre() {
         return estado_repre;
@@ -44,10 +54,6 @@ public class Representante {
     public void setEstado_repre(String estado_repre) {
         this.estado_repre = estado_repre;
     }
-
-    @ManyToOne
-    @JoinColumn(name = "id_proveedor")
-    private Proveedor proveedor;
 
     public Proveedor getProveedor() {
         return proveedor;

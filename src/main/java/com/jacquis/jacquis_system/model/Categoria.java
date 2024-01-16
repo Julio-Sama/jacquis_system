@@ -1,6 +1,6 @@
 package com.jacquis.jacquis_system.model;
 
-import java.util.Set;
+import java.util.List;
 
 import com.jacquis.jacquis_system.dto.CategoriaDTO;
 
@@ -30,7 +30,7 @@ public class Categoria {
     private String estado_categoria;
 
     @OneToMany(mappedBy = "categoria")
-    private Set<Inventario> inventario;
+    private List<Inventario> inventario;
 
     public Categoria(CategoriaDTO categoriaDTO) {
 

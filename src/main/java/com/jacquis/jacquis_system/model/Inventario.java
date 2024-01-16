@@ -1,5 +1,7 @@
 package com.jacquis.jacquis_system.model;
 
+import java.util.List;
+
 import com.jacquis.jacquis_system.dto.InventarioDTO;
 
 import jakarta.persistence.Column;
@@ -9,23 +11,29 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
 
 @Entity
 @Table(name = "producto")
 public class Inventario {
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id_producto;
 
-    @Column(name = "codigo_producto")
+    @NotBlank(message = "El código es obligatorio")
+    @Column(name = "codigo_producto", columnDefinition = "VARCHAR(20)")
     private String codigo_producto;
-    @Column(name = "descripcion")
+
+    @NotBlank(message = "La descripción es obligatoria")
+    @Column(name = "descripcion", columnDefinition = "VARCHAR(200)")
     private String descripcion_producto;
-    @Column(name = "estado_producto")
-    private String estado_producto;
+
+    @Column(name = "estado_producto_p", columnDefinition = "VARCHAR(10)")
+    private String estado_producto_p;
 
     @ManyToOne
     @JoinColumn(name = "id_proveedor")
@@ -43,9 +51,11 @@ public class Inventario {
     @JoinColumn(name = "id_marca")
     private Marca marca;
 
-    @OneToOne
-    @JoinColumn(name = "id_estado_producto")
-    private EstadoProducto estadoProducto;
+    @OneToMany(mappedBy = "inventario")
+    private List<DetalleVenta> detalle_venta;
+
+    @OneToOne(mappedBy = "inventario")
+    private EstadoProducto estado_producto;
 
     public Inventario() {
     }
@@ -53,21 +63,11 @@ public class Inventario {
     public Inventario(InventarioDTO inventarioDTO) {
     }
 
-    public Inventario(Long id_producto, String codigo_producto, String descripcion_producto, String estado_producto, Proveedor proveedor, Categoria categoria, Talla talla, Marca marca) {
-        this.id_producto = id_producto;
+    public Inventario(String codigo_producto, String descripcion_producto, String estado_producto_p,
+            Proveedor proveedor, Categoria categoria, Talla talla, Marca marca) {
         this.codigo_producto = codigo_producto;
         this.descripcion_producto = descripcion_producto;
-        this.estado_producto = estado_producto;
-        this.proveedor = proveedor;
-        this.categoria = categoria;
-        this.talla = talla;
-        this.marca = marca;
-    }
-
-    public Inventario(String codigo_producto, String descripcion_producto, String estado_producto, Proveedor proveedor, Categoria categoria, Talla talla, Marca marca) {
-        this.codigo_producto = codigo_producto;
-        this.descripcion_producto = descripcion_producto;
-        this.estado_producto = estado_producto;
+        this.estado_producto_p = estado_producto_p;
         this.proveedor = proveedor;
         this.categoria = categoria;
         this.talla = talla;
@@ -96,14 +96,6 @@ public class Inventario {
 
     public void setDescripcion_producto(String descripcion_producto) {
         this.descripcion_producto = descripcion_producto;
-    }
-
-    public String getEstado_producto() {
-        return estado_producto;
-    }
-
-    public void setEstado_producto(String estado_producto) {
-        this.estado_producto = estado_producto;
     }
 
     public Proveedor getProveedor() {
@@ -138,5 +130,12 @@ public class Inventario {
         this.marca = marca;
     }
 
-    
+    public String getEstado_producto_p() {
+        return estado_producto_p;
+    }
+
+    public void setEstado_producto_p(String estado_producto_p) {
+        this.estado_producto_p = estado_producto_p;
+    }
+
 }

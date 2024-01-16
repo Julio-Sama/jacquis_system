@@ -15,7 +15,7 @@ public class TelefonoEmpleado {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id_telefono;
+    private Long id__tel_empleado;
     
     @ManyToOne
     @JoinColumn(name = "dui_empleado")

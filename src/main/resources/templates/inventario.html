@@ -84,7 +84,7 @@
         <aside class="menu-sidebar d-none d-lg-block">
             <div class="logo">
                 <a th:href="@{/index}">
-                    <img th:src="@{/images/icon/.png}" alt="Jacqui's Store" />
+                    <img th:src="@{/images/icon/sigejac.png}" alt="Jacqui's Store" />
                 </a>
             </div>
             <div class="menu-sidebar__content js-scrollbar1">
@@ -271,13 +271,13 @@
                                 <h3 class="title-5 m-b-25">Inventario</h3>
                                 <div class="table-data__tool">
                                     <div class="table-data__tool-left">
-                                        <!-- BUSCADOR DE EMPLEADO -->
+                                        <!-- BUSCADOR DE PRODUCTO -->
                                         <div class="rs-select2--light rs-select2--md">
                                             <div class="input-group">
-                                                <input type="text" id="searchInputEmp" class="form-control"
+                                                <input type="text" id="searchInputInv" class="form-control"
                                                     placeholder="Buscar">
                                                 <div class="input-group-append">
-                                                    <button title="Buscar empleado" class="btn btn-primary"
+                                                    <button title="Buscar producto" class="btn btn-primary"
                                                         type="button">
                                                         <i class="zmdi zmdi-search"></i>
                                                     </button>
@@ -373,7 +373,7 @@
     <script>
 
         $(document).ready(function () {
-            $('#searchInputEmp').on('keyup', function () {
+            $('#searchInputInv').on('keyup', function () {
                 var value = $(this).val().toLowerCase();
                 $('#tablaProductos tr').filter(function () {
                     $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)

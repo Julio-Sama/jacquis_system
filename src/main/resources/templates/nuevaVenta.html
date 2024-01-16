@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <link rel="shortcut icon" href="images/icon/favicon.ico">
     <!-- Title Page-->
-    <title>Representantes</title>
+    <title>Nueva venta</title>
     <div th:replace="~{fragments/header :: header-css}"></div>
 </head>
 
@@ -65,7 +65,7 @@
         <aside class="menu-sidebar d-none d-lg-block">
             <div class="logo">
                 <a th:href="@{/index}">
-                    <img th:src="@{/images/icon/sigejac.png}" alt="Jacqui's Store" />
+                    <img th:src="@{/images/icon/.png}" alt="Jacqui's Store" />
                 </a>
             </div>
             <div class="menu-sidebar__content js-scrollbar1">
@@ -244,113 +244,98 @@
             <div class="main-content">
                 <div class="section__content section__content--p30">
                     <div class="container-fluid">
-                        <!-- AQUI VA LA TABLA -->
-                        <div class="row">
-                            <div class="col-md-12">
-                                <!-- DATA TABLE -->
-                                <!-- Pongo el breadcrumbs? -->
-                                <h3 class="title-5 m-b-25">Nuevo Representante</h3>
-                                <!-- Formulario de registro de nuevo empleado -->
-                                <div class="card">
-                                    <div class="card-header">
-                                        <strong>Formulario</strong> de registro
-                                    </div>
-                                    <div class="card-body card-block">
-                                        <form th:action="@{/representantes}" th:object="${representantes}"
-                                            method="POST">
-                                            <div th:if="${#fields.hasErrors()}" class="alert alert-danger" role="alert">
-                                                Por favor, corrija los errores indicados en rojo
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="dui" class="form-control-label"> DUI </label>
-                                                <!-- Documento Unico de Identidad-->
-                                                <input type="text" th:field="*{dui_repre}" name="dui" id="dui"
-                                                    placeholder="Ingrese el DUI..." class="form-control">
-                                                    <div th:if="${#fields.hasErrors('dui_repre')}"
-                                                    th:errors="*{dui_repre}" class="alert alert-danger" role="alert">
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="nombre" class=" form-control-label">Nombre</label>
-                                                <input type="text" th:field="*{nombre}" name="nombre" id="nombre"
-                                                    placeholder="Ingrese el nombre..." class="form-control">
-                                            </div>
-                                            <div th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}"
-                                                class="alert alert-danger" role="alert">
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="apellido" class=" form-control-label">Apellido</label>
-                                                <input type="text" th:field="*{apellido}" name="apellido" id="apellido"
-                                                    placeholder="Ingrese el apellido..." class="form-control">
-                                            </div>
-                                            <div th:if="${#fields.hasErrors('apellido')}" th:errors="*{apellido}"
-                                                class="alert alert-danger" role="alert">
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="fechaInicio" class="form-control-label">Fecha de
-                                                    Inicio</label>
-                                                <input type="date" th:field="*{fecha_inicio_repre}" name="fechaI"
-                                                    id="fechaI" placeholder="Ingrese la fecha de inicio"
-                                                    class="form-control">
-                                            </div>
 
-                                            <div class="form-group">
-                                                <label for="proveedor">Proveedor:</label>
-                                                <select name="proveedor" id="proveedor" required>
-                                                    <option value="">Selecciona un proveedor</option>
-                                                    <option th:each="prov: ${proveedorSelected}"
-                                                        th:value="${prov.id_proveedor}" th:text="${prov.nombre}"
-                                                        th:if="${prov.estado_prov != 'INACTIVO'}">
-                                                    </option>
-                                                </select>
-                                            </div> <!-- <div class="form-group">
-                                                <label for="telefono" class="form-control-label"> Telefono</label>
-                                                <input type="text" name="telefono" id="telefono" placeholder="Ingrese el telefono..."
-                                                    class="form-control">
-                                            </div> -->
-                                            <!-- <div class="form-group">
-                                                <label for="estado" class="form-control-label">Estado</label>
-                                                <select name="estado" id="estado" class="form-control" th:field="*{estado_empleado}">
-                                                    <option value="0">Seleccione el estado...</option>
-                                                    <option value="ACTIVO">Activo</option>
-                                                    <option value="INACTIVO">Inactivo</option>
-                                                </select>
-                                            </div> -->
-                                            <div class="card-footer">
-                                                <button type="submit" class="btn btn-primary btn-sm">
-                                                    <i class="fa fa-dot-circle-o"></i> Guardar
-                                                </button>
-                                                <button type="reset" class="btn btn-danger btn-sm"
-                                                    onclick="history.go(-1);">
-                                                    <i class="fa fa-ban"></i> Cancelar
-                                                </button>
-                                                </button>
-                                            </div>
-                                        </form>
-                                    </div>
-                                </div>
+                        <!-- Encabezado de la página -->
+                        <h3 class="title-5 m-b-25">Nueva venta</h3>
+
+                        <!-- Formulario de registro de nueva venta -->
+                        <div class="card">
+                            <div class="card-header">
+                                <strong>Formulario</strong> de venta
                             </div>
-                        </div>
-                    </div>
-                    <!-- Aqui va todo el contenido -->
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="copyright">
-                                <p>Copyright © 2023 Jacqui's Store. Todos los derechos reservados</p>
+                            <div class="card-body card-block">
+                                <form th:action="@{/ventas}" th:object="${venta}" method="POST">
+
+                                    <!-- Mensaje de errores -->
+                                    <div th:if="${#fields.hasErrors()}" class="alert alert-danger" role="alert">
+                                        Por favor, corrija los errores indicados en rojo
+                                    </div>
+
+                                    <!-- Selección de empleado -->
+                                    <div class="form-group">
+                                        <label for="empleado">Empleado</label>
+                                        <select id="empleado" class="form-control" th:field="*{empleado}">
+                                            <!-- Los empleados se generan dinámicamente -->
+                                        </select>
+                                    </div>
+
+                                    <!-- Fecha y hora de la venta -->
+                                    <div class="form-group">
+                                        <label for="fechaHora">Fecha y hora</label>
+                                        <input type="datetime-local" id="fechaHora" class="form-control" th:field="*{fechaHora}">
+                                    </div>
+
+                                    <!-- Selección de tipo de cliente -->
+                                    <div class="form-group">
+                                        <label for="tipoCliente">Tipo de cliente</label>
+                                        <select id="tipoCliente" class="form-control" th:field="*{tipoCliente}">
+                                            <!-- Los tipos de clientes se generan dinámicamente -->
+                                        </select>
+                                    </div>
+
+                                    <!-- Tabla de productos -->
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th>#</th>
+                                                <th>Descripción</th>
+                                                <th>Cantidad</th>
+                                                <th>Precio unitario</th>
+                                                <th>Subtotal</th>
+                                                <th>Acciones</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <!-- Los productos se generan dinámicamente -->
+                                        </tbody>
+                                    </table>
+
+                                    <!-- Botón para agregar producto -->
+                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalAgregarProducto">
+                                        Agregar producto
+                                    </button>
+
+                                    <!-- Botones de guardar y cancelar -->
+                                    <button type="submit" class="btn btn-success">Guardar</button>
+                                    <button type="reset" class="btn btn-danger">Cancelar</button>
+                                </form>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <!-- END MAIN CONTENT-->
+
+            <!-- Modal para agregar producto -->
+            <div class="modal fade" id="modalAgregarProducto" tabindex="-1" role="dialog" aria-labelledby="modalAgregarProductoLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="modalAgregarProductoLabel">Agregar producto</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <!-- Formulario para agregar producto -->
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                            <button type="button" class="btn btn-primary">Agregar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-        <!-- END PAGE CONTAINER-->
     </div>
-
-    </div>
-
-    <th:block th:replace="~{fragments/scripts :: scripts-main}">todos los scripts</th:block>
 </body>
-
 </html>
-<!-- end document-->

@@ -2,10 +2,10 @@ package com.jacquis.jacquis_system.model;
 
 import java.sql.Date;
 import java.util.List;
-import java.util.Set;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -24,14 +24,18 @@ public class Proveedor {
     private Long id_proveedor;
 
     @NotBlank(message = "El nombre es obligatorio")
+    @Column(name = "nombre", columnDefinition = "VARCHAR(100)")
     private String nombre;
 
+    @NotBlank(message = "La dirección es obligatoria")
+    @Column(name = "direccion", columnDefinition = "VARCHAR(200)")
+    private String direccion;
+
+    @Column(name = "correo", columnDefinition = "VARCHAR(50)")
     @Email(message = "El correo debe ser válido")
     private String correo;
 
-    @NotBlank(message = "La dirección es obligatoria")
-    private String direccion;
-
+    @Column(name = "estado_prov")
     private String estado_prov;
 
     @DateTimeFormat(pattern = "dd/MM/yyyy")
@@ -41,10 +45,13 @@ public class Proveedor {
     private List<Representante> representantes;
 
     @OneToMany(mappedBy = "proveedor")
-    private Set<Inventario> inventario;
+    private List<Inventario> inventario;
 
-    public String getNombre() {
-        return nombre;
+    @OneToMany(mappedBy = "proveedor")
+    private List<Tel_Proveedor> tel_proveedor;
+
+    public Proveedor() {
+        
     }
 
     public Proveedor(Long id_proveedor, String nombre, String correo, String direccion, String estado_prov,
@@ -55,6 +62,10 @@ public class Proveedor {
         this.direccion = direccion;
         this.estado_prov = estado_prov;
         this.fecha_inicio_proveedor = fecha_inicio_proveedor;
+    }
+
+    public String getNombre() {
+        return nombre;
     }
 
     public void setNombre(String nombre) {
@@ -99,10 +110,6 @@ public class Proveedor {
 
     public void setId_proveedor(Long id_proveedor) {
         this.id_proveedor = id_proveedor;
-    }
-
-    public Proveedor() {
-        super();
     }
 
 }

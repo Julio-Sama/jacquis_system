@@ -65,7 +65,7 @@
         <aside class="menu-sidebar d-none d-lg-block">
             <div class="logo">
                 <a th:href="@{/index}">
-                    <img th:src="@{/images/icon/.png}" alt="Jacqui's Store" />
+                    <img th:src="@{/images/icon/sigejac.png}" alt="Jacqui's Store" />
                 </a>
             </div>
             <div class="menu-sidebar__content js-scrollbar1">
@@ -254,8 +254,7 @@
                                 <strong>Formulario</strong> de registro
                             </div>
                             <div class="card-body card-block">
-                                <form th:action="@{/inventario}"
-                                th:object="${inventario}" method="POST">
+                                <form th:action="@{/inventario}" th:object="${inventario}" method="POST">
 
                                     <!-- Mensaje de errores -->
                                     <div th:if="${#fields.hasErrors()}" class="alert alert-danger" role="alert">
@@ -266,11 +265,13 @@
                                         <div class="row">
                                             <div class="col col-md-3">
                                                 <label for="codigo_producto" class="form-control-label">Código de
-                                                    producto</label>
+                                                    producto</label> 
                                             </div>
                                             <div class="col-12 col-md-9">
                                                 <input type="text" th:field="*{codigo_producto}" name="codigo_producto" id="codigo_producto"
                                                     placeholder="Digite el código del producto" class="form-control">
+                                                <div th:if="${#fields.hasErrors('codigo_producto')}"
+                                                    th:errors="*{codigo_producto}" class="alert alert-danger" role="alert"></div>
                                             </div>
                                         </div>
                                     </div>
@@ -283,6 +284,8 @@
                                             <div class="col-12 col-md-9">
                                                 <input type="text" th:field="*{descripcion_producto}" name="descripcion" id="descripcion"
                                                     placeholder="Ejemplo: Blusa azul talla M" class="form-control">
+                                                <div th:if="${#fields.hasErrors('descripcion_producto')}" th:errors="*{descripcion_producto}"
+                                                    class="alert alert-danger" role="alert"></div>
                                             </div>
                                         </div>
                                     </div>
