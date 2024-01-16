@@ -7,13 +7,14 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "estado_producto")
 public class EstadoProducto {
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id_estado_producto;
@@ -31,18 +32,16 @@ public class EstadoProducto {
     @Column(name = "color")
     private String color;
 
-    @OneToOne(mappedBy = "estado_producto")
+    @OneToOne
+    @JoinColumn(name = "id_producto")
     private Inventario inventario;
 
     public EstadoProducto() {
     }
 
-    public EstadoProducto(EstadoProductoDTO estadoProductoDTO){
+    public EstadoProducto(EstadoProductoDTO estadoProductoDTO) {
 
     }
-
-    
-
 
     public EstadoProducto(Long id_estado_producto, int stock, double precio_compra, double ganancia, String estado_p,
             double precioUventa, String color, Inventario inventario) {
@@ -88,8 +87,6 @@ public class EstadoProducto {
         this.ganancia = ganancia;
     }
 
-    
-
     public double getPrecioUventa() {
         return precioUventa;
     }
@@ -121,6 +118,5 @@ public class EstadoProducto {
     public void setEstado_p(String estado_p) {
         this.estado_p = estado_p;
     }
-
 
 }

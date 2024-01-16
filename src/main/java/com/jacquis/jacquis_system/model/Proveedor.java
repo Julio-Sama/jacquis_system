@@ -2,7 +2,6 @@ package com.jacquis.jacquis_system.model;
 
 import java.sql.Date;
 import java.util.List;
-import java.util.Set;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -29,7 +28,7 @@ public class Proveedor {
     private String nombre;
 
     @NotBlank(message = "La dirección es obligatoria")
-    @Column(name = "direccion, columnDefinition = VARCHAR(200)")
+    @Column(name = "direccion", columnDefinition = "VARCHAR(200)")
     private String direccion;
 
     @Column(name = "correo", columnDefinition = "VARCHAR(50)")
@@ -46,10 +45,13 @@ public class Proveedor {
     private List<Representante> representantes;
 
     @OneToMany(mappedBy = "proveedor")
-    private Set<Inventario> inventario;
+    private List<Inventario> inventario;
 
-    public String getNombre() {
-        return nombre;
+    @OneToMany(mappedBy = "proveedor")
+    private List<Tel_Proveedor> tel_proveedor;
+
+    public Proveedor() {
+        
     }
 
     public Proveedor(Long id_proveedor, String nombre, String correo, String direccion, String estado_prov,
@@ -60,6 +62,10 @@ public class Proveedor {
         this.direccion = direccion;
         this.estado_prov = estado_prov;
         this.fecha_inicio_proveedor = fecha_inicio_proveedor;
+    }
+
+    public String getNombre() {
+        return nombre;
     }
 
     public void setNombre(String nombre) {
@@ -104,10 +110,6 @@ public class Proveedor {
 
     public void setId_proveedor(Long id_proveedor) {
         this.id_proveedor = id_proveedor;
-    }
-
-    public Proveedor() {
-        super();
     }
 
 }
