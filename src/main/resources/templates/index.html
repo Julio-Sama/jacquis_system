@@ -18,7 +18,7 @@
                 <div class="container-fluid">
                     <div class="header-mobile-inner">
                         <a class="logo" th:href="@{index}">
-                            <img th:src="@{/images/icon/logo-system.png}" alt="JacquisStore" />
+                            <img th:src="@{/images/icon/logo.png}" alt="JacquisStore" />
                         </a>
                         <button title="#" class="hamburger hamburger--slider" type="button">
                             <span class="hamburger-box">
@@ -85,7 +85,7 @@
         <aside class="menu-sidebar d-none d-lg-block">
             <div class="logo">
                 <a th:href="@{/index}">
-                    <img th:src="@{/images/icon/sigejac.png}" alt="Jacqui's Store" />
+                    <img th:src="@{/images/icon/.png}" alt="Jacqui's Store" />
                 </a>
             </div>
             <div class="menu-sidebar__content js-scrollbar1">
@@ -108,7 +108,7 @@
                                 <i class="fas fa-shopping-cart"></i>Ventas</a>
                             <ul class="list-unstyled navbar__sub-list js-sub-list">
                                 <li>
-                                    <a href="nuevaVenta.html">
+                                    <a th:href="@{/ventas}">
                                         <i class="fas fa-plus-square"></i>Nueva venta</a>
                                 </li>
                                 <li>
@@ -210,7 +210,7 @@
                                     <div class="account-item clearfix js-item-menu">
                                         <div class="image">
                                             <!-- Buscar como cargar imagen de usuario -->
-                                            <img th:src="@{images/icon/Jaquis-r.png}" alt="image user" />
+                                            <img th:src="@{images/icon/Jaquis.jpg}" alt="image user" />
                                         </div>
                                         <div class="content">
                                             <!-- AQUI TENGO QUE SETEAR EL NOMBRE DEL USUARIO  -->
@@ -220,7 +220,7 @@
                                             <div class="info clearfix">
                                                 <div class="image">
                                                     <a href="#">
-                                                        <img th:src="@{images/icon/Jaquis-r.png}"
+                                                        <img th:src="@{images/icon/Jaquis.jpg}"
                                                             alt="Imagen de usuario" />
                                                     </a>
                                                 </div>
