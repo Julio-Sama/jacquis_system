@@ -7,16 +7,20 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.jacquis.jacquis_system.model.Empleado;
+import com.jacquis.jacquis_system.model.TelefonoEmpleado;
 import com.jacquis.jacquis_system.repository.EmpleadoRepository;
 import com.jacquis.jacquis_system.services.EmpleadoService;
+import com.jacquis.jacquis_system.services.TelefonoEmpleadoService;
 
 import jakarta.validation.Valid;
 
@@ -26,6 +30,9 @@ public class EmpleadoController {
 
     @Autowired
     private EmpleadoService empleadoService;
+
+    @Autowired
+    private TelefonoEmpleadoService telefonoEmpleadoService;
 
     @Autowired
     private EmpleadoRepository empleadoRepository;
@@ -60,7 +67,9 @@ public class EmpleadoController {
 
     // Guarda o actualiza un empleado
     @PostMapping
-    public String guardarEmpleado(@Valid @ModelAttribute("empleados") Empleado empleado, Errors errores) {
+    public String guardarEmpleado(@Valid @ModelAttribute("empleados") Empleado empleado,
+            @RequestParam("telefono_empleado") String telefono_empleado,
+            Errors errores) {
 
         if (errores.hasErrors()) {
             return "nuevo_empleado";
@@ -72,11 +81,18 @@ public class EmpleadoController {
             } else {
                 empleado.setEstado_empleado("ACTIVO");
                 empleadoService.saveOrUpdate(empleado);
+
+                // Guardar el telefono del empleado
+                TelefonoEmpleado telefonoEmpleado = new TelefonoEmpleado();
+                telefonoEmpleado.setTelefono(telefono_empleado);
+                telefonoEmpleado.setEmpleado(empleado);
+                empleado.getTelefono_empleado().add(telefonoEmpleado);
+
+                telefonoEmpleadoService.saveOrUpdate(telefonoEmpleado);
+
                 return "redirect:/empleados";
             }
         }
-
-        // return "redirect:/empleados";
     }
 
     // Muestra el formulario para editar un empleado
@@ -98,7 +114,7 @@ public class EmpleadoController {
         empleadoActual.setDireccion(empleado.getDireccion());
         empleadoActual.setCorreo_empleado(empleado.getCorreo_empleado());
         // empleadoActual.setEstado_empleado(empleado.getEstado_empleado());
-        empleadoService.saveOrUpdate(empleadoActual); 
+        empleadoService.saveOrUpdate(empleadoActual);
         return "redirect:/empleados";
     }
 
@@ -111,6 +127,14 @@ public class EmpleadoController {
 
         empleadoService.saveOrUpdate(empleado);
         return "redirect:/empleados";
+    }
+
+    // Eliminar un numero de telefono de un empleado
+    @DeleteMapping("/telefono/{id}")
+    @ResponseBody
+    public String eliminarTelefono(@PathVariable("id") Integer idTelefono) {
+        telefonoEmpleadoService.delete(idTelefono);
+        return "success";
     }
 
     // // Elimina un empleado

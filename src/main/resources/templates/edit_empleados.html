@@ -46,10 +46,7 @@
                             <a href="ventas.html">
                                 <i class="fas fa-shopping-cart"></i>Ventas</a>
                         </li>
-                        <li>
-                            <a href="clientes.html">
-                                <i class="fas fa-users"></i>Clientes</a>
-                        </li>
+                        <!-- -->
                         <li>
                             <a href="proveedores.html">
                                 <i class="fas fa-truck"></i>Proveedores</a>
@@ -96,10 +93,7 @@
                                 </li>
                             </ul>
                         </li>
-                        <li>
-                            <a href="clientes.html">
-                                <i class="fas fa-users"></i>Clientes</a>
-                        </li>
+                        <!-- -->
                         <li class="has-sub">
                             <a class="js-arrow" href="#">
                                 <i class="fas fa-truck"></i>Proveedores</a>
@@ -246,18 +240,22 @@
                         <!-- AQUI VA LA TABLA -->
                         <div class="row">
                             <div class="col-md-12">
+                                <nav aria-label="breadcrumb">
+                                    <ol class="breadcrumb">
+                                        <li class="breadcrumb-item"><a th:href="@{/}">Inicio</a></li>
+                                        <li class="breadcrumb-item"><a th:href="@{/empleados}">Empleados</a></li>
+                                        <li class="breadcrumb-item active" aria-current="page">Editar Empleado</li>
+                                    </ol>
+                                </nav>
                                 <!-- DATA TABLE -->
-                                <!-- Pongo el breadcrumbs? -->
-                                <h3 class="title-5 m-b-25">Editar empleado</h3>
-                                <!-- Formulario de registro de nuevo empleado -->
                                 <div class="card">
                                     <div class="card-header">
                                         <strong>Formulario</strong> de actualización de empleado
-
                                     </div>
-                                    <div class="card-body card-block"> 
-                                        <form th:action="@{/empleados/{id_empleado}(id_empleado=${empleados.id_empleado})}" 
-                                        th:object="${empleados}" method="POST">
+                                    <div class="card-body card-block">
+                                        <form
+                                            th:action="@{/empleados/{id_empleado}(id_empleado=${empleados.id_empleado})}"
+                                            th:object="${empleados}" method="POST">
                                             <div th:if="${#fields.hasErrors()}" class="alert alert-danger" role="alert">
                                                 Por favor, corrija los errores indicados en rojo
                                             </div>
@@ -322,6 +320,33 @@
                                                     <option value="2">Empleado</option>
                                                 </select>
                                             </div>
+
+                                            <!-- mostrar una tabla con los numeros de telefono que tiene el empleado -->
+                                            <div class="form-group">
+                                                <table class="table">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Telefono</th>
+                                                            <th>Acciones</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr th:each="telefono : ${empleados.telefono_empleado}">
+                                                            <td th:text="${telefono.telefono}"
+                                                                style="text-align: center;"></td>
+                                                            <td>
+                                                                <!-- Aquí puedes agregar botones para editar o eliminar el número de teléfono -->
+                                                                <!-- <a th:href="@{/telefono_empleado/edit/{id}(id=${telefono.id_tel_empleado})}"
+                                                                    class="btn btn-primary btn-sm">Editar</a> -->
+                                                                <button class="delete-btn"
+                                                                    data-id="${telefono.id_tel_empleado}">Eliminar</button>
+                                                            </td>
+                                                        </tr>
+
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                            <br>
                                             <div class="card-footer">
                                                 <button type="submit" class="btn btn-primary btn-sm">
                                                     <i class="fa fa-dot-circle-o"></i> Guardar
@@ -356,6 +381,24 @@
 
     <th:block th:replace="~{fragments/scripts :: scripts-main}">todos los scripts</th:block>
     <!-- script para cargar los datos de la tabla al modal -->
+
+    <script th:src="@{https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js}"></script>
+    <script>
+        $(document).ready(function () {
+            $('.delete-btn').click(function () {
+                var id = $(this).data('id');
+                $.ajax({
+                    // /empleados/telefono/{id}(id=${telefono.id_tel_empleado})
+                    url: '/empleados/telefono/' + id,
+                    type: 'DELETE',
+                    success: function (result) {
+                        // Recargar la página cuando la solicitud se complete con éxito
+                        location.reload();
+                    }
+                });
+            });
+        });
+    </script>
 </body>
 
 </html>

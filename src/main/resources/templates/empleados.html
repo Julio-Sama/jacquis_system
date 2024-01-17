@@ -46,10 +46,7 @@
                             <a href="ventas.html">
                                 <i class="fas fa-shopping-cart"></i>Ventas</a>
                         </li>
-                        <li>
-                            <a href="clientes.html">
-                                <i class="fas fa-users"></i>Clientes</a>
-                        </li>
+                        <!-- -->
                         <li>
                             <a href="proveedores.html">
                                 <i class="fas fa-truck"></i>Proveedores</a>
@@ -116,10 +113,7 @@
                                 </li>
                             </ul>
                         </li>
-                        <li>
-                            <a href="clientes.html">
-                                <i class="fas fa-users"></i>Clientes</a>
-                        </li>
+                        <!-- -->
                         <li class="has-sub">
                             <a class="js-arrow" href="#">
                                 <i class="fas fa-truck"></i>Proveedores</a>
@@ -338,6 +332,7 @@
                                                     <!-- <span th:text="${empleado.estado_empleado}" class="status--process"></span> -->
                                                     <span th:text="${empleado.estado_empleado}"
                                                         th:classappend="${empleado.estado_empleado == 'ACTIVO'} ? 'status--process' : 'status--denied'"></span>
+                                                        <!-- <span th:if="${empleado.estado_empleado == 'ACTIVO'}" th:text></span> -->
                                                 </td>
                                                 <!-- <td th:text="${empleado.empleado_fk}"></td> -->
                                                 <td th:hidden="${empleado.id_empleado}"></td>
@@ -350,11 +345,15 @@
                                                             <!-- <button type="button" style="display: none;"></button> -->
                                                         </a>
                                                         <!-- th:href="@{/empleados/editar/{id_empleado}(id_empleado=${empleado.id_empleado})}" -->
-                                                        <button class="item btn-baja-empleado" data-placement="top"
+                                                        <button th:if="${empleado.estado_empleado == 'ACTIVO'}" class="item btn-baja-empleado" data-placement="top"
                                                             title="Dar de baja" data-toggle="modal"
                                                             data-target="#modalEmpleados"
                                                             th:attr="data-id=${empleado.id_empleado}, data-nombre=${empleado.nombre}">
                                                             <i class="zmdi zmdi-long-arrow-down"></i>
+                                                        </button>
+                                                        <button th:if="${empleado.estado_empleado == 'INACTIVO'}" class="item btn-baja-empleado" data-placement="top"
+                                                            title="Dar de baja">
+                                                            <i class="zmdi zmdi-long-arrow-up"></i>
                                                         </button>
                                                         <button class="item" data-toggle="tooltip" data-placement="top"
                                                             title="Perfil">
