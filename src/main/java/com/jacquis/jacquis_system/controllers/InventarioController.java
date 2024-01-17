@@ -20,6 +20,7 @@ import com.jacquis.jacquis_system.model.Marca;
 import com.jacquis.jacquis_system.model.Proveedor;
 import com.jacquis.jacquis_system.model.Talla;
 import com.jacquis.jacquis_system.repository.InventarioRepository;
+import com.jacquis.jacquis_system.services.BarcodeService;
 import com.jacquis.jacquis_system.services.CategoriaService;
 import com.jacquis.jacquis_system.services.InventarioService;
 import com.jacquis.jacquis_system.services.MarcaService;
@@ -31,6 +32,15 @@ import jakarta.validation.Valid;
 @Controller
 @RequestMapping("/inventario")
 public class InventarioController {
+    private final BarcodeService barcodeService;
+    private final InventarioService inventario;
+
+    
+
+    public InventarioController(BarcodeService barcodeService, InventarioService inventario) {
+        this.barcodeService = barcodeService;
+        this.inventario = inventario;
+    }
 
     @Autowired
     private InventarioService inventarioService;

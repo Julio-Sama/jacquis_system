@@ -57,27 +57,27 @@ public class ProveedorController {
 
     // Guarda o actualiza un proveedor
     @PostMapping
-    public String guardarProveedor(@Valid @ModelAttribute("proveedores") Proveedor proveedor, Errors errores) {
-        if (errores.hasErrors()) {
-            return "nuevo_proveedor";
-        } else {
-            proveedor.setEstado_prov("ACTIVO");
-            Date fechaActual = new Date();
-            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yy");
-            String fechaFormateada = sdf.format(fechaActual);
-            // Convierte la cadena formateada de nuevo a Date
-            try {
-                Date fechaInicioProveedorUtil = sdf.parse(fechaFormateada);
-                java.sql.Date fechaInicioProveedor = new java.sql.Date(fechaInicioProveedorUtil.getTime());
-                proveedor.setFecha_inicio_proveedor(fechaInicioProveedor);
-            } catch (java.text.ParseException e) {
-                // Maneja la excepción si ocurre un error de formato
-                e.printStackTrace();
-            }
-            proveedorService.guardarActualizar(proveedor);
-            return "redirect:/proveedores";
+    public String guardarProveedor(@Valid @ModelAttribute("proveedores") Proveedor proveedor) {
+        proveedor.setEstado_prov("ACTIVO");
+
+        Date fechaActual = new Date();
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yy");
+        String fechaFormateada = sdf.format(fechaActual);
+
+        // Convierte la cadena formateada de nuevo a Date
+        try {
+            Date fechaInicioProveedorUtil = sdf.parse(fechaFormateada);
+            java.sql.Date fechaInicioProveedor = new java.sql.Date(fechaInicioProveedorUtil.getTime());
+            proveedor.setFecha_inicio_proveedor(fechaInicioProveedor);
+        } catch (java.text.ParseException e) {
+            // Maneja la excepción si ocurre un error de formato
+            e.printStackTrace();
         }
+
+        proveedorService.guardarActualizar(proveedor);
+        return "redirect:/proveedores";
     }
+
 
     // Muestra el formulario para editar un proveedor
     @GetMapping("/editar/{id_proveedor}")

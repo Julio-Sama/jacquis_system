@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 02-10-2023 a las 19:04:37
+-- Tiempo de generación: 16-11-2023 a las 06:08:09
 -- Versión del servidor: 10.4.18-MariaDB
 -- Versión de PHP: 8.0.3
 
@@ -79,24 +79,29 @@ CREATE TABLE `detalle_venta_online` (
 
 CREATE TABLE `empleado` (
   `id_empleado` bigint(20) NOT NULL,
-  `dui_empleado` bigint(9) NOT NULL,
+  `dui_empleado` varchar(10) NOT NULL,
   `nombre` varchar(255) DEFAULT NULL,
   `apellido` varchar(255) DEFAULT NULL,
   `apellido_dos` varchar(255) DEFAULT NULL,
   `direccion` varchar(255) DEFAULT NULL,
-  `correo_empleado` varchar(255) DEFAULT NULL,
+  `correo_empleado` varchar(255) NOT NULL,
   `estado_empleado` varchar(10) NOT NULL,
-  `empleado_fk` int(11) NOT NULL
+  `empleado_fk` int(11) NOT NULL,
+  `dui_usuario` bigint(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `empleado`
 --
 
-INSERT INTO `empleado` (`id_empleado`, `dui_empleado`, `nombre`, `apellido`, `apellido_dos`, `direccion`, `correo_empleado`, `estado_empleado`, `empleado_fk`) VALUES
-(1, 61607734, 'Julio Antonio', 'Torres', 'Rodriguez', 'Canton Achichilco', 'julioantonio859@gmail.com', 'ACTIVO', 1),
-(2, 10146551, 'Luis Fernando', 'Vaquerano', 'Ramos', 'San Vicente, por un arbol', 'vaqueranoramos12@gmail.com', 'INACTIVO', 2),
-(3, 123456789, 'Nayellis', 'Morales', 'Quintanilla', 'San Vicente', 'nayellis11@gmail.com', 'ACTIVO', 2);
+INSERT INTO `empleado` (`id_empleado`, `dui_empleado`, `nombre`, `apellido`, `apellido_dos`, `direccion`, `correo_empleado`, `estado_empleado`, `empleado_fk`, `dui_usuario`) VALUES
+(1, '061607734', 'Julio Antonio', 'Torres', 'Rodriguez', 'Canton Achichilco, San Vicente', 'julioantonio859@gmail.com', 'ACTIVO', 1, NULL),
+(2, '010146551', 'Luis Antonio', 'Vaquerano', 'Ramos', 'San Vicente, por un arbol', 'vaqueranoramos12@gmail.com', 'INACTIVO', 2, NULL),
+(3, '123456789', 'Nayellis', 'Morales', 'Quintanilla', 'San Vicente', 'nayellis11@gmail.com', 'ACTIVO', 2, NULL),
+(6, '610448911', 'Mercedes', 'Rodriguez', '', 'Apastepeque, San Vicente', 'mercedes@gmail.com', 'ACTIVO', 1, NULL),
+(7, '704588801', 'Franklin', 'Martinez', '', 'San Sebastian, San Vicente', 'franmartin@gmail.com', 'ACTIVO', 2, NULL),
+(8, '114578963', 'Flor', 'Barahona', '', 'Calle a san antonio', 'florbarahona@gmail.com', 'ACTIVO', 2, NULL),
+(10, '061607736', 'Cesar', 'Torres', '', 'Achichilco', 'cesartorres@gmail.cm', 'INACTIVO', 2, NULL);
 
 -- --------------------------------------------------------
 
@@ -137,12 +142,19 @@ CREATE TABLE `producto` (
 CREATE TABLE `proveedor` (
   `id_proveedor` int(11) NOT NULL,
   `nombre` varchar(100) NOT NULL,
-  `correo` varchar(50) NOT NULL,
-  `fechaInicio` date NOT NULL,
   `direccion` varchar(200) NOT NULL,
-  `estado_prov` tinyint(1) NOT NULL,
-  `id_repre` int(11) NOT NULL
+  `correo` varchar(50) NOT NULL,
+  `estado_prov` varchar(255) NOT NULL,
+  `fecha_inicio_proveedor` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `proveedor`
+--
+
+INSERT INTO `proveedor` (`id_proveedor`, `nombre`, `direccion`, `correo`, `estado_prov`, `fecha_inicio_proveedor`) VALUES
+(2, 'Gardemias', 'San Salvador', 'gardemiassv@gmail.com', 'INACTIVO', '2023-10-10'),
+(3, 'Girasoles', 'Zacatecoluca, San Vicente', 'girasoles@gmail.com', 'ACTIVO', '2023-10-10');
 
 -- --------------------------------------------------------
 
@@ -168,11 +180,22 @@ CREATE TABLE `proveedor_logistica` (
 
 CREATE TABLE `representante` (
   `id_repre` int(11) NOT NULL,
-  `dui` varchar(10) NOT NULL,
+  `dui_repre` varchar(10) NOT NULL,
   `nombre` varchar(50) NOT NULL,
   `apellido` varchar(50) DEFAULT NULL,
-  `fecha_inicio_repre` date DEFAULT NULL
+  `fecha_inicio_repre` date DEFAULT NULL,
+  `id_proveedor` int(11) DEFAULT NULL,
+  `estado_repre` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Volcado de datos para la tabla `representante`
+--
+
+INSERT INTO `representante` (`id_repre`, `dui_repre`, `nombre`, `apellido`, `fecha_inicio_repre`, `id_proveedor`, `estado_repre`) VALUES
+(1, '601020204', 'Juana', 'Rivas', '2023-10-10', 3, 'INACTIVO'),
+(2, '123654987', 'Alexander', 'Merino', '2023-10-10', 3, 'ACTIVO'),
+(3, '324354545', 'Miguel', 'Luna', '2023-10-11', 3, 'ACTIVO');
 
 -- --------------------------------------------------------
 
@@ -182,7 +205,7 @@ CREATE TABLE `representante` (
 
 CREATE TABLE `tel_empleado` (
   `id_telefono` bigint(20) NOT NULL,
-  `dui_empleado` bigint(9) NOT NULL,
+  `dui_empleado` varchar(10) NOT NULL,
   `telefono` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -205,7 +228,8 @@ CREATE TABLE `tel_pl` (
 
 CREATE TABLE `tel_proveedor` (
   `id_prov` int(11) DEFAULT NULL,
-  `tel_prov` varchar(15) DEFAULT NULL
+  `tel_prov` varchar(15) DEFAULT NULL,
+  `telefono` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -226,14 +250,20 @@ CREATE TABLE `tel_representante` (
 --
 
 CREATE TABLE `usuario` (
-  `id_usuario` int(11) NOT NULL,
-  `dui_empleado` bigint(9) NOT NULL,
+  `id_usuario` bigint(20) NOT NULL,
+  `dui_empleado` varchar(10) NOT NULL,
   `nick_usuario` varchar(100) DEFAULT NULL,
   `clave_usuario` varchar(255) DEFAULT NULL,
-  `estado_usuario` tinyint(1) DEFAULT NULL,
-  `rol_usuario` varchar(100) DEFAULT NULL,
-  `id_emp` int(11) DEFAULT NULL
+  `estado_usuario` varchar(255) DEFAULT NULL,
+  `rol_usuario` varchar(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `usuario`
+--
+
+INSERT INTO `usuario` (`id_usuario`, `dui_empleado`, `nick_usuario`, `clave_usuario`, `estado_usuario`, `rol_usuario`) VALUES
+(1, '061607734', 'juliosama', 'claveJulio', 'ACTIVO', 'ADMIN');
 
 -- --------------------------------------------------------
 
@@ -243,7 +273,7 @@ CREATE TABLE `usuario` (
 
 CREATE TABLE `venta` (
   `id_venta` int(11) NOT NULL,
-  `dui_empleado` bigint(9) NOT NULL,
+  `dui_empleado` varchar(10) NOT NULL,
   `metodo_pago` varchar(20) DEFAULT NULL,
   `monto_total` double DEFAULT NULL,
   `fecha_hora` datetime DEFAULT NULL,
@@ -287,7 +317,8 @@ ALTER TABLE `detalle_venta_online`
 ALTER TABLE `empleado`
   ADD PRIMARY KEY (`id_empleado`),
   ADD UNIQUE KEY `empleado_pk2` (`dui_empleado`),
-  ADD UNIQUE KEY `empleado_pk` (`correo_empleado`);
+  ADD UNIQUE KEY `empleado_pk` (`correo_empleado`),
+  ADD UNIQUE KEY `UK_9wfkrg1a5mvywbfi6r7hpnmsg` (`dui_usuario`);
 
 --
 -- Indices de la tabla `estado_producto`
@@ -307,8 +338,7 @@ ALTER TABLE `producto`
 -- Indices de la tabla `proveedor`
 --
 ALTER TABLE `proveedor`
-  ADD PRIMARY KEY (`id_proveedor`),
-  ADD KEY `repre_proveedor___fk` (`id_repre`);
+  ADD PRIMARY KEY (`id_proveedor`);
 
 --
 -- Indices de la tabla `proveedor_logistica`
@@ -320,7 +350,9 @@ ALTER TABLE `proveedor_logistica`
 -- Indices de la tabla `representante`
 --
 ALTER TABLE `representante`
-  ADD PRIMARY KEY (`id_repre`);
+  ADD PRIMARY KEY (`id_repre`),
+  ADD UNIQUE KEY `representante_pk` (`dui_repre`),
+  ADD KEY `representante_proveedor_id_proveedor_fk` (`id_proveedor`);
 
 --
 -- Indices de la tabla `tel_empleado`
@@ -352,8 +384,7 @@ ALTER TABLE `tel_representante`
 --
 ALTER TABLE `usuario`
   ADD PRIMARY KEY (`id_usuario`),
-  ADD UNIQUE KEY `usuario_pk` (`dui_empleado`),
-  ADD KEY `usuario_empleado_id_empleado_fk` (`id_emp`);
+  ADD KEY `usuario_empleado_dui_empleado_fk` (`dui_empleado`);
 
 --
 -- Indices de la tabla `venta`
@@ -384,7 +415,7 @@ ALTER TABLE `cliente`
 -- AUTO_INCREMENT de la tabla `empleado`
 --
 ALTER TABLE `empleado`
-  MODIFY `id_empleado` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_empleado` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT de la tabla `producto`
@@ -396,7 +427,7 @@ ALTER TABLE `producto`
 -- AUTO_INCREMENT de la tabla `proveedor`
 --
 ALTER TABLE `proveedor`
-  MODIFY `id_proveedor` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_proveedor` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `proveedor_logistica`
@@ -408,7 +439,7 @@ ALTER TABLE `proveedor_logistica`
 -- AUTO_INCREMENT de la tabla `representante`
 --
 ALTER TABLE `representante`
-  MODIFY `id_repre` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_repre` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `tel_empleado`
@@ -420,7 +451,7 @@ ALTER TABLE `tel_empleado`
 -- AUTO_INCREMENT de la tabla `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_usuario` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `venta`
@@ -447,6 +478,12 @@ ALTER TABLE `detalle_venta_online`
   ADD CONSTRAINT `detalle_venta_online_venta_id_venta_fk` FOREIGN KEY (`id_venta`) REFERENCES `venta` (`id_venta`);
 
 --
+-- Filtros para la tabla `empleado`
+--
+ALTER TABLE `empleado`
+  ADD CONSTRAINT `FKo1iswtb42tv52yjbiqd1a378m` FOREIGN KEY (`dui_usuario`) REFERENCES `usuario` (`id_usuario`);
+
+--
 -- Filtros para la tabla `estado_producto`
 --
 ALTER TABLE `estado_producto`
@@ -460,16 +497,16 @@ ALTER TABLE `producto`
   ADD CONSTRAINT `producto_proveedor_id_proveedor_fk` FOREIGN KEY (`id_proveedor`) REFERENCES `proveedor` (`id_proveedor`);
 
 --
--- Filtros para la tabla `proveedor`
+-- Filtros para la tabla `representante`
 --
-ALTER TABLE `proveedor`
-  ADD CONSTRAINT `repre_proveedor___fk` FOREIGN KEY (`id_repre`) REFERENCES `representante` (`id_repre`);
+ALTER TABLE `representante`
+  ADD CONSTRAINT `representante_proveedor_id_proveedor_fk` FOREIGN KEY (`id_proveedor`) REFERENCES `proveedor` (`id_proveedor`);
 
 --
 -- Filtros para la tabla `tel_empleado`
 --
 ALTER TABLE `tel_empleado`
-  ADD CONSTRAINT `tel_emp_fk` FOREIGN KEY (`dui_empleado`) REFERENCES `empleado` (`dui_empleado`) ON UPDATE CASCADE;
+  ADD CONSTRAINT `tel_empleado_empleado_dui_empleado_fk` FOREIGN KEY (`dui_empleado`) REFERENCES `empleado` (`dui_empleado`);
 
 --
 -- Filtros para la tabla `tel_pl`
