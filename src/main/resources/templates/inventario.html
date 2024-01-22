@@ -307,40 +307,24 @@
                                     </div>
                                 </div>
 
-                                <div th:fragment="tablaProductos" id="tablaProductos" class="table-responsive m-b-40">
-                                    <table class="table table-borderless table-data3">
-                                        <thead>
-                                            <tr>
-                                                <th>Código</th>
-                                                <th>Categoría</th>
-                                                <th>Descripción</th>
-                                                <th>Proveedor</th>
-                                                <th>Marca</th>
-                                                <th>Talla</th>
-                                                <th>Ver</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr th:each="producto: ${inventarioList}">
-                                                <td th:text="${producto.codigo_producto}"></td>
-                                                <td th:text="${producto.categoria.nombre}"></td>
-                                                <td th:text="${producto.descripcion_producto}"></td>
-                                                <td th:text="${producto.proveedor.nombre}"></td>
-                                                <td th:text="${producto.marca.nombre_marca}"></td>
-                                                <td th:text="${producto.talla.nombre_talla}"></td>
-                                                <td th:hidden="${producto.id_producto}"></td>
-                                                <td>
-                                                    <div class="table-data-feature">
-                                                        <a th:href="@{/inventario/info/{id_producto}(id_producto=${producto.id_producto})}"
-                                                        class="item" data-toggle="tooltip" data-placement="top" title="Información">
-                                                            <i class="zmdi zmdi-info"></i>
-                                                        </a>
+                                <div class="container">
+                                    <div class="row">
+                                        <div th:each="producto: ${inventarioList}" class="col-md-4">
+                                            <div class="card mi-clase-personalizada text-center">
+                                                <a
+                                                    th:href="@{/inventario/info/{id_producto}(id_producto=${producto.id_producto})}">
+                                                    <img th:src="@{'https://barcode.tec-it.com/barcode.ashx?data=' + ${producto.codigo_producto}}"
+                                                        alt="Imagen de producto" class="mx-auto">
+                                                    <div class="card-body">
+                                                        <h5 class="card-title" th:text="${producto.categoria.nombre}">
+                                                        </h5>
+                                                        <p class="card-text" th:text="${producto.descripcion_producto}">
+                                                        </p>
                                                     </div>
-                                                </td>
-                                                
-                                            </tr>
-                                        </tbody>
-                                    </table>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>

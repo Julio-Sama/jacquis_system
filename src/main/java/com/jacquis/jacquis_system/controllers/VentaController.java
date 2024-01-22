@@ -2,7 +2,6 @@ package com.jacquis.jacquis_system.controllers;
 
 import java.util.List;
 
-import org.apache.coyote.ErrorState;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,11 +23,6 @@ import jakarta.validation.Valid;
 @Controller
 @RequestMapping("/ventas")
 public class VentaController {
-    private final VentaService venta;
-
-    public VentaController(VentaService venta) {
-        this.venta = venta;
-    }
 
     @Autowired
     private VentaService ventaService;
@@ -37,26 +31,33 @@ public class VentaController {
     @Autowired
     private ClienteService clienteService;
 
-    @GetMapping
-    public String nuevoVenta(Model modelo) {
+    @GetMapping("/nueva")
+    public String nuevaVenta(Model modelo) {
         Venta venta = new Venta();
+        modelo.addAttribute("venta", venta);
+
+        System.out.println("venta: " + venta);
+
         List<Empleado> empleadoSelected = empleadoService.getEmpleados();
         List<Cliente> clienteSelected = clienteService.getClientes();
-        modelo.addAttribute("venta", venta);
+
+        System.out.println("empleadoSelected: " + empleadoSelected.size());
+        System.out.println("clienteSelected: " + clienteSelected.size());
+
         modelo.addAttribute("empleadoSelected", empleadoSelected);
         modelo.addAttribute("clienteSelected", clienteSelected);
 
-        return "nuevaVenta";
+        return "nueva_venta";
     }
 
-    @PostMapping
-    public String guardarVenta(@Valid @ModelAttribute("venta") Venta venta, 
-        Errors errores) {
-        if (errores.hasErrors()) {
-            return "nueva";
-        } else {
-            ventaService.saveOrUpdate(venta);
-            return "redirect:/venta";
-        }
-    }
+    // @PostMapping
+    // public String guardarVenta(@Valid @ModelAttribute("ventas") Venta venta, 
+    //     Errors errores) {
+    //     if (errores.hasErrors()) {
+    //         return "nueva";
+    //     } else {
+    //         ventaService.saveOrUpdate(venta);
+    //         return "redirect:/nuevaVenta";
+    //     }
+    // }
 }

@@ -85,7 +85,7 @@
                                 <i class="fas fa-shopping-cart"></i>Ventas</a>
                             <ul class="list-unstyled navbar__sub-list js-sub-list">
                                 <li>
-                                    <a href="nuevaVenta.html">
+                                    <a th:href="@{/ventas}">
                                         <i class="fas fa-plus-square"></i>Nueva venta</a>
                                 </li>
                                 <li>
@@ -412,7 +412,7 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        <p><strong>Stock:</strong> <p th:text="${inventario.stock}"></p></p>
+                        <p><strong>Stock:</strong> <p th:text="${'HOLA LUIS'}"></p></p>
                         <p><strong>Precio de compra:</strong> {{inventario.precio_compra}}</p>
                         <p><strong>Ganancia:</strong> {{inventario.ganancia}}</p>
                         <p><strong>Estado del producto:</strong> {{inventario.estado_producto}}</p>

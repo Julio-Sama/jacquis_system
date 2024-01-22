@@ -39,6 +39,7 @@ public class Venta {
     private List<DetalleVenta> detalle_venta;
 
     public Venta() {
+        
     }
 
     public Venta(String metodo_pago, double monto_total, Date fecha) {

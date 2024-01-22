@@ -29,7 +29,7 @@ public class Usuario {
     private String rol_usuario;
 
     @OneToOne
-    @JoinColumn(name = "dui_empleado")
+    @JoinColumn(name = "id_empleado")
     private Empleado empleado;
 
     public Usuario() {

@@ -27,11 +27,6 @@ public class Cliente {
     public Cliente() {
     }
 
-    public Cliente(String medio_pago, String tipo_cliente) {
-        this.medio_pago = medio_pago;
-        this.tipo_cliente = tipo_cliente;
-    }
-
     public Long getId_cliente() {
         return id_cliente;
     }

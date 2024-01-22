@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <link rel="shortcut icon" href="images/icon/favicon.ico">
     <!-- Title Page-->
-    <title>Nueva venta</title>
+    <title>Nueva Venta</title>
     <div th:replace="~{fragments/header :: header-css}"></div>
 </head>
 
@@ -17,7 +17,7 @@
                 <div class="container-fluid">
                     <div class="header-mobile-inner">
                         <a class="logo" th:href="@{index}">
-                            <img th:src="@{/images/icon/logo.png}" alt="JacquisStore" />
+                            <img th:src="@{/images/icon/sigejac.png}" alt="JacquisStore" />
                         </a>
                         <button title="searchMobile" class="hamburger hamburger--slider" type="button">
                             <span class="hamburger-box">
@@ -46,15 +46,31 @@
                             <a href="ventas.html">
                                 <i class="fas fa-shopping-cart"></i>Ventas</a>
                         </li>
-                        <li>
-                            <a href="clientes.html">
-                                <i class="fas fa-users"></i>Clientes</a>
-                        </li>
+                        <!-- -->
                         <li>
                             <a href="proveedores.html">
                                 <i class="fas fa-truck"></i>Proveedores</a>
                         </li>
 
+                        <!-- <li>
+                            <a href="map.html">
+                                <i class="fas fa-map-marker-alt"></i>Maps</a>
+                        </li> -->
+                        <!-- <li class="has-sub">
+                            <a class="js-arrow" href="#">
+                                <i class="fas fa-copy"></i>Pages</a>
+                            <ul class="navbar-mobile-sub__list list-unstyled js-sub-list">
+                                <li>
+                                    <a href="login.html">Login</a>
+                                </li>
+                                <li>
+                                    <a href="register.html">Register</a>
+                                </li>
+                                <li>
+                                    <a href="forget-pass.html">Forget Password</a>
+                                </li>
+                            </ul>
+                        </li> -->
                     </ul>
                 </div>
             </nav>
@@ -65,7 +81,7 @@
         <aside class="menu-sidebar d-none d-lg-block">
             <div class="logo">
                 <a th:href="@{/index}">
-                    <img th:src="@{/images/icon/.png}" alt="Jacqui's Store" />
+                    <img th:src="@{/images/icon/sigejac.png}" alt="Jacqui's Store" />
                 </a>
             </div>
             <div class="menu-sidebar__content js-scrollbar1">
@@ -88,7 +104,7 @@
                                 <i class="fas fa-shopping-cart"></i>Ventas</a>
                             <ul class="list-unstyled navbar__sub-list js-sub-list">
                                 <li>
-                                    <a href="nuevaVenta.html">
+                                    <a th:href="@{/ventas}">
                                         <i class="fas fa-plus-square"></i>Nueva venta</a>
                                 </li>
                                 <li>
@@ -97,10 +113,7 @@
                                 </li>
                             </ul>
                         </li>
-                        <li>
-                            <a href="clientes.html">
-                                <i class="fas fa-users"></i>Clientes</a>
-                        </li>
+                        <!-- -->
                         <li class="has-sub">
                             <a class="js-arrow" href="#">
                                 <i class="fas fa-truck"></i>Proveedores</a>
@@ -137,7 +150,7 @@
                             <form class="form-header" action="" method="POST">
                                 <input class="au-input au-input--xl" type="text" name="buscar"
                                     placeholder="Buscar datos &amp; reportes." />
-                                <button title="searchTodo" class="au-btn--submit" type="submit">
+                                <button title="BuscarTodo" class="au-btn--submit" type="submit">
                                     <i class="zmdi zmdi-search"></i>
                                 </button>
                             </form>
@@ -244,69 +257,107 @@
             <div class="main-content">
                 <div class="section__content section__content--p30">
                     <div class="container-fluid">
+                        <!-- AQUI VA LA TABLA -->
                         <div class="row">
                             <div class="col-md-12">
-                        <!-- Encabezado de la página -->
-                            <h3 class="title-5 m-b-25">Nueva venta</h3>
+                                <!-- DATA TABLE -->
+                                <!-- breadcrumbs -->
 
-                        <!-- Formulario de registro de nueva venta -->
                                 <div class="card">
                                     <div class="card-header">
-                                        <strong>Formulario</strong> de venta
+                                        <strong>Factura</strong> de venta
+
                                     </div>
                                     <div class="card-body card-block">
-                                        <form th:action="@{/ventas}" th:object="${ventas}" method="POST">
-
-                                            <!-- Mensaje de errores -->
+                                        <form th:action="@{/ventas}" th:object="${venta}" method="POST">
                                             <div th:if="${#fields.hasErrors()}" class="alert alert-danger" role="alert">
                                                 Por favor, corrija los errores indicados en rojo
                                             </div>
-
-                                            <!-- Selección de empleado -->
                                             <div class="form-group">
-                                                <label for="empleado">Empleado</label>
-                                                <select name="empleado" id="empleado" required
-                                                    th:field="*{empleado.id_empleado}">
-                                                    <option th:each="emp: ${empleadoSelected}"
-                                                        th:value="${emp.id_empleado}" th:text="${emp.nombre}"
-                                                        th:selected="${emp.id_empleado == venta.empleado?.id_empleado}"
-                                                        th:if="${emp.estado_empleado != 'INACTIVO'}"></option>
+                                                <!-- Select del metodo de pago CONTADO -CREDITO -->
+
+                                                <label for="metodo_pago" class="form-control-label">Método de
+                                                    pago</label>
+                                                <select name="metodo_pago" id="metodo_pago" class="form-control">
+                                                    <option value="#">Seleccione el método de pago...</option>
+                                                    <option value="1" th:text="CONTADO"></option>
+                                                    <option value="2" th:text="CRÉDITO"></option>
                                                 </select>
+
+
+
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="nombre" class=" form-control-label">Nombre</label>
+                                                <input type="text" th:field="*{nombre}" name="nombre" id="nombre"
+                                                    placeholder="Ingrese el nombre..." class="form-control">
+                                                <div th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}"
+                                                    class="alert alert-danger" role="alert">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="apellido" class=" form-control-label">Apellido</label>
+                                                <input type="text" th:field="*{apellido}" name="apellido" id="apellido"
+                                                    placeholder="Ingrese el apellido..." class="form-control">
+                                                <div th:if="${#fields.hasErrors('apellido')}" th:errors="*{apellido}"
+                                                    class="alert alert-danger" role="alert">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="apellido2" class="form-control-label">Segundo
+                                                    apellido</label>
+                                                <input type="text" th:field="*{apellido_dos}" name="apellido2"
+                                                    id="apellido2" placeholder="Ingrese el segundo apellido..."
+                                                    class="form-control">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="direccion" class=" form-control-label">Dirección</label>
+                                                <input type="text" th:field="*{direccion}" name="direccion"
+                                                    id="direccion" placeholder="Ingrese la dirección..."
+                                                    class="form-control">
+                                                <div th:if="${#fields.hasErrors('direccion')}" th:errors="*{direccion}"
+                                                    class="alert alert-danger" role="alert">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="correo" class="form-control-label"> Correo
+                                                    electronico</label>
+                                                <input type="text" th:field="*{correo_empleado}" name="correo"
+                                                    id="correo" placeholder="Ingrese el correo electronico..."
+                                                    class="form-control">
+                                                <div th:if="${#fields.hasErrors('correo_empleado')}"
+                                                    th:errors="*{correo_empleado}" class="alert alert-danger"
+                                                    role="alert">
+                                                </div>
                                             </div>
 
-                                            <!-- Selección de tipo de cliente -->
                                             <div class="form-group">
-                                                <label for="tipoCliente">Tipo de cliente</label>
-                                                <select id="tipoCliente" class="form-control" th:field="*{clienteSelected.tipoCliente}">
-                                                    <!-- Los tipos de clientes se generan dinámicamente -->
-                                                </select>
+                                                <label for="telefono_empleado"
+                                                    class="form-control-label">Teléfono</label>
+                                                <input type="tel" name="telefono_empleado" id="telefono_empleado"
+                                                    placeholder="Ingrese el teléfono..." class="form-control"
+                                                    title="Un número de teléfono válido consiste en su código de país, y luego los demás dígitos"
+                                                    required pattern="[0-9]+">
                                             </div>
 
-                                            <!-- Tabla de productos -->
-                                            <table class="table">
-                                                <thead>
-                                                    <tr>
-                                                        <th>#</th>
-                                                        <th>Descripción</th>
-                                                        <th>Cantidad</th>
-                                                        <th>Precio unitario</th>
-                                                        <th>Subtotal</th>
-                                                        <th>Acciones</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <!-- Los productos se generan dinámicamente -->
-                                                </tbody>
-                                            </table>
 
-                                            <!-- Botón para agregar producto -->
-                                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalAgregarProducto">
-                                                Agregar producto
-                                            </button>
-
-                                            <!-- Botones de guardar y cancelar -->
-                                            <button type="submit" class="btn btn-success">Guardar</button>
-                                            <button type="reset" class="btn btn-danger">Cancelar</button>
+                                            <div class="form-group">
+                                                <label for="rol" class="form-control-label">Rol</label>
+                                                <select name="rol" id="rol" class="form-control">
+                                                    <option value="0">Seleccione el rol...</option>
+                                                    <option value="1">Administrador</option>
+                                                    <option value="2">Empleado</option>
+                                                </select>
+                                            </div>
+                                            <div class="card-footer">
+                                                <button type="submit" class="btn btn-primary btn-sm">
+                                                    <i class="fa fa-dot-circle-o"></i> Guardar
+                                                </button>
+                                                <button type="reset" class="btn btn-danger btn-sm"
+                                                onClick="history.go(-1);">
+                                                    <i class="fa fa-ban"></i> Cancelar
+                                                </button>
+                                            </div>
                                         </form>
                                     </div>
                                 </div>
@@ -314,29 +365,26 @@
                         </div>
                     </div>
                 </div>
-            </div>
-
-            <!-- Modal para agregar producto -->
-            <div class="modal fade" id="modalAgregarProducto" tabindex="-1" role="dialog" aria-labelledby="modalAgregarProductoLabel" aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="modalAgregarProductoLabel">Agregar producto</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-body">
-                            <!-- Formulario para agregar producto -->
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                            <button type="button" class="btn btn-primary">Agregar</button>
+                <!-- Aqui va todo el contenido -->
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="copyright">
+                            <p>Copyright © 2023 Jacqui's Store. Todos los derechos reservados</p>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+        <!-- END MAIN CONTENT-->
     </div>
+    <!-- END PAGE CONTAINER-->
+    </div>
+
+    </div>
+
+    <th:block th:replace="~{fragments/scripts :: scripts-main}">todos los scripts</th:block>
+    <!-- script para cargar los datos de la tabla al modal -->
 </body>
+
 </html>
+<!-- end document-->

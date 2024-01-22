@@ -63,15 +63,21 @@ public class Inventario {
     public Inventario(InventarioDTO inventarioDTO) {
     }
 
-    public Inventario(String codigo_producto, String descripcion_producto, String estado_producto_p,
-            Proveedor proveedor, Categoria categoria, Talla talla, Marca marca) {
-        this.codigo_producto = codigo_producto;
-        this.descripcion_producto = descripcion_producto;
-        this.estado_producto_p = estado_producto_p;
-        this.proveedor = proveedor;
-        this.categoria = categoria;
-        this.talla = talla;
-        this.marca = marca;
+
+    public List<DetalleVenta> getDetalle_venta() {
+        return detalle_venta;
+    }
+
+    public void setDetalle_venta(List<DetalleVenta> detalle_venta) {
+        this.detalle_venta = detalle_venta;
+    }
+
+    public EstadoProducto getEstado_producto() {
+        return estado_producto;
+    }
+
+    public void setEstado_producto(EstadoProducto estado_producto) {
+        this.estado_producto = estado_producto;
     }
 
     public Long getId_producto() {

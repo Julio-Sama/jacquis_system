@@ -59,7 +59,7 @@ public class EmpleadoController {
 
     @GetMapping("/nuevo")
     public String nuevoEmpleado(Model modelo) {
-        Empleado empleado = new Empleado();
+        Empleado empleado = new Empleado(); 
         modelo.addAttribute("empleados", empleado);
 
         return "nuevo_empleado"; // retorna al archivo index.html con los datos cargados en el modelo
@@ -97,7 +97,7 @@ public class EmpleadoController {
 
     // Muestra el formulario para editar un empleado
     @GetMapping("/editar/{id_empleado}")
-    public String editarEmpleado(@PathVariable("id_empleado") Long idEmpleado, Model modelo) {
+    public String editarEmpleado(@PathVariable("id_empleado") Integer idEmpleado, Model modelo) {
         Empleado empleado = empleadoService.getEmpleadoById(idEmpleado);
         modelo.addAttribute("empleados", empleado);
 
@@ -106,7 +106,7 @@ public class EmpleadoController {
 
     // Actualiza un empleado
     @PostMapping("/{id_empleado}")
-    public String actualizarEmpleado(@PathVariable("id_empleado") Long idEmpleado,
+    public String actualizarEmpleado(@PathVariable("id_empleado") Integer idEmpleado,
             @ModelAttribute("empleados") Empleado empleado) {
         Empleado empleadoActual = empleadoService.getEmpleadoById(idEmpleado);
         empleadoActual.setNombre(empleado.getNombre());
@@ -120,7 +120,7 @@ public class EmpleadoController {
 
     // Dar de baja un empleado
     @GetMapping("/baja/{id_empleado}")
-    public String bajaEmpleado(@PathVariable("id_empleado") Long idEmpleado, Model modelo) {
+    public String bajaEmpleado(@PathVariable("id_empleado") Integer idEmpleado, Model modelo) {
         Empleado empleado = empleadoService.getEmpleadoById(idEmpleado);
         modelo.addAttribute("id_empleado", empleado.getId_empleado());
         empleado.setEstado_empleado("INACTIVO");
@@ -139,7 +139,7 @@ public class EmpleadoController {
 
     // // Elimina un empleado
     // @DeleteMapping("/empleados/{id_empleado}")
-    // public String eliminarEmpleado(@PathVariable("id_empleado") Long idEmpleado)
+    // public String eliminarEmpleado(@PathVariable("id_empleado") Integer idEmpleado)
     // {
     // empleadoService.delete(idEmpleado);
     // return "redirect:/index/empleados";
